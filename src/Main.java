@@ -13,6 +13,8 @@ public class Main {
         File file = new File("C:\\Users\\piete\\IdeaProjects\\Labo_Optimalisatie\\inleesfile.txt");
         data.leesData(file);
 
+
+
         }
     }
 

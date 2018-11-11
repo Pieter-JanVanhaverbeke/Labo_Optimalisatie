@@ -152,7 +152,7 @@ public class Data {
                     Depot depot = new Depot(id, locationid);
                     depotlijst.add(depot);
                 }
-            } else if (line.contains("Trucks")) {
+            } else if (line.contains("TRUCKS")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
                 for (int i = 0; i < aantal; i++) {
 
@@ -164,6 +164,7 @@ public class Data {
 
                     Truck truck = new Truck(id, startlocationid, enlocationid, null);
                     trucklijst.add(truck);
+                    System.out.println("bla");
                 }
             } else if (line.contains("MACHINE_TYPES")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();

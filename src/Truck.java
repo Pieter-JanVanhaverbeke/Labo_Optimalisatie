@@ -3,17 +3,20 @@ public class Truck {
     private static final int TRUCK_CAPACITY = 100;
     private static final int TRUCK_WORKING_TIME = 600;
 
-    private int latitude;            //begin pos meegeven bij constructor
-    private int longitude;
+    private int startlocation;            //begin pos meegeven bij constructor
+    private int endlocation;
 
     private int id;
     private String name;
+    private int geredenminuten;
 
-    public Truck(int latitude, int longitude, int id, String name) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+
+    public Truck(int startlocation, int endlocation, int id, String name) {
+        this.startlocation = startlocation;
+        this.endlocation = endlocation;
         this.id = id;
         this.name = name;
+        this.geredenminuten = 0;
     }
 
     public static int getTruckCapacity() {
@@ -24,20 +27,20 @@ public class Truck {
         return TRUCK_WORKING_TIME;
     }
 
-    public int getLatitude() {
-        return latitude;
+    public int getStartlocation() {
+        return startlocation;
     }
 
-    public void setLatitude(int latitude) {
-        this.latitude = latitude;
+    public void setStartlocation(int startlocation) {
+        this.startlocation = startlocation;
     }
 
-    public int getLongitude() {
-        return longitude;
+    public int getEndlocation() {
+        return endlocation;
     }
 
-    public void setLongitude(int longitude) {
-        this.longitude = longitude;
+    public void setEndlocation(int endlocation) {
+        this.endlocation = endlocation;
     }
 
     public int getId() {
@@ -56,11 +59,19 @@ public class Truck {
         this.name = name;
     }
 
+    public int getGeredenminuten() {
+        return geredenminuten;
+    }
+
+    public void setGeredenminuten(int geredenminuten) {
+        this.geredenminuten = geredenminuten;
+    }
+
     @Override
     public String toString() {
         return "Truck{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
+                "startlocation=" + startlocation +
+                ", endlocation=" + endlocation +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';
