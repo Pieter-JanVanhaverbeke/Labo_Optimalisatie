@@ -164,8 +164,8 @@ public class Data {
 
                     Truck truck = new Truck(id, startlocationid, enlocationid, null);
                     trucklijst.add(truck);
-                    System.out.println("bla");
                 }
+
             } else if (line.contains("MACHINE_TYPES")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
                 for (int i = 0; i < aantal; i++) {
@@ -208,6 +208,21 @@ public class Data {
                     Drop drop = new Drop(id, machinetypeid, locationid);
                     droplijst.add(drop);
                 }
+            }
+
+                else if (line.contains("COLLECTS")) {
+                    int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
+                    for (int i = 0; i < aantal; i++) {
+                        line = sc.nextLine();
+                        String[] values = line.split("\\s+");
+                        int id = Integer.parseInt(values[1]);
+                        int machineid = Integer.parseInt(values[2]);
+
+                        Collect collect = new Collect(id,machineid);
+                        collectlijst.add(collect);
+                    }
+
+
 
             } else if (line.contains("TIME_MATRIX")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
