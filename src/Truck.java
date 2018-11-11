@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Truck {
     //Constanten
     private static final int TRUCK_CAPACITY = 100;
@@ -9,6 +11,9 @@ public class Truck {
     private int id;
     private String name;
     private int geredenminuten;
+    private int volume;
+
+    ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
 
 
     public Truck(int startlocation, int endlocation, int id, String name) {
@@ -17,6 +22,8 @@ public class Truck {
         this.id = id;
         this.name = name;
         this.geredenminuten = 0;
+        this.volume = 0;
+        machinelijst = new ArrayList<Machine>();
     }
 
     public static int getTruckCapacity() {
@@ -65,6 +72,24 @@ public class Truck {
 
     public void setGeredenminuten(int geredenminuten) {
         this.geredenminuten = geredenminuten;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public void pickUp(Machine machine){
+        machinelijst.add(machine);
+        volume = volume + machine.getMachineType().getVolume();
+    }
+
+    public void dropOf(Machine machine){
+        volume = volume - machine.getMachineType().getVolume();
+        machinelijst.remove(machine);
     }
 
     @Override

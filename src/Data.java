@@ -191,7 +191,7 @@ public class Data {
                     int machinetypeid = Integer.parseInt(values[2]);
                     int locationid = Integer.parseInt(values[3]);
 
-                    Machine machine = new Machine(id, machinetypeid, locationid);
+                    Machine machine = new Machine(id, machinetypeid, locationid, machinetypelijst.get(machinetypeid));
                     machinelijst.add(machine);
                 }
 
