@@ -3,10 +3,13 @@ public class Drop {
     private int machineId;          //van lijst van machines die elk id hebben
     private int locationId;
 
-    public Drop(int id, int machineId, int locationId) {
+    private Machine machine;
+
+    public Drop(int id, int machineId, int locationId, Machine machine) {
         this.id = id;
         this.machineId = machineId;
         this.locationId = locationId;
+        this.machine = machine;
     }
 
 
@@ -32,5 +35,13 @@ public class Drop {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
     }
 }

@@ -149,7 +149,7 @@ public class Data {
                     int id = Integer.parseInt(values[1]);
                     int locationid = Integer.parseInt(values[2]);
 
-                    Depot depot = new Depot(id, locationid);
+                    Depot depot = new Depot(id, locationid, locationlijst.get(locationid));
                     depotlijst.add(depot);
                 }
             } else if (line.contains("TRUCKS")) {
@@ -205,7 +205,7 @@ public class Data {
                     int machinetypeid = Integer.parseInt(values[2]);
                     int locationid = Integer.parseInt(values[3]);
 
-                    Drop drop = new Drop(id, machinetypeid, locationid);
+                    Drop drop = new Drop(id, machinetypeid, locationid, machinelijst.get(machinetypeid));
                     droplijst.add(drop);
                 }
             }
@@ -218,7 +218,7 @@ public class Data {
                         int id = Integer.parseInt(values[1]);
                         int machineid = Integer.parseInt(values[2]);
 
-                        Collect collect = new Collect(id,machineid);
+                        Collect collect = new Collect(id,machineid, machinelijst.get(machineid));
                         collectlijst.add(collect);
                     }
 

@@ -12,6 +12,7 @@ public class Truck {
     private String name;
     private int geredenminuten;
     private int volume;
+    private int distance;
 
     ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
 
@@ -23,6 +24,7 @@ public class Truck {
         this.name = name;
         this.geredenminuten = 0;
         this.volume = 0;
+        this.distance = 0;
         machinelijst = new ArrayList<Machine>();
     }
 
@@ -82,14 +84,35 @@ public class Truck {
         this.volume = volume;
     }
 
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
     public void pickUp(Machine machine){
         machinelijst.add(machine);
         volume = volume + machine.getMachineType().getVolume();
+        geredenminuten = geredenminuten + machine.getMachineType().getServicetime();
     }
 
     public void dropOf(Machine machine){
         volume = volume - machine.getMachineType().getVolume();
+        geredenminuten = geredenminuten + machine.getMachineType().getServicetime();
         machinelijst.remove(machine);
+    }
+
+    public void Verplaats(int locationid, Timematrix timematrix, Distancematrix distancematrix){              //truck gaat naar locationid
+        int tijdnodig = timematrix.getTime()[startlocation][locationid];
+        int distancenodig = distancematrix.getDistance()[startlocation][locationid];
+
+        geredenminuten = geredenminuten + tijdnodig;                    //updaten tijd
+        distance = distance + distancenodig;                            //updaten distance
+
+        startlocation = locationid;                                             //aanpassen huidige locatie
+
     }
 
     @Override
