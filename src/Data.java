@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-
-    private ArrayList<Location> locationslijst;
     private ArrayList<Depot> depotlijst;
     private ArrayList<Drop> droplijst;
     private ArrayList<Collect> collectlijst;
@@ -19,7 +17,6 @@ public class Data {
     private Timematrix timematrix;
 
     public Data(){
-        locationslijst = new ArrayList<Location>();
         depotlijst = new ArrayList<Depot>();
         droplijst = new ArrayList<Drop>() ;
         collectlijst = new ArrayList<Collect>() ;
@@ -31,14 +28,6 @@ public class Data {
 
        //  Distancematrix distancematrix = new Distancematrix();
        //  Timematrix timematrix = new Timematrix();
-    }
-
-    public ArrayList<Location> getLocationslijst() {
-        return locationslijst;
-    }
-
-    public void setLocationslijst(ArrayList<Location> locationslijst) {
-        this.locationslijst = locationslijst;
     }
 
     public ArrayList<Depot> getDepotlijst() {
@@ -138,7 +127,7 @@ public class Data {
                     String name = values[4];
 
                     Location location = new Location(id, lat, lon, name);
-                    locationslijst.add(location);
+                    locationlijst.add(location);
                 }
             } else if (line.contains("DEPOTS")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
@@ -149,7 +138,7 @@ public class Data {
                     int id = Integer.parseInt(values[1]);
                     int locationid = Integer.parseInt(values[2]);
 
-                    Depot depot = new Depot(id, locationid, locationlijst.get(locationid));
+                    Depot depot = new Depot(id,locationlijst.get(locationid));
                     depotlijst.add(depot);
                 }
             } else if (line.contains("TRUCKS")) {
@@ -191,7 +180,7 @@ public class Data {
                     int machinetypeid = Integer.parseInt(values[2]);
                     int locationid = Integer.parseInt(values[3]);
 
-                    Machine machine = new Machine(id, machinetypeid, locationid, machinetypelijst.get(machinetypeid));
+                    Machine machine = new Machine(id, machinetypeid, locationlijst.get(locationid), machinetypelijst.get(machinetypeid));
                     machinelijst.add(machine);
                 }
 
@@ -205,7 +194,7 @@ public class Data {
                     int machinetypeid = Integer.parseInt(values[2]);
                     int locationid = Integer.parseInt(values[3]);
 
-                    Drop drop = new Drop(id, machinetypeid, locationid, machinelijst.get(machinetypeid));
+                    Drop drop = new Drop(id, machinetypeid, machinelijst.get(machinetypeid));
                     droplijst.add(drop);
                 }
             }
@@ -218,7 +207,7 @@ public class Data {
                         int id = Integer.parseInt(values[1]);
                         int machineid = Integer.parseInt(values[2]);
 
-                        Collect collect = new Collect(id,machineid, machinelijst.get(machineid));
+                        Collect collect = new Collect(id,machinelijst.get(machineid));
                         collectlijst.add(collect);
                     }
 

@@ -5,8 +5,8 @@ public class Truck {
     private static final int TRUCK_CAPACITY = 100;
     private static final int TRUCK_WORKING_TIME = 600;
 
-    private int startlocation;            //begin pos meegeven bij constructor
-    private int endlocation;
+    private int huidigeLocatie;            //begin pos meegeven bij constructor
+    private int endlocationid;
 
     private int id;
     private String name;
@@ -17,9 +17,9 @@ public class Truck {
     ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
 
 
-    public Truck(int startlocation, int endlocation, int id, String name) {
-        this.startlocation = startlocation;
-        this.endlocation = endlocation;
+    public Truck(int huidigeLocatie, int endlocationid, int id, String name) {
+        this.huidigeLocatie = huidigeLocatie;
+        this.endlocationid = endlocationid;
         this.id = id;
         this.name = name;
         this.geredenminuten = 0;
@@ -36,20 +36,20 @@ public class Truck {
         return TRUCK_WORKING_TIME;
     }
 
-    public int getStartlocation() {
-        return startlocation;
+    public int getHuidigeLocatie() {
+        return huidigeLocatie;
     }
 
-    public void setStartlocation(int startlocation) {
-        this.startlocation = startlocation;
+    public void setHuidigeLocatie(int huidigeLocatie) {
+        this.huidigeLocatie = huidigeLocatie;
     }
 
-    public int getEndlocation() {
-        return endlocation;
+    public int getEndlocationid() {
+        return endlocationid;
     }
 
-    public void setEndlocation(int endlocation) {
-        this.endlocation = endlocation;
+    public void setEndlocationid(int endlocationid) {
+        this.endlocationid = endlocationid;
     }
 
     public int getId() {
@@ -92,6 +92,14 @@ public class Truck {
         this.distance = distance;
     }
 
+    public ArrayList<Machine> getMachinelijst() {
+        return machinelijst;
+    }
+
+    public void setMachinelijst(ArrayList<Machine> machinelijst) {
+        this.machinelijst = machinelijst;
+    }
+
     public void pickUp(Machine machine){
         machinelijst.add(machine);
         volume = volume + machine.getMachineType().getVolume();
@@ -105,21 +113,21 @@ public class Truck {
     }
 
     public void Verplaats(int locationid, Timematrix timematrix, Distancematrix distancematrix){              //truck gaat naar locationid
-        int tijdnodig = timematrix.getTime()[startlocation][locationid];
-        int distancenodig = distancematrix.getDistance()[startlocation][locationid];
+        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
+        int distancenodig = distancematrix.getDistance()[huidigeLocatie][locationid];
 
         geredenminuten = geredenminuten + tijdnodig;                    //updaten tijd
         distance = distance + distancenodig;                            //updaten distance
 
-        startlocation = locationid;                                             //aanpassen huidige locatie
+        huidigeLocatie = locationid;                                             //aanpassen huidige locatie
 
     }
 
     @Override
     public String toString() {
         return "Truck{" +
-                "startlocation=" + startlocation +
-                ", endlocation=" + endlocation +
+                "huidigeLocatie=" + huidigeLocatie +
+                ", endlocationid=" + endlocationid +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';

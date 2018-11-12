@@ -1,17 +1,17 @@
 public class Machine {
     private int id;
     private int machineTypeId;      //TODO nog denken over id of machine meegeven
-    private int locationid;
-    private MachineType machineType;
 
-    public Machine(int id, int machineTypeId, int locationid, MachineType machineType) {
+    private MachineType machineType;
+    private Location location;
+
+
+
+    public Machine(int id, int machineTypeId, Location location, MachineType machineType) {
         this.id = id;
         this.machineTypeId = machineTypeId;
-        this.locationid = locationid;
         this.machineType = machineType;
-
-
-
+        this.location = location;
     }
 
     public int getId() {
@@ -30,14 +30,6 @@ public class Machine {
         this.machineTypeId = machineTypeId;
     }
 
-    public int getLocationid() {
-        return locationid;
-    }
-
-    public void setLocationid(int locationid) {
-        this.locationid = locationid;
-    }
-
     public MachineType getMachineType() {
         return machineType;
     }
@@ -46,13 +38,21 @@ public class Machine {
         this.machineType = machineType;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "Machine{" +
                 "id=" + id +
                 ", machineTypeId=" + machineTypeId +
-                ", locationid=" + locationid +
                 ", machineType=" + machineType +
+                ", location=" + location +
                 '}';
     }
 }
