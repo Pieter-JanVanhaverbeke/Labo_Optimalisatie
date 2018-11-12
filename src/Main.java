@@ -12,7 +12,7 @@ public class Main {
 
         //Starten oplossing
        Oplossing opl = new Oplossing(data);
-      opl.start();
+       opl.start();
 
 
         }

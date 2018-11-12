@@ -9,7 +9,7 @@ public class Oplossing {
 
     public Oplossing(Data data) {
         this.data = data;
-        oplossingsmatrix = null; //Na oplossing toevoegen
+        oplossingsmatrix = new Oplossingsmatrix(); //Na oplossing toevoegen
 
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
@@ -130,6 +130,55 @@ public class Oplossing {
             bestetruck.addStop(endLocation);
 
         }
+
+        //omzetten naar opl vorm
+        zetommatrixopl();
     }
+
+
+
+
+    public void zetommatrixopl(){
+        int [] [] matrix;
+        //Zoeken naar langste route
+        int langste=0;
+        for(int i=0; i<data.getTrucklijst().size();i++){
+            Truck truck = data.getTrucklijst().get(i);
+
+            if(truck.stoplijst.size()>langste){
+                langste=truck.stoplijst.size();
+            }
+        }
+
+        //matrix initilialiseren
+        matrix = new int[data.getTrucklijst().size()][langste];
+        for(int i=0;i<langste;i++){
+            for(int j=0; j<langste;j++){
+                matrix [i][j] = 0;
+            }
+        }
+
+
+        for(int i=0; i<data.getTrucklijst().size();i++){
+            Truck truck = data.getTrucklijst().get(i);
+            for(int j=0; j<truck.stoplijst.size();j++){
+                matrix[i][j] = truck.stoplijst.get(j).getId();              //locationid meegeven
+            }
+        }
+
+        oplossingsmatrix.setOplossing(matrix);
+
+        for(int i=0; i<langste;i++){
+            for(int j=0; j<langste;j++){
+                System.out.print(oplossingsmatrix.getOplossing()[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+
+    }
+
+
+
 
 }

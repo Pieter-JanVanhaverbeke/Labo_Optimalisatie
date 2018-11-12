@@ -3,10 +3,13 @@ public class Oplossingsmatrix {
     private int [] [] oplossing;
 
 
+    public Oplossingsmatrix(){
+        oplossing = null;
+    }
+
     public Oplossingsmatrix(int aantaltrucks, int langsteroute) {
         oplossing = new int[aantaltrucks][langsteroute] ;
     }
-
 
     public Oplossingsmatrix(int[][] oplossing) {
         this.oplossing = oplossing;
@@ -31,6 +34,8 @@ public class Oplossingsmatrix {
 
         return true;
     }
+
+
 
 
 
