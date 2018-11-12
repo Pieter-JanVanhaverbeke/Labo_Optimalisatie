@@ -10,6 +10,12 @@ public class Main {
         data.leesData(file);
 
 
+        //Starten oplossing
+       Oplossing opl = new Oplossing(data);
+        opl.start();
+
+
+      //  System.out.println(data.getDistancematrix().getDistance()[27][26]);
 
         }
     }

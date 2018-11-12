@@ -44,6 +44,17 @@ public class Location {
         this.name = name;
     }
 
+    public int getDistance(int locationid, Distancematrix distancematrix){
+       int distance = distancematrix.getDistance()[id][locationid];
+       return distance;
+    }
+
+    public int getTime(int locationid, Timematrix timematrix){
+        int time = timematrix.getTime()[id][locationid];
+        return time;
+    }
+
+
     @Override
     public String toString() {
         return "Location{" +

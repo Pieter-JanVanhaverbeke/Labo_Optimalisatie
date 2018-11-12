@@ -1,3 +1,4 @@
+import javax.crypto.Mac;
 import java.util.ArrayList;
 
 public class Truck {
@@ -15,9 +16,10 @@ public class Truck {
     private int distance;
 
     ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
+    ArrayList<Location> stoplijst;
 
 
-    public Truck(int huidigeLocatie, int endlocationid, int id, String name) {
+    public Truck( int id, int huidigeLocatie, int endlocationid, String name) {
         this.huidigeLocatie = huidigeLocatie;
         this.endlocationid = endlocationid;
         this.id = id;
@@ -26,6 +28,7 @@ public class Truck {
         this.volume = 0;
         this.distance = 0;
         machinelijst = new ArrayList<Machine>();
+        stoplijst = new ArrayList<Location>();
     }
 
     public static int getTruckCapacity() {
@@ -100,6 +103,18 @@ public class Truck {
         this.machinelijst = machinelijst;
     }
 
+    public ArrayList<Location> getStoplijst() {
+        return stoplijst;
+    }
+
+    public void setStoplijst(ArrayList<Location> stoplijst) {
+        this.stoplijst = stoplijst;
+    }
+
+    public void addStop(Location location){
+        stoplijst.add(location);
+    }
+
     public void pickUp(Machine machine){
         machinelijst.add(machine);
         volume = volume + machine.getMachineType().getVolume();
@@ -112,7 +127,7 @@ public class Truck {
         machinelijst.remove(machine);
     }
 
-    public void Verplaats(int locationid, Timematrix timematrix, Distancematrix distancematrix){              //truck gaat naar locationid
+    public void verplaats(int locationid, Timematrix timematrix, Distancematrix distancematrix){              //truck gaat naar locationid
         int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
         int distancenodig = distancematrix.getDistance()[huidigeLocatie][locationid];
 
@@ -121,6 +136,26 @@ public class Truck {
 
         huidigeLocatie = locationid;                                             //aanpassen huidige locatie
 
+    }
+
+    public boolean heefttijd(int locationid,Timematrix timematrix){
+        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
+
+        int nodigeminuten = geredenminuten + tijdnodig;
+        int terugkeertijd = timematrix.getTime()[locationid][endlocationid];
+
+        if(geredenminuten+nodigeminuten+terugkeertijd>TRUCK_WORKING_TIME){
+            return false;
+        }
+
+        else return true;
+    }
+
+    public boolean heeftcapacity(Machine machine){
+            if(volume+machine.getMachineType().getVolume()>TRUCK_CAPACITY){
+                return  false;
+            }
+            else return true;
     }
 
     @Override

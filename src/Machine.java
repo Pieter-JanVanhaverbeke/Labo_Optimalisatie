@@ -4,6 +4,7 @@ public class Machine {
 
     private MachineType machineType;
     private Location location;
+    private boolean collect;
 
 
 
@@ -12,6 +13,7 @@ public class Machine {
         this.machineTypeId = machineTypeId;
         this.machineType = machineType;
         this.location = location;
+        this.collect = false;
     }
 
     public int getId() {
@@ -45,6 +47,15 @@ public class Machine {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public boolean isCollect() {
+        return collect;
+    }
+
+    public void setCollect(boolean collect) {
+        this.collect = collect;
+    }
+
 
     @Override
     public String toString() {

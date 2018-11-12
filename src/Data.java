@@ -196,6 +196,8 @@ public class Data {
 
                     Drop drop = new Drop(id, machinetypeid, machinelijst.get(machinetypeid));
                     droplijst.add(drop);
+
+
                 }
             }
 
@@ -209,6 +211,9 @@ public class Data {
 
                         Collect collect = new Collect(id,machinelijst.get(machineid));
                         collectlijst.add(collect);
+
+                        machinelijst.get(machineid).setCollect(true);                   //zeggen dat machine collect is
+
                     }
 
 
