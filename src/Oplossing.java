@@ -90,8 +90,10 @@ public class Oplossing {
         for (int i=0; i<data.getDroplijst().size();i++) {
             Drop drop = data.getDroplijst().get(i);
 
-       //     Machine machine = new Machine(data.getMachinelijst().size(),drop.getMachineTypeId());
-            Location location = drop.getMachine().getLocation();
+
+            int machinetypeid = drop.getMachineTypeId();
+            Location location = drop.getLocation();
+
             int locatiemachineid = drop.getMachine().getLocation().getId();
 
             for (int j = 0; j < data.getTrucklijst().size(); j++) {                    //voor alle collects kijken naar iedere truck
@@ -110,18 +112,22 @@ public class Oplossing {
             }
 
 
-            bestetruck.pickUp();                       //opnemen machine
+            Machine machine = new Machine();        //dummy machine meenemen en plaatsen op droppoint
+            MachineType machineType = data.getMachinetypelijst().get(machinetypeid);
+            machine.setMachineType(machineType);
+
+
+            bestetruck.pickUp(machine);                       //opnemen dummy machine bij depots
             bestetruck.verplaats(location.getId(),timematrix,distancematrix);           //verplaatsen
             if(korstedistance!=0){
                 bestetruck.addStop(location);
             }
-            bestetruck.dropOf(drop.getMachine());                       //afzetten
+            bestetruck.dropOf(machine);                       //afzetten
             bestetruck.verplaats(bestetruck.getEndlocationid(),timematrix,distancematrix);          //terugkeren
 
             //Steken in opl
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
             bestetruck.addStop(endLocation);
-
 
         }
     }

@@ -7,6 +7,13 @@ public class Machine {
     private boolean collect;
 
 
+    public Machine() {
+        this.id = -1;
+        this.machineTypeId = 0;
+        this.machineType = null;
+        this.location = null;
+        this.collect = false;
+    }
 
     public Machine(int id, int machineTypeId, Location location, MachineType machineType) {
         this.id = id;
