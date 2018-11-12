@@ -68,7 +68,7 @@ public class Oplossing {
                 }
             }
 
-
+            //steken in opl
             bestetruck.verplaats(locatiemachineid,timematrix,distancematrix);                   //verplaatsen naar locatie
             if(korstedistance!=0){
                 bestetruck.addStop(machinelocation);
@@ -78,8 +78,9 @@ public class Oplossing {
 
             bestetruck.verplaats(bestetruck.getEndlocationid(),timematrix,distancematrix);      //terugkeren naar eindlocatie
 
+            //steken in opl
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
-            bestetruck.addStop(endLocation);
+            bestetruck.addStop(endLocation);                                                        //adden stop
 
             //TODO zetten in oplossingsmatrix
         }
@@ -88,6 +89,8 @@ public class Oplossing {
 
         for (int i=0; i<data.getDroplijst().size();i++) {
             Drop drop = data.getDroplijst().get(i);
+
+       //     Machine machine = new Machine(data.getMachinelijst().size(),drop.getMachineTypeId());
             Location location = drop.getMachine().getLocation();
             int locatiemachineid = drop.getMachine().getLocation().getId();
 
@@ -107,10 +110,18 @@ public class Oplossing {
             }
 
 
-            bestetruck.pickUp(drop.getMachine());                       //opnemen machine
+            bestetruck.pickUp();                       //opnemen machine
             bestetruck.verplaats(location.getId(),timematrix,distancematrix);           //verplaatsen
+            if(korstedistance!=0){
+                bestetruck.addStop(location);
+            }
             bestetruck.dropOf(drop.getMachine());                       //afzetten
             bestetruck.verplaats(bestetruck.getEndlocationid(),timematrix,distancematrix);          //terugkeren
+
+            //Steken in opl
+            Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
+            bestetruck.addStop(endLocation);
+
 
         }
     }
