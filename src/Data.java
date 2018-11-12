@@ -113,7 +113,6 @@ public class Data {
         }
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            //    System.out.println(line);
 
             if (line.contains("LOCATIONS:")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();     //eerste getal zoeken
@@ -193,7 +192,6 @@ public class Data {
                     int id = Integer.parseInt(values[1]);
                     int machinetypeid = Integer.parseInt(values[2]);
                     int locationid = Integer.parseInt(values[3]);
-                    System.out.println(locationid);
 
                     Drop drop = new Drop(id, machinetypeid, locationlijst.get(locationid));
                     droplijst.add(drop);

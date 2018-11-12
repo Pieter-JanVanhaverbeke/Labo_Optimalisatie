@@ -1,5 +1,3 @@
-import java.sql.Time;
-
 public class Oplossing {
 
     private Data data;
@@ -51,24 +49,26 @@ public class Oplossing {
             int locatiemachineid = collect.getMachine().getLocation().getId();
             Location machinelocation = collect.getMachine().getLocation();          //locatie van collect
 
-
-            for(int j=0; j<data.getTrucklijst().size();j++){                    //voor alle collects kijken naar iedere truck
+            for(int j=0; j<data.getTrucklijst().size();j++) {                   //voor alle collects kijken naar iedere truck
 
                 Truck truck = data.getTrucklijst().get(j);
 
 
                 int trucklocationid = truck.getHuidigeLocatie();
-                int calculateddistance = collect.getMachine().getLocation().getDistance(trucklocationid,distancematrix);        //distance die berekent is
+                int calculateddistance = collect.getMachine().getLocation().getDistance(trucklocationid, distancematrix);        //distance die berekent is
+                //    System.out.println("cal: " + calculateddistance);
 
-
-                if(calculateddistance<korstedistance){
-                    if(truck.heefttijd(locatiemachineid,timematrix)){              //kijken of truck tijd heeft //TODO meereken of tijd heeft voor servicetime
-                    korstedistance = calculateddistance;
-                    bestetruck = truck;                         //beste truck als huidige truck plaatsen
+                if (calculateddistance < korstedistance) {
+                    if (truck.heefttijd(locatiemachineid, timematrix)) {              //kijken of truck tijd heeft //TODO meereken of tijd heeft voor servicetime
+                        korstedistance = calculateddistance;
+                        bestetruck = truck;                         //beste truck als huidige truck plaatsen
+                    }
                 }
             }
 
+
             //steken in opl
+        //        System.out.println(bestetruck.toString());
             bestetruck.verplaats(locatiemachineid,timematrix,distancematrix);                   //verplaatsen naar locatie
             if(korstedistance!=0){
                 bestetruck.addStop(machinelocation);
@@ -83,7 +83,7 @@ public class Oplossing {
             bestetruck.addStop(endLocation);                                                        //adden stop
 
             //TODO zetten in oplossingsmatrix
-        }
+
 
         }
 
@@ -94,7 +94,7 @@ public class Oplossing {
             int machinetypeid = drop.getMachineTypeId();
             Location location = drop.getLocation();
 
-            int locatiemachineid = drop.getMachine().getLocation().getId();
+            int locatiemachineid = drop.getLocation().getId();
 
             for (int j = 0; j < data.getTrucklijst().size(); j++) {                    //voor alle collects kijken naar iedere truck
                 Truck truck = data.getTrucklijst().get(j);
