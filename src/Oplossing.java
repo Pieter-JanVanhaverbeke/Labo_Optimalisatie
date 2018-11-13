@@ -152,9 +152,9 @@ public class Oplossing {
 
         //matrix initilialiseren
         matrix = new int[data.getTrucklijst().size()][langste];
-        for(int i=0;i<langste;i++){
+        for(int i=0;i<data.getTrucklijst().size();i++){
             for(int j=0; j<langste;j++){
-                matrix [i][j] = 0;
+                matrix [i][j] = -1;
             }
         }
 
