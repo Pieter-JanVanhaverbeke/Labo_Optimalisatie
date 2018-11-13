@@ -168,7 +168,7 @@ public class Oplossing {
 
         oplossingsmatrix.setOplossing(matrix);
 
-        for(int i=0; i<langste;i++){
+        for(int i=0; i<data.getTrucklijst().size();i++){
             for(int j=0; j<langste;j++){
                 System.out.print(oplossingsmatrix.getOplossing()[i][j] + " ");
             }
