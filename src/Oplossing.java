@@ -56,10 +56,10 @@ public class Oplossing {
 
                 int trucklocationid = truck.getHuidigeLocatie();
                 int calculateddistance = collect.getMachine().getLocation().getDistance(trucklocationid, distancematrix);        //distance die berekent is
-                //    System.out.println("cal: " + calculateddistance);
 
                 if (calculateddistance < korstedistance) {
                     if (truck.heefttijd(locatiemachineid, timematrix)) {              //kijken of truck tijd heeft //TODO meereken of tijd heeft voor servicetime
+                    //    System.out.println("truck" + j + " " + truck.getGeredenminuten());
                         korstedistance = calculateddistance;
                         bestetruck = truck;                         //beste truck als huidige truck plaatsen
                     }
@@ -68,7 +68,6 @@ public class Oplossing {
 
 
             //steken in opl
-        //        System.out.println(bestetruck.toString());
             bestetruck.verplaats(locatiemachineid,timematrix,distancematrix);                   //verplaatsen naar locatie
             if(korstedistance!=0){
                 bestetruck.addStop(machinelocation);
@@ -90,6 +89,8 @@ public class Oplossing {
         for (int i=0; i<data.getDroplijst().size();i++) {
             Drop drop = data.getDroplijst().get(i);
 
+            korstedistance=999999999; //resetten kortstedistance
+            bestetruck = null; //resetten bestetruck
 
             int machinetypeid = drop.getMachineTypeId();
             Location location = drop.getLocation();
@@ -105,6 +106,7 @@ public class Oplossing {
 
                 if(calculateddistance < korstedistance){
                     if((truck.heefttijd(locatiemachineid,timematrix))){ //TODO meereken of tijd heeft voor servicetime
+           //             System.out.println("trucktime: " + j + " " + truck.getGeredenminuten());
                         korstedistance=calculateddistance;
                         bestetruck = truck;
                     }
@@ -175,6 +177,11 @@ public class Oplossing {
             System.out.println();
         }
 
+        int totaledistance = 0;
+        for(int i=0; i<data.getTrucklijst().size();i++){
+            totaledistance = totaledistance + data.getTrucklijst().get(i).getDistance();
+        }
+        System.out.println("totale distance: " + totaledistance);
 
     }
 
