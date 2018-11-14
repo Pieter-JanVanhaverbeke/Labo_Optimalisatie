@@ -1,5 +1,7 @@
 import javax.crypto.Mac;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Truck {
     //Constanten
@@ -17,6 +19,7 @@ public class Truck {
 
     ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
     ArrayList<Location> stoplijst;
+    LinkedList<String> pickUpsDropOffs;
 
 
     public Truck( int id, int huidigeLocatie, int endlocationid, String name) {
@@ -29,6 +32,7 @@ public class Truck {
         this.distance = 0;
         machinelijst = new ArrayList<Machine>();
         stoplijst = new ArrayList<Location>();
+        pickUpsDropOffs = new LinkedList<>();
     }
 
     public static int getTruckCapacity() {

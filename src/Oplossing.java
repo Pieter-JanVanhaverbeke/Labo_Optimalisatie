@@ -1,11 +1,13 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Oplossing {
 
     private Data data;
     private Oplossingsmatrix oplossingsmatrix;
+    private Solution solution;
 
     private Timematrix timematrix;
     private Distancematrix distancematrix;
@@ -18,7 +20,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-
+        this.solution = new Solution(data.getTrucklijst().size(), 30, distancematrix, timematrix);
     }
 
     public Data getData() {
@@ -164,9 +166,9 @@ public class Oplossing {
             }
         }
 
-
+        Truck truck;
         for(int i=0; i<data.getTrucklijst().size();i++){
-            Truck truck = data.getTrucklijst().get(i);
+            truck = data.getTrucklijst().get(i);
             for(int j=0; j<truck.stoplijst.size();j++){
                 matrix[i][j] = truck.stoplijst.get(j).getId();              //locationid meegeven
             }
@@ -207,9 +209,9 @@ public class Oplossing {
 
     public void writeSolution(String original){
 
-        PrintWriter printWriter;
+        PrintWriter printWriter = null;
         try{
-            File file = new File("/data/solution");
+            File file = new File("src/data/solution");
             file.createNewFile();
             printWriter = new PrintWriter(file);
 
@@ -218,12 +220,15 @@ public class Oplossing {
                 printWriter.println(String.format("PROBLEM: %s", new File(original).getName()));
                 printWriter.println(String.format("DISTANCE: %d", totalDistance()));
                 printWriter.println(String.format("TRUCKS: %d", neededTrucks()));
+
             } else {
                 printWriter.println("infeasible.");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if(printWriter != null) printWriter.close();
         }
     }
 }
