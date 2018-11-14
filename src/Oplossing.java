@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Oplossing {
 
     private Data data;
@@ -177,15 +181,49 @@ public class Oplossing {
             System.out.println();
         }
 
-        int totaledistance = 0;
-        for(int i=0; i<data.getTrucklijst().size();i++){
-            totaledistance = totaledistance + data.getTrucklijst().get(i).getDistance();
-        }
-        System.out.println("totale distance: " + totaledistance);
+        System.out.println("totale distance: " + totalDistance());
 
     }
 
+    private int totalDistance(){
+        int totaledistance = 0;
+        for(int i=0; i<data.getTrucklijst().size();i++) {
+            totaledistance = totaledistance + data.getTrucklijst().get(i).getDistance();
+        }
+        return totaledistance;
+    }
 
+    private int neededTrucks(){
+        int neededTrucks = 0;
+        for(int i=0; i<oplossingsmatrix.getOplossing().length;i++) {
+            if(oplossingsmatrix.getOplossing()[i][0] != -1) neededTrucks++;
+        }
+        return neededTrucks;
+    }
 
+    private boolean isFeasible(){
+        return true;
+    }
 
+    public void writeSolution(String original){
+
+        PrintWriter printWriter;
+        try{
+            File file = new File("/data/solution");
+            file.createNewFile();
+            printWriter = new PrintWriter(file);
+
+            if(isFeasible()){
+
+                printWriter.println(String.format("PROBLEM: %s", new File(original).getName()));
+                printWriter.println(String.format("DISTANCE: %d", totalDistance()));
+                printWriter.println(String.format("TRUCKS: %d", neededTrucks()));
+            } else {
+                printWriter.println("infeasible.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
