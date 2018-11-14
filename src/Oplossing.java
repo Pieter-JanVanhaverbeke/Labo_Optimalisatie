@@ -5,6 +5,7 @@ public class Oplossing {
 
     private Timematrix timematrix;
     private Distancematrix distancematrix;
+    private Machinematrix machinematrix;
 
 
     public Oplossing(Data data) {
@@ -13,6 +14,10 @@ public class Oplossing {
 
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
+        machinematrix=data.getMachinematrix();
+        machinematrix.setCollect(data.getCollectlijst());
+        machinematrix.setDrop(data.getDroplijst());
+
 
 
     }
@@ -47,7 +52,8 @@ public class Oplossing {
 
             Collect collect = data.getCollectlijst().get(i);        //huidig item dat gecollect moet worden
             int locatiemachineid = collect.getMachine().getLocation().getId();
-            Location machinelocation = collect.getMachine().getLocation();          //locatie van collect
+            Location machinelocation = collect.getMachine().getLocation();//locatie van collect
+            int machineTypeid=collect.getMachine().getMachineTypeId();
 
             for(int j=0; j<data.getTrucklijst().size();j++) {                   //voor alle collects kijken naar iedere truck
 
@@ -79,7 +85,9 @@ public class Oplossing {
 
             //steken in opl
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
-            bestetruck.addStop(endLocation);                                                        //adden stop
+            bestetruck.addStop(endLocation);//adden stop
+
+            machinematrix.collectGebeurt(locatiemachineid, machineTypeid);
 
             //TODO zetten in oplossingsmatrix
 
@@ -131,9 +139,12 @@ public class Oplossing {
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
             bestetruck.addStop(endLocation);
 
+            machinematrix.dropGebeurt(locatiemachineid, machinetypeid);
+
         }
 
         //omzetten naar opl vorm
+
         zetommatrixopl();
     }
 

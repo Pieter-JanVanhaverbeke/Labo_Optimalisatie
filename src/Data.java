@@ -15,6 +15,7 @@ public class Data {
 
     private Distancematrix distancematrix;
     private Timematrix timematrix;
+    private Machinematrix machinematrix;
 
     public Data(){
         depotlijst = new ArrayList<Depot>();
@@ -25,6 +26,7 @@ public class Data {
         machinetypelijst = new ArrayList<MachineType>() ;
         trucklijst = new ArrayList<Truck>() ;
 
+        machinematrix=new Machinematrix();
 
        //  Distancematrix distancematrix = new Distancematrix();
        //  Timematrix timematrix = new Timematrix();
@@ -98,6 +100,10 @@ public class Data {
         return timematrix;
     }
 
+    public Machinematrix getMachinematrix(){
+        return  machinematrix;
+    }
+
     public void setTimematrix(Timematrix timematrix) {
         this.timematrix = timematrix;
     }
@@ -127,7 +133,9 @@ public class Data {
 
                     Location location = new Location(id, lat, lon, name);
                     locationlijst.add(location);
+
                 }
+                machinematrix.setAantalLocatiesid(aantal);
             } else if (line.contains("DEPOTS")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
                 for (int i = 0; i < aantal; i++) {
@@ -168,6 +176,7 @@ public class Data {
                     MachineType machineType = new MachineType(id, volume, servicetime, name);
                     machinetypelijst.add(machineType);
                 }
+                machinematrix.setAantalMachinesid(aantal);
 
             } else if (line.contains("MACHINES")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
@@ -253,6 +262,6 @@ public class Data {
 
         }
 
-
+        machinematrix.genereerMatrix();
     }
 }
