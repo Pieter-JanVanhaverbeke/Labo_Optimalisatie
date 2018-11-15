@@ -20,7 +20,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-        this.solution = new Solution(data.getTrucklijst().size(), 30, distancematrix, timematrix);
+        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix);
     }
 
     public Data getData() {
@@ -41,6 +41,8 @@ public class Oplossing {
 
     //TODO oplossing die eerste resultaat brengt
     public void start(){
+
+        Solution solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix);
 
         int korstedistance = 999999999;
         Truck bestetruck = null;
