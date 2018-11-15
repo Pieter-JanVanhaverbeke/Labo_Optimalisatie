@@ -13,8 +13,8 @@ public class Data {
     private ArrayList<Truck> trucklijst;
 
 
-    private Distancematrix distancematrix;
-    private Timematrix timematrix;
+    private DistanceMatrix distancematrix;
+    private TimeMatrix timematrix;
 
     public Data(){
         depotlijst = new ArrayList<Depot>();
@@ -86,19 +86,19 @@ public class Data {
         this.trucklijst = trucklijst;
     }
 
-    public Distancematrix getDistancematrix() {
+    public DistanceMatrix getDistancematrix() {
         return distancematrix;
     }
 
-    public void setDistancematrix(Distancematrix distancematrix) {
+    public void setDistancematrix(DistanceMatrix distancematrix) {
         this.distancematrix = distancematrix;
     }
 
-    public Timematrix getTimematrix() {
+    public TimeMatrix getTimematrix() {
         return timematrix;
     }
 
-    public void setTimematrix(Timematrix timematrix) {
+    public void setTimematrix(TimeMatrix timematrix) {
         this.timematrix = timematrix;
     }
 
@@ -219,7 +219,7 @@ public class Data {
 
             } else if (line.contains("TIME_MATRIX")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
-                timematrix = new Timematrix(aantal, aantal);
+                timematrix = new TimeMatrix(aantal, aantal);
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
 
@@ -235,7 +235,7 @@ public class Data {
 
             } else if (line.contains("DISTANCE_MATRIX: ")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
-                distancematrix = new Distancematrix(aantal, aantal);
+                distancematrix = new DistanceMatrix(aantal, aantal);
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
                     while (line.charAt(0) == ' ') {

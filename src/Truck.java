@@ -1,6 +1,4 @@
-import javax.crypto.Mac;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Truck {
@@ -131,7 +129,7 @@ public class Truck {
         machinelijst.remove(machine);
     }
 
-    public void verplaats(int locationid, Timematrix timematrix, Distancematrix distancematrix){              //truck gaat naar locationid
+    public void verplaats(int locationid, TimeMatrix timematrix, DistanceMatrix distancematrix){              //truck gaat naar locationid
         int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
         int distancenodig = distancematrix.getDistance()[huidigeLocatie][locationid];
 
@@ -142,7 +140,7 @@ public class Truck {
 
     }
 
-    public boolean heefttijd(int locationid,Timematrix timematrix){
+    public boolean heefttijd(int locationid, TimeMatrix timematrix){
         int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
 
         int nodigeminuten = geredenminuten + tijdnodig;

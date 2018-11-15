@@ -44,12 +44,12 @@ public class Location {
         this.name = name;
     }
 
-    public int getDistance(int locationid, Distancematrix distancematrix){
+    public int getDistance(int locationid, DistanceMatrix distancematrix){
        int distance = distancematrix.getDistance()[id][locationid];
        return distance;
     }
 
-    public int getTime(int locationid, Timematrix timematrix){
+    public int getTime(int locationid, TimeMatrix timematrix){
         int time = timematrix.getTime()[id][locationid];
         return time;
     }

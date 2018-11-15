@@ -1,16 +1,16 @@
 import java.util.Arrays;
 
-public class Timematrix {
+public class TimeMatrix {
 
     private int [] [] time;
 
 
-    public Timematrix(int lengte, int breedte){
+    public TimeMatrix(int lengte, int breedte){
         this.time = new int [lengte] [breedte];
     }
 
 
-    public Timematrix(int[][] time) {
+    public TimeMatrix(int[][] time) {
         this.time = time;
     }
 

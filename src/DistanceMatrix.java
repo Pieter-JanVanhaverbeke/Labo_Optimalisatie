@@ -1,13 +1,13 @@
 import java.util.Arrays;
 
-public class Distancematrix {
+public class DistanceMatrix {
     private int [] [] distance;
 
-    public Distancematrix(int[][] distance) {
+    public DistanceMatrix(int[][] distance) {
         this.distance = distance;
     }
 
-    public Distancematrix(int lengte, int breedte){
+    public DistanceMatrix(int lengte, int breedte){
         this.distance = new int [lengte] [breedte];
     }
 

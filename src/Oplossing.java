@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 public class Oplossing {
 
@@ -9,8 +8,8 @@ public class Oplossing {
     private Oplossingsmatrix oplossingsmatrix;
     private Solution solution;
 
-    private Timematrix timematrix;
-    private Distancematrix distancematrix;
+    private TimeMatrix timematrix;
+    private DistanceMatrix distancematrix;
 
 
     public Oplossing(Data data) {
