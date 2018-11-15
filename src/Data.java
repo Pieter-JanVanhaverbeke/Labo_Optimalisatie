@@ -150,6 +150,8 @@ public class Data {
                     int startlocationid = Integer.parseInt(values[2]);
                     int enlocationid = Integer.parseInt(values[3]);
 
+                    Location huidigelocatie = locationlijst.get(startlocationid);
+
                     Truck truck = new Truck(id, startlocationid, enlocationid, null);
                     trucklijst.add(truck);
                 }
