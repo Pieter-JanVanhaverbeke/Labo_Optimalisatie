@@ -64,7 +64,7 @@ public class Oplossing {
                 int calculateddistance = collect.getMachine().getLocation().getDistance(trucklocationid, distancematrix);        //distance die berekent is
 
                 if (calculateddistance < korstedistance) {
-                    if (truck.heefttijd(locatiemachineid, timematrix)) {              //kijken of truck tijd heeft //TODO meereken of tijd heeft voor servicetime
+                    if (truck.heefttijd(locatiemachineid, timematrix,0)) {              //kijken of truck tijd heeft //TODO meereken of tijd heeft voor servicetime
                     //    System.out.println("truck" + j + " " + truck.getGeredenminuten());
                         korstedistance = calculateddistance;
                         bestetruck = truck;                         //beste truck als huidige truck plaatsen
@@ -111,7 +111,7 @@ public class Oplossing {
                 int calculateddistance = location.getDistance(huidigelocatieid, distancematrix);
 
                 if(calculateddistance < korstedistance){
-                    if((truck.heefttijd(locatiemachineid,timematrix))){ //TODO meereken of tijd heeft voor servicetime
+                    if((truck.heefttijd(locatiemachineid,timematrix,0))){ //TODO meereken of tijd heeft voor servicetime
            //             System.out.println("trucktime: " + j + " " + truck.getGeredenminuten());
                         korstedistance=calculateddistance;
                         bestetruck = truck;
@@ -143,6 +143,26 @@ public class Oplossing {
         zetommatrixopl();
     }
 
+    public void start2(){
+        for(int i=0; i<data.getTrucklijst().size();i++){
+            Truck truck = data.getTrucklijst().get(i);
+
+
+
+          boolean ok = true;
+          while (ok){
+              ok = truck.dichtsteDropPickup(data.getDroplijst(),data.getCollectlijst(),distancematrix,timematrix);
+          }
+
+
+
+        }
+
+
+
+
+    }
+
 
 
 
@@ -153,8 +173,8 @@ public class Oplossing {
         for(int i=0; i<data.getTrucklijst().size();i++){
             Truck truck = data.getTrucklijst().get(i);
 
-            if(truck.stoplijst.size()>langste){
-                langste=truck.stoplijst.size();
+            if(truck.getStoplijst().size()>langste){
+                langste=truck.getStoplijst().size();
             }
         }
 
@@ -169,8 +189,8 @@ public class Oplossing {
         Truck truck;
         for(int i=0; i<data.getTrucklijst().size();i++){
             truck = data.getTrucklijst().get(i);
-            for(int j=0; j<truck.stoplijst.size();j++){
-                matrix[i][j] = truck.stoplijst.get(j).getId();              //locationid meegeven
+            for(int j=0; j<truck.getStoplijst().size();j++){
+                matrix[i][j] = truck.getStoplijst().get(j).getId();              //locationid meegeven
             }
         }
 
@@ -231,4 +251,7 @@ public class Oplossing {
             if(printWriter != null) printWriter.close();
         }
     }
+
+
+
 }

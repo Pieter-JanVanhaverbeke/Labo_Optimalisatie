@@ -6,6 +6,10 @@ public class Machine {
     private Location location;
     private boolean collect;
 
+    private int volume;
+    private int servicetime;
+    private String name;
+
 
     public Machine() {
         this.id = -1;
@@ -21,6 +25,10 @@ public class Machine {
         this.machineType = machineType;
         this.location = location;
         this.collect = false;
+
+        this.volume = machineType.getVolume();
+        this.servicetime = machineType.getServicetime();
+        this.name = machineType.getName();
     }
 
     public int getId() {
@@ -63,6 +71,29 @@ public class Machine {
         this.collect = collect;
     }
 
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public int getServicetime() {
+        return servicetime;
+    }
+
+    public void setServicetime(int servicetime) {
+        this.servicetime = servicetime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString() {
@@ -71,6 +102,10 @@ public class Machine {
                 ", machineTypeId=" + machineTypeId +
                 ", machineType=" + machineType +
                 ", location=" + location +
+                ", collect=" + collect +
+                ", volume=" + volume +
+                ", servicetime=" + servicetime +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
