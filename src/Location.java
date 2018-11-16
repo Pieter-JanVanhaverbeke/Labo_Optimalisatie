@@ -76,27 +76,6 @@ public class Location {
         return bestedepot;
     }
 
-/*
-   public Depot dichtsteDepotmetMachine(ArrayList<Depot> depotslijst,int machineTypeId, Distancematrix distancematrix){
-        Depot depot;
-        Depot bestedepot = null;
-        int bestedistance = 999999;
-        for(int i=0; i<depotslijst.size();i++) {
-            depot = depotslijst.get(i);
-            if (depot.hasMachine(machineTypeId)) {
-
-                int distance = this.location.getDistance(depot.getLocation().getId(), distancematrix);
-                if (distance < bestedistance) {
-                    bestedepot = depot;
-                    bestedistance = distance;
-                }
-            }
-        }
-
-
-        return bestedepot;
-    }
- */
     @Override
     public String toString() {
         return "Location{" +

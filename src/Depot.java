@@ -62,4 +62,30 @@ public class Depot {
         }
         return false;
     }
+
+    public Machine getMachine(int machinetypeid){
+        Machine machine = null;
+        for(int i=0; i<machinelijst.size();i++){
+            if(machinelijst.get(i).getMachineTypeId()==machinetypeid){
+                machine = machinelijst.get(i);
+            }
+        }
+        return  machine;
+    }
+
+
+    public Truck getGoedeTruck(int locationid,TimeMatrix timeMatrix, int servicetime){
+        Truck goedetruck=null;
+        for(int i=0; i<trucklijst.size();i++){
+            Truck truck = trucklijst.get(i);
+            if(truck.heefttijd(locationid,timeMatrix,servicetime)){
+                goedetruck = truck;
+            }
+        }
+
+        return goedetruck;
+
+
+    }
+
 }

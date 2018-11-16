@@ -175,7 +175,7 @@ public class Oplossing {
      int aantalcollects = data.getCollectlijst().size();
 
 
-     //  while (aantalcollects>0){
+   //    while (aantalcollects>0){
      //      int teller = 0;
      for(int i=0; i<data.getTrucklijst().size();i++){
 
@@ -188,7 +188,7 @@ public class Oplossing {
          //IF aantalcollects = 0
 
 
-         aantalcollects--;
+      //   aantalcollects--;
 
      }
 
@@ -203,7 +203,21 @@ public class Oplossing {
 
 
      for(int i=0;i<onvoltooidedrops.size();i++){
-         //Depot depot = drop.getdichtsteDepot()
+
+         Drop drop = onvoltooidedrops.get(0);
+         int machinetypeid = drop.getMachineTypeId();
+
+
+         Depot depot = drop.getLocation().getDichtsteDepot(data.getDepotlijst(),machinetypeid,data.getDistancematrix());
+         int servicetime = data.getMachinetypelijst().get(machinetypeid).getServicetime();            //get servicetime
+         Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
+
+         Machine machine = depot.getMachine(machinetypeid);
+         truck.pickUp(machine);
+         truck.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
+         truck.dropOf(machine);
+         truck.keerTerug(timematrix,distancematrix);
+
      }
 
 
