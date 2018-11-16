@@ -75,6 +75,7 @@ public class Depot {
 
 
     public Truck getGoedeTruck(int locationid,TimeMatrix timeMatrix, int servicetime){
+
         Truck goedetruck=null;
         for(int i=0; i<trucklijst.size();i++){
             Truck truck = trucklijst.get(i);
@@ -91,5 +92,7 @@ public class Depot {
     public void addMachine(Machine machine){
         machinelijst.add(machine);
     }
+
+    public void addTruck(Truck truck) {trucklijst.add(truck);}
 
 }

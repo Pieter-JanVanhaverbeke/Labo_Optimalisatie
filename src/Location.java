@@ -60,8 +60,17 @@ public class Location {
         Depot depot;
         Depot bestedepot = null;
         int bestedistance = 999999;
+
+       /* System.out.println("size: " + depotslijst.size());
+        System.out.println("type nodig: " + machineTypeId);
+        System.out.println("depot2: " + depotslijst.get(1).getMachinelijst().size());*/
         for(int i=0; i<depotslijst.size();i++) {
+        //    System.out.println("depot: " + i);
             depot = depotslijst.get(i);
+     /*       for(int j=0; j<depot.getMachinelijst().size();j++){
+                System.out.println("depot: " + depot.getId() + " machine: " + depot.getMachinelijst().get(j).getName());
+            }
+*/
             if (depot.hasMachine(machineTypeId)) {
                 int distance = this.getDistance(depot.getLocation().getId(), distancematrix);
                 if (distance < bestedistance) {

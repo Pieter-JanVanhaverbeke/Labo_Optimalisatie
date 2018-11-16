@@ -281,6 +281,35 @@ public class Data {
 
         }
 
+        //DEPOTS VULLEN MET MACHINES
+        for(int i=0; i<depotlijst.size();i++){
+            Depot depot = depotlijst.get(i);
+            for(int j=0; j<machinelijst.size();j++){
+                Machine machine = machinelijst.get(j);
+
+
+                if(machine.getLocation().getId()==depot.getLocation().getId()){
+                    depot.addMachine(machine);
+                }
+            }
+        }
+
+
+        //alle trucks toevoegen
+        for(int i=0; i<depotlijst.size();i++){
+            Depot depot = depotlijst.get(i);
+            for(int j=0; j<trucklijst.size();j++){
+                Truck truck = trucklijst.get(j);
+
+
+                if(truck.getEndlocationid()==depot.getLocation().getId()){
+                    depot.addTruck(truck);
+                }
+            }
+        }
+
+
+
 
     }
 }

@@ -189,7 +189,7 @@ public class Oplossing {
          while (ok){
 
              ok = truck.dichtsteDropPickup(droplijst,collectlijst,distancematrix,timematrix,einddepot);
-             System.out.println(truck.getMachinelijst().size());
+            // System.out.println(truck.getMachinelijst().size());
          }
 
          if(aantalcollects==0){
@@ -219,12 +219,16 @@ public class Oplossing {
 
 
          Depot depot = drop.getLocation().getDichtsteDepot(data.getDepotlijst(),machinetypeid,data.getDistancematrix());
-         System.out.println(depot);
+         //System.out.println("depot: " + depot);
          int servicetime = data.getMachinetypelijst().get(machinetypeid).getServicetime();            //get servicetime
+
+
          Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
 
          Machine machine = depot.getMachine(machinetypeid);
+//         System.out.println("truck: " + truck );
          truck.pickUp(machine);
+//         System.out.println("drop: " + drop);
          truck.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
          truck.dropOf(machine);
          truck.keerTerug(timematrix,distancematrix);
