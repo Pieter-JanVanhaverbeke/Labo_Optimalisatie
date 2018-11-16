@@ -6,18 +6,22 @@ import java.util.LinkedList;
 
 public class Solution {
 
+    public static final int MAX_TIME = 600;
+
     /*
     int[]: [locationId, machineId, drop/pickupId, ?miss nog link naar dropoff, wie weet? ,<machineTypeId>]
      */
     private LinkedList<int[]>[] solution;
     private TimeMatrix timematrix;
     private DistanceMatrix distancematrix;
+    private Data data;
 
-    public Solution(int trucks, DistanceMatrix distancematrix, TimeMatrix timematrix) {
+    public Solution(int trucks, DistanceMatrix distancematrix, TimeMatrix timematrix, Data data) {
         this.solution = new LinkedList[trucks];
         for(int i = 0; i < solution.length; i++) solution[i] = new LinkedList<int[]>();
         this.distancematrix = distancematrix;
         this.timematrix = timematrix;
+        this.data = data;
     }
 
     public void add(int truck, int[] data){
@@ -58,7 +62,7 @@ public class Solution {
     public void writeSolution(File original){
 
         try {
-            BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("data/solution")));
+            BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("src/data/solution")));
             buffer.append(String.format("PROBLEM: %s\n", original.getName()));
             buffer.append(String.format("DISTANCE: %d\n", getTotalDistance()));
             buffer.append(String.format("TRUCKS: %d\n", getTotalTrucks()));
@@ -70,12 +74,12 @@ public class Solution {
                     for(int[] stop: solution[truck]){
                         if(stop[0] != id){
                             id = stop[0];
-                            buffer.append(String.format(" %d:%d", stop[0], stop[1]));
-                        } else {
-                            buffer.append(String.format(":%d", stop[1]));
+                            buffer.append(String.format(" %d", stop[0]));
                         }
+                        if(stop[1] != -1) buffer.append(String.format(":%d", stop[1]));
                     }
                     id = -1;
+                    buffer.append("\n");
                 }
             }
             buffer.close();
@@ -118,6 +122,20 @@ public class Solution {
             }
         }
         return totalDistance;
+    }
+
+    public boolean chackFeasibility(){
+
+        for(LinkedList<int[]> truck: solution){
+
+            if(truck != null && truck.size() != 0){
+
+                if(getTruckTime(truck) > MAX_TIME
+                        || !data.getStartLocations().contains(truck.getFirst()[0])
+                        || !data.getEndLocations().contains(truck.getLast()[0])) return false;
+            }
+        }
+        return true;
     }
 
     @Override

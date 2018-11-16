@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Data {
@@ -12,6 +13,8 @@ public class Data {
     private ArrayList<MachineType> machinetypelijst;
     private ArrayList<Truck> trucklijst;
 
+    private HashSet<Integer> endLocations;
+    private HashSet<Integer> startLocations;
 
     private DistanceMatrix distancematrix;
     private TimeMatrix timematrix;
@@ -24,6 +27,9 @@ public class Data {
         machinelijst  = new ArrayList<Machine>() ;
         machinetypelijst = new ArrayList<MachineType>() ;
         trucklijst = new ArrayList<Truck>() ;
+
+        startLocations = new HashSet<>();
+        endLocations = new HashSet<>();
 
 
        //  Distancematrix distancematrix = new Distancematrix();
@@ -102,6 +108,22 @@ public class Data {
         this.timematrix = timematrix;
     }
 
+    public HashSet<Integer> getEndLocations() {
+        return endLocations;
+    }
+
+    public void setEndLocations(HashSet<Integer> endLocations) {
+        this.endLocations = endLocations;
+    }
+
+    public HashSet<Integer> getStartLocations() {
+        return startLocations;
+    }
+
+    public void setStartLocations(HashSet<Integer> startLocations) {
+        this.startLocations = startLocations;
+    }
+
     public void leesData(File file) throws FileNotFoundException {
         // file = new File("C:\\Users\\piete\\IdeaProjects\\Labo_Optimalisatie\\inleesfile.txt");
         Scanner sc = null;
@@ -151,6 +173,10 @@ public class Data {
                     int enlocationid = Integer.parseInt(values[3]);
 
                     Location huidigelocatie = locationlijst.get(startlocationid);
+
+                    endLocations.add(enlocationid);
+                    startLocations.add(startlocationid);
+
 
                     Truck truck = new Truck(id, startlocationid, enlocationid, null);
                     trucklijst.add(truck);

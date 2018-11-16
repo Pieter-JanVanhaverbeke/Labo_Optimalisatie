@@ -19,7 +19,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix);
+        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix, data);
     }
 
     public Data getData() {
@@ -40,8 +40,6 @@ public class Oplossing {
 
     //TODO oplossing die eerste resultaat brengt
     public void start(){
-
-        Solution solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix);
 
         int korstedistance = 999999999;
         Truck bestetruck = null;
@@ -73,7 +71,7 @@ public class Oplossing {
                 }
             }
 
-
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), -1, -1});
             //steken in opl
             bestetruck.verplaats(locatiemachineid,timematrix,distancematrix);                   //verplaatsen naar locatie
             if(korstedistance!=0){
@@ -81,12 +79,14 @@ public class Oplossing {
             }
 
             bestetruck.pickUp(collect.getMachine());                                            //opnemen machine
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), collect.getMachine().getId(), collect.getId()});
 
             bestetruck.verplaats(bestetruck.getEndlocationid(),timematrix,distancematrix);      //terugkeren naar eindlocatie
 
             //steken in opl
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
-            bestetruck.addStop(endLocation);                                                        //adden stop
+            bestetruck.addStop(endLocation);                                                     //adden stop
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), collect.getMachine().getId(), collect.getId()});
 
             //TODO zetten in oplossingsmatrix
 
@@ -125,18 +125,20 @@ public class Oplossing {
             MachineType machineType = data.getMachinetypelijst().get(machinetypeid);
             machine.setMachineType(machineType);
 
-
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), drop.getId(), drop.getId(), drop.getMachineTypeId()});
             bestetruck.pickUp(machine);                       //opnemen dummy machine bij depots
             bestetruck.verplaats(location.getId(),timematrix,distancematrix);           //verplaatsen
             if(korstedistance!=0){
                 bestetruck.addStop(location);
             }
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), machine.getId(), drop.getId(), drop.getMachineTypeId()});
             bestetruck.dropOf(machine);                       //afzetten
             bestetruck.verplaats(bestetruck.getEndlocationid(),timematrix,distancematrix);          //terugkeren
 
             //Steken in opl
             Location endLocation = data.getLocationlijst().get(bestetruck.getEndlocationid());
             bestetruck.addStop(endLocation);
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), -1, -1});
 
         }
 
@@ -228,29 +230,9 @@ public class Oplossing {
         return true;
     }
 
-    public void writeSolution(String original){
+    public void writeSolution(File original){
 
-        PrintWriter printWriter = null;
-        try{
-            File file = new File("src/data/solution");
-            file.createNewFile();
-            printWriter = new PrintWriter(file);
-
-            if(isFeasible()){
-
-                printWriter.println(String.format("PROBLEM: %s", new File(original).getName()));
-                printWriter.println(String.format("DISTANCE: %d", totalDistance()));
-                printWriter.println(String.format("TRUCKS: %d", neededTrucks()));
-
-            } else {
-                printWriter.println("infeasible.");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(printWriter != null) printWriter.close();
-        }
+        solution.writeSolution(original);
     }
 
 
