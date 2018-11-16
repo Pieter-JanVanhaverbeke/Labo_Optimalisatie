@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Oplossing {
 
@@ -39,7 +40,7 @@ public class Oplossing {
     }
 
     //TODO oplossing die eerste resultaat brengt
-    public void start(){
+ /*   public void start(){
 
         int korstedistance = 999999999;
         Truck bestetruck = null;
@@ -166,7 +167,51 @@ public class Oplossing {
 
     }
 
+*/
 
+
+ public void start(){
+     int aantaldrops = data.getDroplijst().size();
+     int aantalcollects = data.getCollectlijst().size();
+
+
+     //  while (aantalcollects>0){
+     //      int teller = 0;
+     for(int i=0; i<data.getTrucklijst().size();i++){
+
+         Truck truck = data.getTrucklijst().get(i);
+         boolean ok = true;
+         while (ok){
+             ok = truck.dichtsteDropPickup(data.getDroplijst(),data.getCollectlijst(),distancematrix,timematrix);
+         }
+
+         //IF aantalcollects = 0
+
+
+         aantalcollects--;
+
+     }
+
+     ArrayList<Drop> onvoltooidedrops = new ArrayList<Drop>();
+     for(int i=0;i<data.getDroplijst().size();i++){
+         Drop drop = data.getDroplijst().get(i);
+         if(drop.getMachine()==null){                    //als drop geen machine heeft
+             onvoltooidedrops.add(drop);
+         }
+     }
+
+
+
+     for(int i=0;i<onvoltooidedrops.size();i++){
+         //Depot depot = drop.getdichtsteDepot()
+     }
+
+
+
+
+
+
+ }
 
 
     public void zetommatrixopl(){

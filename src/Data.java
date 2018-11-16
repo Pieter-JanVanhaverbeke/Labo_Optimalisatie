@@ -239,7 +239,7 @@ public class Data {
                         Collect collect = new Collect(id,machinelijst.get(machineid));
                         collectlijst.add(collect);
 
-                        machinelijst.get(machineid).setCollect(true);                   //zeggen dat machine collect is
+                     //   machinelijst.get(machineid).setCollect(true);                   //zeggen dat machine collect is
 
                     }
 

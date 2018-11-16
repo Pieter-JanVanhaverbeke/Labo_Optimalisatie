@@ -19,7 +19,6 @@ public class Truck {
 
 
     private ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
-    private ArrayList<Integer> machineTypesidlijst;
     private ArrayList<Location> stoplijst;
     private LinkedList<String> pickUpsDropOffs;
 
@@ -109,13 +108,6 @@ public class Truck {
         this.machinelijst = machinelijst;
     }
 
-    public ArrayList<Integer> getMachineTypeslijst() {
-        return machineTypesidlijst;
-    }
-
-    public void setMachineTypeslijst(ArrayList<Integer> machineTypeslijst) {
-        this.machineTypesidlijst = machineTypeslijst;
-    }
 
     public ArrayList<Location> getStoplijst() {
         return stoplijst;
@@ -161,20 +153,19 @@ public class Truck {
         int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
 
         for(int i=0; i<machinelijst.size();i++){
-           machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
+            machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
         }
 
         int totaletijdnodig = nodigeminuten + terugkeertijd + machinesafzettentijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
 
 
-       // if(geredenminuten+nodigeminuten+terugkeertijd+servicetime>TRUCK_WORKING_TIME){
+        // if(geredenminuten+nodigeminuten+terugkeertijd+servicetime>TRUCK_WORKING_TIME){
         if(totaletijdnodig>TRUCK_WORKING_TIME){
             return false;
         }
 
         else return true;
     }
-
     //als tijd heeft + capaciteit heeft --> opnemen
     public boolean kanOpnemen(Collect collect, TimeMatrix timematrix){
         int servicetime = collect.getMachine().getServicetime();
@@ -215,7 +206,7 @@ public class Truck {
     }
 
     public boolean heeftcapacity(Machine machine){
-            if(volume+machine.getMachineType().getVolume()>TRUCK_CAPACITY){
+            if(volume+machine.getVolume()>TRUCK_CAPACITY){
                 return  false;
             }
             else return true;

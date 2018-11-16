@@ -2,6 +2,7 @@ public class Collect {
     private int id;
     private Machine machine;
 
+    //TODO boolean collect
     public Collect(int id, Machine machine) {
         this.id = id;
         this.machine = machine;

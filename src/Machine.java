@@ -2,9 +2,7 @@ public class Machine {
     private int id;
     private int machineTypeId;      //TODO nog denken over id of machine meegeven
 
-    private MachineType machineType;
     private Location location;
-    private boolean collect;
 
     private int volume;
     private int servicetime;
@@ -14,17 +12,13 @@ public class Machine {
     public Machine() {
         this.id = -1;
         this.machineTypeId = 0;
-        this.machineType = null;
         this.location = null;
-        this.collect = false;
     }
 
     public Machine(int id, int machineTypeId, Location location, MachineType machineType) {
         this.id = id;
         this.machineTypeId = machineTypeId;
-        this.machineType = machineType;
         this.location = location;
-        this.collect = false;
 
         this.volume = machineType.getVolume();
         this.servicetime = machineType.getServicetime();
@@ -39,22 +33,6 @@ public class Machine {
         this.id = id;
     }
 
-    public int getMachineTypeId() {
-        return machineTypeId;
-    }
-
-    public void setMachineTypeId(int machineTypeId) {
-        this.machineTypeId = machineTypeId;
-    }
-
-    public MachineType getMachineType() {
-        return machineType;
-    }
-
-    public void setMachineType(MachineType machineType) {
-        this.machineType = machineType;
-    }
-
     public Location getLocation() {
         return location;
     }
@@ -63,12 +41,12 @@ public class Machine {
         this.location = location;
     }
 
-    public boolean isCollect() {
-        return collect;
+    public int getMachineTypeId() {
+        return machineTypeId;
     }
 
-    public void setCollect(boolean collect) {
-        this.collect = collect;
+    public void setMachineTypeId(int machineTypeId) {
+        this.machineTypeId = machineTypeId;
     }
 
     public int getVolume() {
@@ -100,9 +78,7 @@ public class Machine {
         return "Machine{" +
                 "id=" + id +
                 ", machineTypeId=" + machineTypeId +
-                ", machineType=" + machineType +
                 ", location=" + location +
-                ", collect=" + collect +
                 ", volume=" + volume +
                 ", servicetime=" + servicetime +
                 ", name='" + name + '\'' +
