@@ -52,6 +52,8 @@ public class Solution {
         return score;
     }
 
+    // TODO prune
+
     /*
     PROBLEM: <name_of_used_input_file>
     DISTANCE: <value>
@@ -70,13 +72,18 @@ public class Solution {
             int id = -1;
             for(int truck = 0; truck < solution.length; truck++){
                 if(solution[truck]!= null && solution[truck].size() != 0){
+                    if(truck == 30){
+                        System.out.println("break");
+                    }
                     buffer.append(String.format("%d %d %d", truck, getTruckDistance(solution[truck]), getTruckTime(solution[truck])));
                     for(int[] stop: solution[truck]){
                         if(stop[0] != id){
                             id = stop[0];
                             buffer.append(String.format(" %d", stop[0]));
                         }
-                        if(stop[1] != -1) buffer.append(String.format(":%d", stop[1]));
+                        if(stop[1] != -1){
+                            buffer.append(String.format(":%d", stop[1]));
+                        }
                     }
                     id = -1;
                     buffer.append("\n");
