@@ -24,20 +24,46 @@ public class Solution {
         this.data = data;
     }
 
+    /**
+     *  Method adds data to the tail of the specified truck's route.
+     *
+     * @param truck     id of the truck to add to.
+     * @param data      data to add to machine.
+     */
     public void add(int truck, int[] data){
         this.solution[truck].add(data);
     }
 
+    /**
+     *  Insert new data into a given trucks route at a certain stop.
+     *
+     * @param truck first truck.
+     * @param stop  stop to insert at.
+     * @param data  data to insert.
+     */
     public void insert(int truck, int stop, int[] data){
         solution[truck].add(stop, data);
     }
 
+    /**
+     *  Swap data of a given truck at a given location with the data of another given truck at a certain location.
+     *
+     * @param truck         first specified truck.
+     * @param stop          stop specified for the first truck.
+     * @param otherTruck    second specified stop.
+     * @param otherStop     stop specified for the second truck.
+     */
     public void swap(int truck, int stop, int otherTruck, int otherStop){
         int[] temp = solution[truck].get(stop);
         solution[truck].set(stop, solution[otherTruck].get(otherStop));
         solution[otherTruck].set(otherStop, temp);
     }
 
+    /**
+     *  Calculates score for the current solution.
+     *
+     * @return  score.
+     */
     public int calculateScore(){
 
         int score = 0;
@@ -61,9 +87,16 @@ public class Solution {
     <truckId> <distance> <time> <locationId(:machine_id)...>
      */
 
+    /**
+     *  Writes current solution to file.
+     *
+     * @param original  original file specifying the problem.
+     */
+
     public void writeSolution(File original){
 
         try {
+            // TODO make output file variable
             BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("src/data/solution")));
             buffer.append(String.format("PROBLEM: %s\n", original.getName()));
             buffer.append(String.format("DISTANCE: %d\n", getTotalDistance()));
@@ -131,6 +164,20 @@ public class Solution {
         return totalDistance;
     }
 
+    /**
+     *  <p>
+     *      Method to check feasibility.
+     *      checked constraints:
+     *      <ul>
+     *          <li>truck does not drive longer than maximum time.</li>
+     *          <li>truck starts at it's start location</li>
+     *          <li>truck ends at it's end location</li>
+     *      </ul>
+     *  </p>
+     *
+     * @return  true if feasible, false if not.
+     */
+
     public boolean chackFeasibility(){
 
         for(LinkedList<int[]> truck: solution){
@@ -145,6 +192,11 @@ public class Solution {
         return true;
     }
 
+    /**
+     *  Debug output string method.
+     *
+     * @return  debug output string.
+     */
     @Override
     public String toString(){
 
