@@ -63,7 +63,6 @@ public class Location {
         for(int i=0; i<depotslijst.size();i++) {
             depot = depotslijst.get(i);
             if (depot.hasMachine(machineTypeId)) {
-
                 int distance = this.getDistance(depot.getLocation().getId(), distancematrix);
                 if (distance < bestedistance) {
                     bestedepot = depot;

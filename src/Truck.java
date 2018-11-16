@@ -168,6 +168,10 @@ public class Truck {
     }
     //als tijd heeft + capaciteit heeft --> opnemen
     public boolean kanOpnemen(Collect collect, TimeMatrix timematrix){
+        if(collect==null){
+            return false;
+        }
+        System.out.println("machineid: " + collect.getMachine());
         int servicetime = collect.getMachine().getServicetime();
         Machine machine = collect.getMachine();
         if(heefttijd(collect.getMachine().getLocation().getId(),timematrix,servicetime) && heeftcapacity(machine) ){
@@ -192,10 +196,13 @@ public class Truck {
         verplaats(endlocationid, timematrix, distancematrix);
     }
 
-    public void truckLegen(){
+    public void truckLegen(Depot depot){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
-            dropOf(machinelijst.get(i));
+            Machine machine = machinelijst.get(i);
+            dropOf(machine);
+            depot.addMachine(machine);
         }
+
     }
 
     public int getDistance(Location location, DistanceMatrix distancematrix){
@@ -213,12 +220,13 @@ public class Truck {
     }
 
 
-    public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix){
+    public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix, Depot depot){
         Drop drop = dichtsteDrop(droplijst,distancematrix);
         Collect collect = dichtstePickup(collectlijst,distancematrix);
 
 
            ArrayList<Machine> goedemachines = getAlleMachinesVanType(drop.getMachineTypeId());
+        System.out.println("goedemachines: " + goedemachines.size());
         if(kanAfzetten(goedemachines,timematrix)){                  //als machine kan afzetten, afzetten
                    Machine machine = goedemachines.get(0);
                    dropOf(machine);
@@ -226,14 +234,18 @@ public class Truck {
                }
         //   }
 
+     //   System.out.println("id: " + collect.getId());
         if(kanOpnemen(collect,timematrix)){              //kijkt of mogelijk is om machine op te nemen en later weer af te zetten
+            System.out.println("collecttruck: " + id );
                 this.pickUp(collect.getMachine());                                                      //collect machine
                 this.verplaats(collect.getMachine().getLocation().getId(),timematrix,distancematrix);   //verplaatsen naar collect
+                collectlijst.remove(collect);
+             //   collect.setMachine(null);
                return true;
             }
             else {
                 keerTerug(timematrix, distancematrix);                                                  //terugkeren
-                truckLegen();                                                                           //truck legen van voorwerpen
+                truckLegen(depot);                                                                           //truck legen van voorwerpen
                return false;
             }
 

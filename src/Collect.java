@@ -6,6 +6,7 @@ public class Collect {
     public Collect(int id, Machine machine) {
         this.id = id;
         this.machine = machine;
+        boolean collect;
     }
 
     public int getId() {
@@ -23,6 +24,8 @@ public class Collect {
     public void setMachine(Machine machine) {
         this.machine = machine;
     }
+
+
 
     @Override
     public String toString() {

@@ -174,17 +174,27 @@ public class Oplossing {
      int aantaldrops = data.getDroplijst().size();
      int aantalcollects = data.getCollectlijst().size();
 
+     ArrayList<Collect> collectlijst = data.getCollectlijst();
+     ArrayList<Drop> droplijst = data.getDroplijst();
+
+
 
    //    while (aantalcollects>0){
      //      int teller = 0;
      for(int i=0; i<data.getTrucklijst().size();i++){
 
          Truck truck = data.getTrucklijst().get(i);
+         Depot einddepot = data.getDepotlijst().get(truck.getEndlocationid());
          boolean ok = true;
          while (ok){
-             ok = truck.dichtsteDropPickup(data.getDroplijst(),data.getCollectlijst(),distancematrix,timematrix);
+
+             ok = truck.dichtsteDropPickup(droplijst,collectlijst,distancematrix,timematrix,einddepot);
+             System.out.println(truck.getMachinelijst().size());
          }
 
+         if(aantalcollects==0){
+             i=data.getTrucklijst().size();
+         }
          //IF aantalcollects = 0
 
 
@@ -204,11 +214,12 @@ public class Oplossing {
 
      for(int i=0;i<onvoltooidedrops.size();i++){
 
-         Drop drop = onvoltooidedrops.get(0);
+         Drop drop = onvoltooidedrops.get(i);
          int machinetypeid = drop.getMachineTypeId();
 
 
          Depot depot = drop.getLocation().getDichtsteDepot(data.getDepotlijst(),machinetypeid,data.getDistancematrix());
+         System.out.println(depot);
          int servicetime = data.getMachinetypelijst().get(machinetypeid).getServicetime();            //get servicetime
          Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
 

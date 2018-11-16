@@ -88,4 +88,8 @@ public class Depot {
 
     }
 
+    public void addMachine(Machine machine){
+        machinelijst.add(machine);
+    }
+
 }
