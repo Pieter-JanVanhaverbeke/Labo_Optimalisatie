@@ -125,7 +125,7 @@ public class Oplossing {
             MachineType machineType = data.getMachinetypelijst().get(machinetypeid);
             machine.setMachineType(machineType);
 
-            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), drop.getId(), drop.getId(), drop.getMachineTypeId()});
+            solution.add(bestetruck.getId(), new int[]{bestetruck.getHuidigeLocatie(), machine.getId(), drop.getId(), drop.getMachineTypeId()});
             bestetruck.pickUp(machine);                       //opnemen dummy machine bij depots
             bestetruck.verplaats(location.getId(),timematrix,distancematrix);           //verplaatsen
             if(korstedistance!=0){
