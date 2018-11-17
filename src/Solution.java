@@ -22,6 +22,7 @@ public class Solution {
         this.distancematrix = distancematrix;
         this.timematrix = timematrix;
         this.data = data;
+        for(Truck truck: data.getTrucklijst()) truck.linkSolution(this);
     }
 
     /**
