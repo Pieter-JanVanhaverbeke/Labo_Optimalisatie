@@ -2,6 +2,7 @@ import javax.crypto.Mac;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import com.google.common.collect.HashMultimap;
 
 public class Truck {
     //Constanten
@@ -18,8 +19,13 @@ public class Truck {
     private int distance;
 
 
+
+
     private ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
-    private ArrayList<Location> stoplijst;
+  //  private ArrayList<Location> stoplijst;
+ //   private HashMultimap<Integer,Integer> stopsendrops;
+    private ArrayList<Stop> stoplijst;
+
     private LinkedList<String> pickUpsDropOffs;
 
 
@@ -32,7 +38,7 @@ public class Truck {
         this.volume = 0;
         this.distance = 0;
         machinelijst = new ArrayList<Machine>();
-        stoplijst = new ArrayList<Location>();
+        stoplijst = new ArrayList<Stop>();
         pickUpsDropOffs = new LinkedList<>();
     }
 
@@ -108,17 +114,16 @@ public class Truck {
         this.machinelijst = machinelijst;
     }
 
+    public void addStop(Stop stop){
+        stoplijst.add(stop);
+    }
 
-    public ArrayList<Location> getStoplijst() {
+    public ArrayList<Stop> getStoplijst() {
         return stoplijst;
     }
 
-    public void setStoplijst(ArrayList<Location> stoplijst) {
+    public void setStoplijst(ArrayList<Stop> stoplijst) {
         this.stoplijst = stoplijst;
-    }
-
-    public void addStop(Location location){
-        stoplijst.add(location);
     }
 
     public void pickUp(Machine machine){
@@ -126,6 +131,9 @@ public class Truck {
         machinelijst.add(machine);
         volume = volume + machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
+
+      //  Stop stop = new Stop(huidigeLocatie);
+
     }
 
     public void dropOf(Machine machine){
@@ -133,6 +141,7 @@ public class Truck {
         volume = volume - machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
         machinelijst.remove(machine);
+
     }
 
     public void verplaats(int locationid, TimeMatrix timematrix, DistanceMatrix distancematrix){              //truck gaat naar locationid
@@ -143,6 +152,9 @@ public class Truck {
         distance = distance + distancenodig;                            //updaten distance
 
         huidigeLocatie = locationid;                                             //aanpassen huidige locatie
+
+
+
 
     }
 
@@ -197,11 +209,13 @@ public class Truck {
         verplaats(endlocationid, timematrix, distancematrix);
     }
 
-    public void truckLegen(Depot depot){
+    public void truckLegen(Depot depot, Stop stop){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
             dropOf(machine);
             depot.addMachine(machine);
+            stop.addMachine(machine);
+            addStop(stop);
           //  depot.addTruck(this);                                                //als leeg is, bij depot plaatsen
         }
 
@@ -223,14 +237,21 @@ public class Truck {
 
 
     public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix, Depot depot){
+        Stop stop = null;
         Drop drop = dichtsteDrop(droplijst,distancematrix);
         Collect collect = dichtstePickup(collectlijst,distancematrix);
 
 
            ArrayList<Machine> goedemachines = getAlleMachinesVanType(drop.getMachineTypeId());
         if(kanAfzetten(goedemachines,timematrix)){                  //als machine kan afzetten, afzetten
+
+
+            this.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
+            stop = new Stop(huidigeLocatie);
                    Machine machine = goedemachines.get(0);
                    dropOf(machine);
+                   stop.addMachine(machine);
+                   addStop(stop);
                    return true;
                }
         //   }
@@ -240,12 +261,20 @@ public class Truck {
                 this.pickUp(collect.getMachine());                                                      //collect machine
                 this.verplaats(collect.getMachine().getLocation().getId(),timematrix,distancematrix);   //verplaatsen naar collect
                 collectlijst.remove(collect);
+
+                //ADDING TO STOPLIJST
+                stop = new Stop(huidigeLocatie);
+                stop.addMachine(collect.getMachine());
+                addStop(stop);
              //   collect.setMachine(null);
                return true;
             }
             else {
                 keerTerug(timematrix, distancematrix);                                                  //terugkeren
-                truckLegen(depot);                                                                           //truck legen van voorwerpen
+                 stop = new Stop(huidigeLocatie);
+                truckLegen(depot,stop);//truck legen van voorwerpen
+
+
                return false;
             }
 

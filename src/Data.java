@@ -140,12 +140,16 @@ public class Data {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();     //eerste getal zoeken
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
-                    String[] values = line.split("\\s+");
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
 
-                    int id = Integer.parseInt(values[1]);
-                    double lat = Double.parseDouble(values[2]);
-                    double lon = Double.parseDouble(values[3]);
-                    String name = values[4];
+
+                    String[] values = line.split("\\s+");
+                    int id = Integer.parseInt(values[0]);
+                    double lat = Double.parseDouble(values[1]);
+                    double lon = Double.parseDouble(values[2]);
+                    String name = values[3];
 
                     Location location = new Location(id, lat, lon, name);
                     locationlijst.add(location);
@@ -155,9 +159,14 @@ public class Data {
                 for (int i = 0; i < aantal; i++) {
 
                     line = sc.nextLine();
+
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
+
                     String[] values = line.split("\\s+");
-                    int id = Integer.parseInt(values[1]);
-                    int locationid = Integer.parseInt(values[2]);
+                    int id = Integer.parseInt(values[0]);
+                    int locationid = Integer.parseInt(values[1]);
 
                     Depot depot = new Depot(id,locationlijst.get(locationid));
                     depotlijst.add(depot);
@@ -167,10 +176,15 @@ public class Data {
                 for (int i = 0; i < aantal; i++) {
 
                     line = sc.nextLine();
+
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
+
                     String[] values = line.split("\\s+");
-                    int id = Integer.parseInt(values[1]);
-                    int startlocationid = Integer.parseInt(values[2]);
-                    int enlocationid = Integer.parseInt(values[3]);
+                    int id = Integer.parseInt(values[0]);
+                    int startlocationid = Integer.parseInt(values[1]);
+                    int enlocationid = Integer.parseInt(values[2]);
 
                     Location huidigelocatie = locationlijst.get(startlocationid);
 
@@ -187,11 +201,16 @@ public class Data {
                 for (int i = 0; i < aantal; i++) {
 
                     line = sc.nextLine();
+
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
+
                     String[] values = line.split("\\s+");
-                    int id = Integer.parseInt(values[1]);
-                    int volume = Integer.parseInt(values[2]);
-                    int servicetime = Integer.parseInt(values[3]);
-                    String name = values[4];
+                    int id = Integer.parseInt(values[0]);
+                    int volume = Integer.parseInt(values[1]);
+                    int servicetime = Integer.parseInt(values[2]);
+                    String name = values[3];
 
                     MachineType machineType = new MachineType(id, volume, servicetime, name);
                     machinetypelijst.add(machineType);
@@ -202,10 +221,15 @@ public class Data {
                 for (int i = 0; i < aantal; i++) {
 
                     line = sc.nextLine();
+
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
+
                     String[] values = line.split("\\s+");
-                    int id = Integer.parseInt(values[1]);
-                    int machinetypeid = Integer.parseInt(values[2]);
-                    int locationid = Integer.parseInt(values[3]);
+                    int id = Integer.parseInt(values[0]);
+                    int machinetypeid = Integer.parseInt(values[1]);
+                    int locationid = Integer.parseInt(values[2]);
 
                     Machine machine = new Machine(id, machinetypeid, locationlijst.get(locationid), machinetypelijst.get(machinetypeid));
                     machinelijst.add(machine);
@@ -216,10 +240,15 @@ public class Data {
                 for (int i = 0; i < aantal; i++) {
 
                     line = sc.nextLine();
+
+                    while (line.charAt(0) == ' ') {
+                        line = line.substring(1);
+                    }
+
                     String[] values = line.split("\\s+");
-                    int id = Integer.parseInt(values[1]);
-                    int machinetypeid = Integer.parseInt(values[2]);
-                    int locationid = Integer.parseInt(values[3]);
+                    int id = Integer.parseInt(values[0]);
+                    int machinetypeid = Integer.parseInt(values[1]);
+                    int locationid = Integer.parseInt(values[2]);
 
                     Drop drop = new Drop(id, machinetypeid, locationlijst.get(locationid));
                     droplijst.add(drop);
@@ -232,9 +261,14 @@ public class Data {
                     int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
                     for (int i = 0; i < aantal; i++) {
                         line = sc.nextLine();
+
+                        while (line.charAt(0) == ' ') {
+                            line = line.substring(1);
+                        }
+
                         String[] values = line.split("\\s+");
-                        int id = Integer.parseInt(values[1]);
-                        int machineid = Integer.parseInt(values[2]);
+                        int id = Integer.parseInt(values[0]);
+                        int machineid = Integer.parseInt(values[1]);
 
                         Collect collect = new Collect(id,machinelijst.get(machineid));
                         collectlijst.add(collect);
