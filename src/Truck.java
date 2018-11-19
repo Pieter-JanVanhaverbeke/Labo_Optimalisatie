@@ -22,9 +22,8 @@ public class Truck {
 
 
     private ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
-  //  private ArrayList<Location> stoplijst;
- //   private HashMultimap<Integer,Integer> stopsendrops;
     private ArrayList<Stop> stoplijst;
+    private Stop huidigestop;
 
     private LinkedList<String> pickUpsDropOffs;
 
@@ -40,6 +39,7 @@ public class Truck {
         machinelijst = new ArrayList<Machine>();
         stoplijst = new ArrayList<Stop>();
         pickUpsDropOffs = new LinkedList<>();
+        huidigestop = new Stop(huidigeLocatie);
     }
 
     public static int getTruckCapacity() {
@@ -212,12 +212,15 @@ public class Truck {
     public void truckLegen(Depot depot, Stop stop){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
-            dropOf(machine);
+            System.out.println("Truck " + id + " dropt " + machine.getName() + " af");
+
+            geredenminuten = geredenminuten + machine.getServicetime();
             depot.addMachine(machine);
             stop.addMachine(machine);
-            addStop(stop);
-          //  depot.addTruck(this);                                                //als leeg is, bij depot plaatsen
         }
+        machinelijst.clear();
+        this.setVolume(0);  //alles legen, volume is 0
+        addStop(stop);
 
     }
 
@@ -248,6 +251,8 @@ public class Truck {
 
             this.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
             stop = new Stop(huidigeLocatie);
+            huidigestop = stop;                     //nieuwe stop plaatsen na verplaatsing
+
                    Machine machine = goedemachines.get(0);
                    dropOf(machine);
                    stop.addMachine(machine);
@@ -260,10 +265,11 @@ public class Truck {
         if(kanOpnemen(collect,timematrix)){              //kijkt of mogelijk is om machine op te nemen en later weer af te zetten
                 this.pickUp(collect.getMachine());                                                      //collect machine
                 this.verplaats(collect.getMachine().getLocation().getId(),timematrix,distancematrix);   //verplaatsen naar collect
-                collectlijst.remove(collect);
+            collectlijst.remove(collect);
 
                 //ADDING TO STOPLIJST
                 stop = new Stop(huidigeLocatie);
+                huidigestop = stop;
                 stop.addMachine(collect.getMachine());
                 addStop(stop);
              //   collect.setMachine(null);
