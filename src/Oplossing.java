@@ -78,7 +78,7 @@ public class Oplossing {
              i=data.getTrucklijst().size();
          }*/
 
-         teller = (teller + 1) % data.getTrucklijst().size();
+         teller = (teller + 7) % data.getTrucklijst().size();
 
 
          aantalcollects=collectlijst.size();
@@ -109,7 +109,9 @@ public class Oplossing {
          Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
 
          Machine machine = depot.getMachine(machinetypeid);
+         System.out.println(truck.getId());
          truck.pickUp(machine);
+
 
          if(truck.getStoplijst().size()==0){            //zetten startlocatie als nog geen stops had
              Stop stop = new Stop(truck.getHuidigeLocatie());
@@ -149,12 +151,15 @@ public class Oplossing {
 
      for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
-         System.out.println();
-      //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
-         for(int j=0; j<truck.getStoplijst().size();j++){
-             System.out.print(truck.getStoplijst().get(j).toString() + " ");
-     }
+         if(truck.getStoplijst().size()!=0) {
 
+             System.out.println();
+             System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
+             //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
+             for (int j = 0; j < truck.getStoplijst().size(); j++) {
+                 System.out.print(truck.getStoplijst().get(j).toString() + " ");
+             }
+         }
  }
 
 
