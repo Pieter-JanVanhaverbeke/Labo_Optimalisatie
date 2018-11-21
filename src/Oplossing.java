@@ -74,16 +74,20 @@ public class Oplossing {
              ok = truck.dichtsteDropPickup(droplijst,collectlijst,distancematrix,timematrix,einddepot);
          }
 
-     /*    if(aantalcollects==0){
-             i=data.getTrucklijst().size();
-         }*/
-
          teller = (teller + 7) % data.getTrucklijst().size();
 
 
          aantalcollects=collectlijst.size();
 
      }
+
+     for(int i=0;i<data.getTrucklijst().size();i++){
+         Truck truck = data.getTrucklijst().get(i);
+         if(truck.getStoplijst().size()!=0){
+             truck.addStop(truck.getHuidigestop());
+         }
+     }
+
 
      ArrayList<Drop> onvoltooidedrops = new ArrayList<Drop>();
      for(int i=0;i<data.getDroplijst().size();i++){
@@ -109,7 +113,6 @@ public class Oplossing {
          Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
 
          Machine machine = depot.getMachine(machinetypeid);
-         System.out.println(truck.getId());
          truck.pickUp(machine);
 
 
@@ -146,7 +149,7 @@ public class Oplossing {
          totaledistance = totaledistance + truck.getDistance();
      }
 
-     //System.out.println("totale distance: " + totaledistance);
+
 
 
      for(int i=0; i<data.getTrucklijst().size();i++){
@@ -160,8 +163,10 @@ public class Oplossing {
                  System.out.print(truck.getStoplijst().get(j).toString() + " ");
              }
          }
- }
 
+ }
+     System.out.println();
+     System.out.println("totale distance: " + totaledistance);
 
 
  }

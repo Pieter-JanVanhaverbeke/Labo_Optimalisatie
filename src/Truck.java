@@ -232,7 +232,7 @@ public class Truck {
         }
         machinelijst.clear();
         this.setVolume(0);  //alles legen, volume is 0
-        addStop(stop);
+      //  addStop(stop);
 
     }
 
