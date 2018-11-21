@@ -1,9 +1,5 @@
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class Oplossing {
 
@@ -22,7 +18,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix, data);
+        this.solution = new Solution(data);
     }
 
     public Data getData() {
@@ -149,25 +145,8 @@ public class Oplossing {
          totaledistance = totaledistance + truck.getDistance();
      }
 
-
-
-
-     for(int i=0; i<data.getTrucklijst().size();i++){
-         Truck truck = data.getTrucklijst().get(i);
-         if(truck.getStoplijst().size()!=0) {
-
-             System.out.println();
-             System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
-             //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
-             for (int j = 0; j < truck.getStoplijst().size(); j++) {
-                 System.out.print(truck.getStoplijst().get(j).toString() + " ");
-             }
-         }
-
- }
-     System.out.println();
-     System.out.println("totale distance: " + totaledistance);
-
+     solution = new Solution(data);
+     solution.load();
 
  }
 

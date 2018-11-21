@@ -12,17 +12,22 @@ public class Solution {
     int[]: [locationId, machineId, drop/pickupId, ?miss nog link naar dropoff, wie weet? ,<machineTypeId>]
      */
     private LinkedList<int[]>[] solution;
-    private TimeMatrix timematrix;
-    private DistanceMatrix distancematrix;
+    private LinkedList<Integer>[] truckTimes;
+
+    private int[][] timeMatrix;
+    private int[][] distanceMatrix;
+    private int[] startLocations;
+    private int[] endLocations;
+
     private Data data;
 
-    public Solution(int trucks, DistanceMatrix distancematrix, TimeMatrix timematrix, Data data) {
-        this.solution = new LinkedList[trucks];
-        for(int i = 0; i < solution.length; i++) solution[i] = new LinkedList<int[]>();
-        this.distancematrix = distancematrix;
-        this.timematrix = timematrix;
+    public Solution(Data data) {
+        this.solution = new LinkedList[data.getTrucklijst().size()];
+        this.distanceMatrix = data.getDistancematrix().getDistance();
+        this.timeMatrix = data.getTimematrix().getTime();
+        this.startLocations = new int[data.getTrucklijst().size()];
+        this.endLocations = new int[data.getTrucklijst().size()];
         this.data = data;
-        for(Truck truck: data.getTrucklijst()) truck.linkSolution(this);
     }
 
     /**
@@ -71,7 +76,7 @@ public class Solution {
         for(int truck = 0; truck < solution.length; truck++){
             for(int stop = 0; stop < solution[0].size(); stop++){
                 if(stop == solution[0].size() - 1 || solution[truck].get(stop) == null || solution[truck].get(stop + 1) == null) break;
-                else score += distancematrix.getDistance()
+                else score += distanceMatrix
                         [ solution[truck].get(stop)[0] ]
                         [ solution[truck].get(stop + 1)[0] ];
             }
@@ -132,7 +137,7 @@ public class Solution {
     private int getTruckDistance(LinkedList<int[]> truck) {
         int distance = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
-            distance += distancematrix.getDistance()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
+            distance += distanceMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
         return distance;
     }
@@ -140,7 +145,7 @@ public class Solution {
     private int getTruckTime(LinkedList<int[]> truck) {
         int time = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
-            time += timematrix.getTime()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
+            time += timeMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
         return time;
     }
@@ -191,6 +196,28 @@ public class Solution {
             }
         }
         return true;
+    }
+
+    /**
+     * Method to load initial solution into right format.
+     *
+     */
+    public void load(){
+
+        for(int truck = 0; truck < data.getTrucklijst().size(); truck++){
+            solution[truck] = new LinkedList<>();
+            for(Stop stop: data.getTrucklijst().get(truck).getStoplijst()){
+                if(stop.getMachines().isEmpty()) solution[truck].addLast(new int[]{stop.getStoplocatieid(), -1});
+                else {
+                    for(Integer machine: stop.getMachines()){
+                        solution[truck].addLast(new int[]{
+                                stop.getStoplocatieid(),
+                                machine
+                        });
+                    }
+                }
+            }
+        }
     }
 
     /**
