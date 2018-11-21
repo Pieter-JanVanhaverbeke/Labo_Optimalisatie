@@ -145,6 +145,7 @@ public class Solution {
     private int getTruckTime(LinkedList<int[]> truck) {
         int time = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
+            if(truck.get(stop)[1] >= 0) time += data.getMachinelijst().get(truck.get(stop)[1]).getServicetime();
             time += timeMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
         return time;
