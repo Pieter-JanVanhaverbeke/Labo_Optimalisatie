@@ -148,6 +148,7 @@ public class Solution {
             if(truck.get(stop)[1] >= 0) time += data.getMachinelijst().get(truck.get(stop)[1]).getServicetime();
             time += timeMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
+        if(truck.getLast()[1] >= 0) time += data.getMachinelijst().get(truck.getLast()[1]).getServicetime();
         return time;
     }
 
