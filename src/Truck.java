@@ -271,7 +271,9 @@ public class Truck {
 
                    Machine machine = goedemachines.get(0);
                    dropOf(machine);
+                   droplijst.remove(drop);
                    huidigestop.addMachine(machine);
+
 
                    return true;
                }
