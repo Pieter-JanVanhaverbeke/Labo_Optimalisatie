@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Stop {
     private int stoplocatieid;
@@ -27,6 +28,12 @@ public class Stop {
 
     public void addMachine(Machine machine){
         machines.add(machine.getId());
+    }
+
+    public void addMachinelijst(List<Machine> machinelijst){
+        for(int i=0; i<machinelijst.size();i++){
+            machines.add(machinelijst.get(i).getId());
+        }
     }
 
     @Override

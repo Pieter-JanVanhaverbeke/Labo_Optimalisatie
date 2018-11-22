@@ -140,8 +140,6 @@ public class Truck {
         volume = volume + machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
 
-      //  Stop stop = new Stop(huidigeLocatie);
-
     }
 
     public void dropOf(Machine machine){
@@ -149,6 +147,7 @@ public class Truck {
         volume = volume - machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
         machinelijst.remove(machine);
+
 
     }
 
@@ -191,6 +190,32 @@ public class Truck {
 
         else return true;
     }
+
+    public boolean heefttijd(int locationid,int locationid2,TimeMatrix timematrix, int servicetime){
+        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
+        int tijdnodig2 = timematrix.getTime()[locationid][locationid2];
+
+        int nodigeminuten = geredenminuten + tijdnodig + tijdnodig2;                             //tijd voor verplaatsing + meerekenen huidige tijd
+        int terugkeertijd = timematrix.getTime()[locationid2][endlocationid];        //tijd voor naar eindlocatie te gaan
+
+        int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
+
+        for(int i=0; i<machinelijst.size();i++){
+            machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
+        }
+
+        int totaletijdnodig = nodigeminuten + terugkeertijd + machinesafzettentijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
+
+
+        // if(geredenminuten+nodigeminuten+terugkeertijd+servicetime>TRUCK_WORKING_TIME){
+        if(totaletijdnodig>TRUCK_WORKING_TIME){
+            return false;
+        }
+
+        else return true;
+    }
+
+
     //als tijd heeft + capaciteit heeft --> opnemen
     public boolean kanOpnemen(Collect collect, TimeMatrix timematrix){
         if(collect==null){
@@ -198,9 +223,11 @@ public class Truck {
         }
         int servicetime = collect.getMachine().getServicetime();
         Machine machine = collect.getMachine();
+
         if(heefttijd(collect.getMachine().getLocation().getId(),timematrix,servicetime) && heeftcapacity(machine) ){
             return true;
         }
+
 
         return false;
     }
@@ -224,7 +251,7 @@ public class Truck {
     public void truckLegen(Depot depot, Stop stop){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
-            System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
+          //  System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
             geredenminuten = geredenminuten + machine.getServicetime();
             depot.addMachine(machine);
@@ -235,6 +262,20 @@ public class Truck {
       //  addStop(stop);
 
     }
+
+    public void truckLegen(){
+        for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
+            Machine machine = machinelijst.get(i);
+              System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
+
+            geredenminuten = geredenminuten + machine.getServicetime();
+        }
+        machinelijst.clear();
+        this.setVolume(0);  //alles legen, volume is 0
+
+    }
+
+
 
     public int getDistance(Location location, DistanceMatrix distancematrix){
         int locatieid = location.getId();
@@ -248,6 +289,13 @@ public class Truck {
                 return  false;
             }
             else return true;
+    }
+
+    public boolean heeftcapacity(Machine machine1 , Machine machine2){
+        if(volume+machine1.getVolume()+machine2.getVolume()>TRUCK_CAPACITY){
+            return  false;
+        }
+        else return true;
     }
 
 

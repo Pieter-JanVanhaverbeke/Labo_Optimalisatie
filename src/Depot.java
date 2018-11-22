@@ -93,6 +93,10 @@ public class Depot {
         machinelijst.add(machine);
     }
 
+    public void removeMachine(Machine machine){
+        machinelijst.remove(machine);
+    }
+
     public void addTruck(Truck truck) {trucklijst.add(truck);}
 
 }
