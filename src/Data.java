@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class Data {
@@ -13,8 +14,8 @@ public class Data {
     private ArrayList<MachineType> machinetypelijst;
     private ArrayList<Truck> trucklijst;
 
-    private HashSet<Integer> endLocations;
-    private HashSet<Integer> startLocations;
+    private ArrayList<Integer> endLocations;
+    private ArrayList<Integer> startLocations;
 
     private DistanceMatrix distancematrix;
     private TimeMatrix timematrix;
@@ -28,8 +29,8 @@ public class Data {
         machinetypelijst = new ArrayList<MachineType>() ;
         trucklijst = new ArrayList<Truck>() ;
 
-        startLocations = new HashSet<>();
-        endLocations = new HashSet<>();
+        startLocations = new ArrayList<Integer>();
+        endLocations = new ArrayList<Integer>();
 
 
        //  Distancematrix distancematrix = new Distancematrix();
@@ -108,19 +109,19 @@ public class Data {
         this.timematrix = timematrix;
     }
 
-    public HashSet<Integer> getEndLocations() {
+    public ArrayList<Integer> getEndLocations() {
         return endLocations;
     }
 
-    public void setEndLocations(HashSet<Integer> endLocations) {
+    public void setEndLocations(ArrayList<Integer> endLocations) {
         this.endLocations = endLocations;
     }
 
-    public HashSet<Integer> getStartLocations() {
+    public List<Integer> getStartLocations() {
         return startLocations;
     }
 
-    public void setStartLocations(HashSet<Integer> startLocations) {
+    public void setStartLocations(ArrayList<Integer> startLocations) {
         this.startLocations = startLocations;
     }
 

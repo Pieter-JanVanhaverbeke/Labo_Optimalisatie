@@ -203,17 +203,43 @@ public class Solution {
      */
 
     public boolean checkFeasibility(){
+        boolean feasibel = true;
 
-        for(LinkedList<int[]> truck: solution){
+        for(int i=0; i<solution.length;i++){
+            LinkedList<int[]> truck = solution[i];
+     //   for(LinkedList<int[]> truck: solution){
 
             if(truck != null && truck.size() != 0){
 
-                if(getTruckTime(truck) > MAX_TIME
-                        || !data.getStartLocations().contains(truck.getFirst()[0])
-                        || !data.getEndLocations().contains(truck.getLast()[0])) return false;
+                //TODO EERST ALLES OVERLOPEN EN KIJKEN OF FEASABLE IS, LATER OPTIMALISEREN
+
+
+                //TODO TIJD KUNNEN CHECKEN --> optimaliseren
+                if(getTruckTime(truck)>MAX_TIME){
+                    feasibel = false;
+                    break;
+                }
+
+                //TODO EIND EN BEGINPOS CHECKEN -->optimaliseren
+                else if(data.getStartLocations().get(i)==truck.getFirst()[0] || data.getEndLocations().get(i)==truck.getLast()[0]) {
+                    feasibel = false;
+                    break;
+                }
+
+
+                //TODO VOLUME KUNNEN CHECKEN
+
+                //Huidig volume bijhouden in linked list???
+
+                //TODO DROPS EN COLLECTS AFGEHANDELD KUNNEN CHECKEN
+
+                //
+
+                //TODO PICKUP VOOR COLLECT CHECKEN
+                
             }
         }
-        return true;
+        return feasibel;
     }
 
     /**
