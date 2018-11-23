@@ -6,7 +6,7 @@ public class Main {
 
         String fileName;
         if(args.length > 0) fileName = args[0];
-        else fileName = "src/data/tvh_problem_3.txt";
+        else fileName = "src/data/tvh_problem_4.txt";
 
         //Beginnen met inlezen:
         Data data = new Data();
