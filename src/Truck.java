@@ -134,7 +134,7 @@ public class Truck {
     }
 
     public void pickUp(Machine machine){
-        System.out.println("Truck " + id + " neemt " + machine.getId() + " op locatie: "  + huidigeLocatie);
+     //   System.out.println("Truck " + id + " neemt " + machine.getId() + " op locatie: "  + huidigeLocatie);
         machinelijst.add(machine);
         volume = volume + machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
@@ -142,7 +142,7 @@ public class Truck {
     }
 
     public void dropOf(Machine machine){
-        System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: "  + huidigeLocatie);
+     //   System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: "  + huidigeLocatie);
         volume = volume - machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
         machinelijst.remove(machine);
@@ -265,7 +265,7 @@ public class Truck {
     public void truckLegen(){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
-              System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
+            //  System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
             geredenminuten = geredenminuten + machine.getServicetime();
         }

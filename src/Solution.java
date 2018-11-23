@@ -186,7 +186,7 @@ public class Solution {
      * @return  true if feasible, false if not.
      */
 
-    public boolean chackFeasibility(){
+    public boolean checkFeasibility(){
 
         for(LinkedList<int[]> truck: solution){
 
