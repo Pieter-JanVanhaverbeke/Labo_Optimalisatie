@@ -11,6 +11,22 @@ public class Solution {
     /*
     int[]: [locationId, machineId, drop/pickupId, ?miss nog link naar dropoff, wie weet? ,<machineTypeId>]
      */
+
+    //TODO VOLUME KUNNEN CHECKEN
+
+    //TODO TIJD KUNNEN CHECKEN
+
+    //TODO DROPS EN COLLECTS AFGEHANDELD KUNNEN CHECKEN
+
+    //TODO PICKUP VOOR COLLECT CHECKEN
+
+    //TODO EIND EN BEGINPOS CHECKEN
+
+
+
+
+
+
     private LinkedList<int[]>[] solution;
     private LinkedList<Integer>[] truckTimes;
 
