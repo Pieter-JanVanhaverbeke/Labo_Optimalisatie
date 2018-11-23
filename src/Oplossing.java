@@ -22,7 +22,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix, data);
+        this.solution = new Solution(data);
     }
 
     public Data getData() {
@@ -149,7 +149,7 @@ public class Oplossing {
      System.out.println();
      System.out.println("totale distance: " + totalDistance());
 
-
+     solution.load();
  }
 
 
