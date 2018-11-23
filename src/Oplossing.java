@@ -1,5 +1,9 @@
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class Oplossing {
 
@@ -18,7 +22,7 @@ public class Oplossing {
         timematrix = data.getTimematrix();
         distancematrix = data.getDistancematrix();
 
-        this.solution = new Solution(data);
+        this.solution = new Solution(data.getTrucklijst().size(), distancematrix, timematrix, data);
     }
 
     public Data getData() {
@@ -37,120 +41,116 @@ public class Oplossing {
         this.oplossingsmatrix = oplossingsmatrix;
     }
 
+
  public void start(){
-     int aantaldrops = data.getDroplijst().size();
-     int aantalcollects = data.getCollectlijst().size();
-
-     ArrayList<Collect> collectlijst = data.getCollectlijst();
-     ArrayList<Drop> droplijst = data.getDroplijst();
-
-    // ArrayList<Depot> depotlijst = new ArrayList<Depot>();
-
-    // depotlijst.addAll(data.getDepotlijst());
-    // for(int i=0; i<depotlijst.size();i++){
-
-    // }
+        ArrayList<Drop> droplijst = data.getDroplijst();
+        ArrayList<Collect> collectlijst = data.getCollectlijst();
+        ArrayList<Depot> depotlijst = data.getDepotlijst();
+        ArrayList<Truck> trucklijst = data.getTrucklijst();
+        Collect dichtstecollect;
+        Truck bestetruck;
+        Machine machine = null;
+        Stop stop = null;
+        boolean verplaats = false;
 
 
-    // ArrayList<Truck> trucklijst = new ArrayList<Truck>();
-     for(int i=0; i<data.getTrucklijst().size()/data.getDepotlijst().size();i++){
-         for(int j=0; j<data.getDepotlijst().size();j++){
+        for(int i=0; i<droplijst.size();i++){
+            Drop drop = droplijst.get(i);
+            dichtstecollect = drop.getLocation().getDichtsteCollect(collectlijst,drop.getMachineTypeId(),distancematrix);       //dichtste collect
 
-         }
+            if(dichtstecollect!=null){
+                 machine= dichtstecollect.getMachine();  //machine van collect
+                collectlijst.remove(dichtstecollect);   //removing collect uit lijst
+            }
+            else{                                       //geen machine gevonden van collect
+                Depot depot = drop.getLocation().getDichtsteDepot(depotlijst,drop.getMachineTypeId(),distancematrix);
+                machine = depot.getMachine(drop.getMachineTypeId());
+                depot.removeMachine(machine);           //verwijderen uit depotlijst
+            }
 
-     }
-     int teller = 0;
+            bestetruck = machine.getLocation().getDichtsteTruck(trucklijst,machine,drop.getLocation().getId(),distancematrix,timematrix);  //dichtste depot
+            int beginlocatie = bestetruck.getHuidigeLocatie();
+            verplaats = bestetruck.verplaats(machine.getLocation().getId(),timematrix,distancematrix);
+            bestetruck.pickUp(machine);
 
-     //for(int i=0; i<data.getTrucklijst().size();i++){
-     while(aantalcollects!=0){
-         Truck truck = data.getTrucklijst().get(teller);
-         Depot einddepot = data.getDepotlijst().get(truck.getEndlocationid());
-         boolean ok = true;
-         while (ok){
-             ok = truck.dichtsteDropPickup(droplijst,collectlijst,distancematrix,timematrix,einddepot);
-         }
+            if(verplaats && bestetruck.getEndlocationid()==beginlocatie){
+                 stop = new Stop(beginlocatie);   //solve bug
+                 bestetruck.addStop(stop);
+            }
 
-         teller = (teller + 7) % data.getTrucklijst().size();
-
-
-         aantalcollects=collectlijst.size();
-
-     }
-
-     for(int i=0;i<data.getTrucklijst().size();i++){
-         Truck truck = data.getTrucklijst().get(i);
-         if(truck.getStoplijst().size()!=0){
-             truck.addStop(truck.getHuidigestop());
-         }
-     }
+            stop = new Stop(machine.getLocation().getId());
+            stop.addMachine(machine);
+            bestetruck.setHuidigestop(stop);
+            bestetruck.addStop(stop);
 
 
-     ArrayList<Drop> onvoltooidedrops = new ArrayList<Drop>();
-     for(int i=0;i<data.getDroplijst().size();i++){
-         Drop drop = data.getDroplijst().get(i);
-         if(drop.getMachine()==null){                    //als drop geen machine heeft
-             onvoltooidedrops.add(drop);
-         }
-     }
+            bestetruck.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
+            bestetruck.dropOf(machine);
+
+            stop = new Stop(drop.getLocation().getId());
+            stop.addMachine(machine);
+            bestetruck.setHuidigestop(stop);
+            bestetruck.addStop(stop);
+          //  bestetruck.keerTerug(timematrix,distancematrix);
+            //TODO nieuwe afhandelfunctie dichtstetruck OK
+
+        }
+
+        //TODO na afhandelen droplijst, overige collects afhandelen OK
+        //TODO stops afhandelen
+
+        for(int i=0; i<collectlijst.size();i++){
+            Collect collect = collectlijst.get(i);
+            machine = collect.getMachine();
+            bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine,distancematrix,timematrix);
+
+            if(bestetruck.getStoplijst().size()==0){
+                stop = new Stop(bestetruck.getHuidigeLocatie());
+                bestetruck.addStop(stop);
+            }
+
+            bestetruck.verplaats(machine.getLocation().getId(),timematrix,distancematrix);
+            bestetruck.pickUp(machine);
+            stop = new Stop(bestetruck.getHuidigeLocatie());
+            stop.addMachine(machine);
+            bestetruck.addStop(stop);
+        }
 
 
-
-     for(int i=0;i<onvoltooidedrops.size();i++){
-
-         Drop drop = onvoltooidedrops.get(i);
-         int machinetypeid = drop.getMachineTypeId();
-
-
-         Depot depot = drop.getLocation().getDichtsteDepot(data.getDepotlijst(),machinetypeid,data.getDistancematrix());
-         //System.out.println("depot: " + depot);
-         int servicetime = data.getMachinetypelijst().get(machinetypeid).getServicetime();            //get servicetime
-
-
-         Truck truck = depot.getGoedeTruck(drop.getLocation().getId(),timematrix,servicetime);          //haal goede truck
-
-         Machine machine = depot.getMachine(machinetypeid);
-         truck.pickUp(machine);
-
-
-         if(truck.getStoplijst().size()==0){            //zetten startlocatie als nog geen stops had
-             Stop stop = new Stop(truck.getHuidigeLocatie());
-             stop.addMachine(machine);
-             truck.addStop(stop);
-         }
-         else{
-             truck.getHuidigestop().addMachine(machine);
-         }
-
-         truck.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
-
-
-         truck.dropOf(machine);
-         Stop stop = new Stop(truck.getHuidigeLocatie());
-         stop.addMachine(machine);
-         truck.setHuidigestop(stop);
-         truck.addStop(stop);
-         truck.keerTerug(timematrix,distancematrix);
-         stop = new Stop(truck.getHuidigeLocatie());
-         truck.addStop(stop);
-         truck.setHuidigestop(stop);
+        //TODO iedere truck naar eindlocatie OK
+        for(int i=0; i<trucklijst.size();i++){
+            Truck truck = trucklijst.get(i);
+            if(truck.getHuidigeLocatie()!=truck.getEndlocationid()){
+                truck.keerTerug(timematrix,distancematrix);
+                stop = new Stop(truck.getHuidigeLocatie());
+                stop.addMachinelijst(truck.getMachinelijst());
+                truck.addStop(stop);
+            }
+            truck.truckLegen();
+        }
 
 
 
-     }
-
-     int totaledistance=0;
+        //PRINTEN
      for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
-      //   System.out.println("distance truck " + i + ": " + truck.getDistance());
-         totaledistance = totaledistance + truck.getDistance();
+         if(truck.getStoplijst().size()!=0) {
+
+             System.out.println();
+             System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
+             //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
+             for (int j = 0; j < truck.getStoplijst().size(); j++) {
+                 System.out.print(truck.getStoplijst().get(j).toString() + " ");
+             }
+         }
+
      }
 
-     solution = new Solution(data);
-     solution.load();
+     System.out.println();
+     System.out.println("totale distance: " + totalDistance());
+
 
  }
-
-
 
 
 

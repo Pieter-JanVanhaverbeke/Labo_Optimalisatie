@@ -61,16 +61,8 @@ public class Location {
         Depot bestedepot = null;
         int bestedistance = 999999;
 
-       /* System.out.println("size: " + depotslijst.size());
-        System.out.println("type nodig: " + machineTypeId);
-        System.out.println("depot2: " + depotslijst.get(1).getMachinelijst().size());*/
         for(int i=0; i<depotslijst.size();i++) {
-        //    System.out.println("depot: " + i);
             depot = depotslijst.get(i);
-     /*       for(int j=0; j<depot.getMachinelijst().size();j++){
-                System.out.println("depot: " + depot.getId() + " machine: " + depot.getMachinelijst().get(j).getName());
-            }
-*/
             if (depot.hasMachine(machineTypeId)) {
                 int distance = this.getDistance(depot.getLocation().getId(), distancematrix);
                 if (distance < bestedistance) {
@@ -83,6 +75,74 @@ public class Location {
 
         return bestedepot;
     }
+
+    public Collect getDichtsteCollect(ArrayList<Collect> collectlijst, int machineTypeId,DistanceMatrix distancematrix){
+        Collect collect;
+        Collect bestecollect = null;
+        int bestedistance = 999999;
+
+
+        for(int i=0; i<collectlijst.size();i++) {
+            collect = collectlijst.get(i);
+
+            if (collect.getMachine().getMachineTypeId()==machineTypeId) {
+                int distance = this.getDistance(collect.getMachine().getLocation().getId(), distancematrix);
+                if (distance < bestedistance) {
+                    bestecollect = collect;
+                    bestedistance = distance;
+                }
+            }
+        }
+
+        return bestecollect;
+    }
+
+
+
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, DistanceMatrix distancematrix, TimeMatrix timeMatrix){
+        Truck truck;
+        Truck bestetruck = null;
+        int bestedistance = 999999;
+
+
+        for(int i=0; i<trucklijst.size();i++) {
+            truck = trucklijst.get(i);
+            if(truck.heeftcapacity(machine)&&truck.heefttijd(machine.getLocation().getId(),timeMatrix,machine.getServicetime())) {    //truck moet machine hebben
+                int distance = this.getDistance(truck.getHuidigeLocatie(), distancematrix);     //huidige locatie
+                if (distance < bestedistance) {
+                    bestetruck = truck;
+                    bestedistance = distance;
+                }
+            }
+        }
+        return bestetruck;
+    }
+
+
+
+
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int droplocatie, DistanceMatrix distancematrix, TimeMatrix timeMatrix){
+        Truck truck;
+        Truck bestetruck = null;
+        int bestedistance = 999999;
+
+
+        for(int i=0; i<trucklijst.size();i++) {
+            truck = trucklijst.get(i);
+                if(truck.heeftcapacity(machine)&&truck.heefttijd(machine.getLocation().getId(),droplocatie,timeMatrix,machine.getServicetime())) {    //truck moet machine hebben
+                    int distance = this.getDistance(truck.getHuidigeLocatie(), distancematrix);     //huidige locatie
+                    if (distance < bestedistance) {
+                        bestetruck = truck;
+                        bestedistance = distance;
+                    }
+                }
+            }
+            return bestetruck;
+        }
+
+
+
+
 
     @Override
     public String toString() {
