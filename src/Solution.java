@@ -28,6 +28,7 @@ public class Solution {
 
     private LinkedList<int[]>[] solution;
     private LinkedList<Integer>[] truckTimes;
+    private LinkedList<Integer>[] truckDistances;
     private LinkedList<LinkedList<Integer>>[] truckCurrentMachines;
 
     private int[][] timeMatrix;
@@ -44,6 +45,7 @@ public class Solution {
         this.solution = new LinkedList[data.getTrucklijst().size()];
         this.truckCurrentMachines = new LinkedList[data.getTrucklijst().size()];
         this.truckTimes = new LinkedList[data.getTrucklijst().size()];
+        this.truckDistances = new LinkedList[data.getTrucklijst().size()];
         this.distanceMatrix = data.getDistancematrix().getDistance();
         this.timeMatrix = data.getTimematrix().getTime();
         this.startLocations = new int[data.getTrucklijst().size()];
@@ -264,20 +266,30 @@ public class Solution {
 
         // get first truck and matching stops --------------------------------------------------------------------------
         int firstTruck = rng.nextInt(solution.length);
-        int stop = rng.nextInt(solution[firstTruck].size());
-        int collectStop = Math.min(solution[firstTruck].get(stop)[3], stop);
-        int dropStop = Math.max(solution[firstTruck].get(stop)[3], stop);
-        int[] collect = solution[firstTruck].get(collectStop);
-        int[] drop = solution[firstTruck].get(dropStop);
+        int firstStop = rng.nextInt(solution[firstTruck].size());
+        int firstCollectStop = Math.min(solution[firstTruck].get(firstStop)[3], firstStop);
+        int firstDropStop = Math.max(solution[firstTruck].get(firstStop)[3], firstStop);
+        int[] collect = solution[firstTruck].get(firstCollectStop);
+        int[] drop = solution[firstTruck].get(firstDropStop);
 
         // TODO chance to swap with available machine ******************************************************************
 
-        // remog from first truck and update delta control structures --------------------------------------------------
-        solution[firstTruck].remove(dropStop);
-        solution[firstTruck].remove(collectStop);
-        update(firstTruck, collectStop);
+        // remove from first truck and update delta control structures --------------------------------------------------
+        solution[firstTruck].remove(firstDropStop);
+        solution[firstTruck].remove(firstCollectStop);
+        update(firstTruck, firstCollectStop);
 
+        //get second truck and locations for stops ---------------------------------------------------------------------
+        int secondTruck = rng.nextInt(solution.length);
+        int secondCollectStop = rng.nextInt(solution[secondTruck].size() - 1);
+        int secondDropStop =
+                secondCollectStop + 1 +
+                rng.nextInt(solution[secondTruck].size() - secondCollectStop - 1);
 
+        // add collect and drop to second truck and update delta control structures ------------------------------------
+        solution[secondTruck].add(secondCollectStop, collect);
+        solution[secondTruck].add(secondDropStop, drop);
+        update(secondTruck, secondCollectStop);
     }
 
     private void update(int truck, int start) {
@@ -287,6 +299,7 @@ public class Solution {
 
             // delete previous if exists -------------------------------------------------------------------------------
             if (stop < truckTimes[truck].size()) truckTimes[truck].remove(stop);
+            if (stop < truckDistances[truck].size()) truckDistances[truck].remove(stop);
             if (stop < truckCurrentMachines[truck].size()) truckCurrentMachines[truck].remove(stop);
 
             // updating trucks driven time -----------------------------------------------------------------------------
@@ -294,6 +307,11 @@ public class Solution {
                     (truckTimes[truck].isEmpty() ? 0 : truckTimes[truck].getLast()) +
                     (stop < 1 ? 0 : timeMatrix[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
                     (solution[truck].get(stop)[1] == -1 ? 0 : machineStats[solution[truck].get(stop)[1]][2])
+            );
+            // updating trucks driven distance -------------------------------------------------------------------------
+            truckDistances[truck].addLast(
+                    (truckDistances[truck].isEmpty() ? 0 : truckDistances[truck].getLast()) +
+                    (stop < 1 ? 0 : distanceMatrix[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]])
             );
 
             // updating machines on truck at certain stop --------------------------------------------------------------
@@ -327,6 +345,7 @@ public class Solution {
             // route building ------------------------------------------------------------------------------------------
             solution[truck] = new LinkedList<>();
             truckTimes[truck] = new LinkedList<>();
+            truckDistances[truck] = new LinkedList<>();
             truckCurrentMachines[truck] = new LinkedList<>();
             for(int stopId = 0; stopId < data.getTrucklijst().get(truck).getStoplijst().size(); stopId++){
                 stop = data.getTrucklijst().get(truck).getStoplijst().get(stopId);

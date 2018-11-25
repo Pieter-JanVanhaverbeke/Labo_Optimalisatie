@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="added data for delta evaluation">
+    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="delta rebuild for control structures tested">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Solution.java" afterPath="$PROJECT_DIR$/src/Solution.java" />
     </list>
@@ -76,10 +76,10 @@
       <file leaf-file-name="Solution.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Solution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="279" column="8" lean-forward="false" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
+            <state relative-caret-position="596">
+              <caret line="291" column="47" lean-forward="true" selection-start-line="291" selection-start-column="47" selection-end-line="291" selection-end-column="47" />
               <folding>
-                <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
+                <marker date="1543174923874" expanded="true" signature="8753:8760" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -183,13 +183,13 @@
       <find>move(</find>
       <find>truck</find>
       <find>truckVol</find>
+      <find>truckTimes =</find>
     </findStrings>
     <replaceStrings>
       <replace>firsttr</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -434,7 +434,7 @@
       <workItem from="1542962761610" duration="139000" />
       <workItem from="1542963439890" duration="57000" />
       <workItem from="1543158165061" duration="275000" />
-      <workItem from="1543159450320" duration="11499000" />
+      <workItem from="1543159450320" duration="13485000" />
     </task>
     <task id="LOCAL-00001" summary="load fixed, v2.0">
       <created>1542818085873</created>
@@ -450,11 +450,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543166954259</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="delta rebuild for control structures tested">
+      <created>1543172965837</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1543172965837</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29806000" />
+    <option name="totallyTimeSpent" value="31792000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -586,22 +593,23 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="load fixed, v2.0" />
     <MESSAGE value="added data for delta evaluation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added data for delta evaluation" />
+    <MESSAGE value="delta rebuild for control structures tested" />
+    <option name="LAST_COMMIT_MESSAGE" value="delta rebuild for control structures tested" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="47" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="48" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="58" />
+        </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>139</line>
+          <line>141</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
@@ -609,7 +617,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="57" />
+      <option name="time" value="59" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -661,7 +669,7 @@
         <state relative-caret-position="1050">
           <caret line="50" column="60" lean-forward="false" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding>
-            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
+            <marker date="1543174923874" expanded="true" signature="8753:8760" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -891,7 +899,7 @@
         <state relative-caret-position="3424">
           <caret line="197" column="36" lean-forward="false" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
           <folding>
-            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
+            <marker date="1543174923874" expanded="true" signature="8753:8760" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1034,10 +1042,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="279" column="8" lean-forward="false" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
+        <state relative-caret-position="596">
+          <caret line="291" column="47" lean-forward="true" selection-start-line="291" selection-start-column="47" selection-end-line="291" selection-end-column="47" />
           <folding>
-            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
+            <marker date="1543174923874" expanded="true" signature="8753:8760" ph="{...}" />
           </folding>
         </state>
       </provider>
