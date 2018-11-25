@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="load fixed, v2.0">
+    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="added data for delta evaluation">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Solution.java" afterPath="$PROJECT_DIR$/src/Solution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/solution" afterPath="$PROJECT_DIR$/src/data/solution" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,10 +76,10 @@
       <file leaf-file-name="Solution.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Solution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="275" column="18" lean-forward="false" selection-start-line="275" selection-start-column="8" selection-end-line="275" selection-end-column="18" />
+            <state relative-caret-position="588">
+              <caret line="279" column="8" lean-forward="false" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
               <folding>
-                <marker date="1543166702014" expanded="true" signature="8600:8607" ph="{...}" />
+                <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -182,7 +181,12 @@
       <find>machine_</find>
       <find>solution(</find>
       <find>move(</find>
+      <find>truck</find>
+      <find>truckVol</find>
     </findStrings>
+    <replaceStrings>
+      <replace>firsttr</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
@@ -430,7 +434,7 @@
       <workItem from="1542962761610" duration="139000" />
       <workItem from="1542963439890" duration="57000" />
       <workItem from="1543158165061" duration="275000" />
-      <workItem from="1543159450320" duration="6850000" />
+      <workItem from="1543159450320" duration="11499000" />
     </task>
     <task id="LOCAL-00001" summary="load fixed, v2.0">
       <created>1542818085873</created>
@@ -439,11 +443,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542818085873</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added data for delta evaluation">
+      <created>1543166954259</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1543166954259</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25157000" />
+    <option name="totallyTimeSpent" value="29806000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -574,7 +585,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="load fixed, v2.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="load fixed, v2.0" />
+    <MESSAGE value="added data for delta evaluation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added data for delta evaluation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -597,7 +609,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="53" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -649,7 +661,7 @@
         <state relative-caret-position="1050">
           <caret line="50" column="60" lean-forward="false" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding>
-            <marker date="1543166702014" expanded="true" signature="8600:8607" ph="{...}" />
+            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -879,7 +891,7 @@
         <state relative-caret-position="3424">
           <caret line="197" column="36" lean-forward="false" selection-start-line="197" selection-start-column="36" selection-end-line="197" selection-end-column="36" />
           <folding>
-            <marker date="1543166702014" expanded="true" signature="8600:8607" ph="{...}" />
+            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1004,14 +1016,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/solution">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/tvh_problem_4.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -1020,12 +1024,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/solution">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="275" column="18" lean-forward="false" selection-start-line="275" selection-start-column="8" selection-end-line="275" selection-end-column="18" />
+        <state relative-caret-position="588">
+          <caret line="279" column="8" lean-forward="false" selection-start-line="279" selection-start-column="8" selection-end-line="279" selection-end-column="8" />
           <folding>
-            <marker date="1543166702014" expanded="true" signature="8600:8607" ph="{...}" />
+            <marker date="1543172936483" expanded="true" signature="8628:8635" ph="{...}" />
           </folding>
         </state>
       </provider>
