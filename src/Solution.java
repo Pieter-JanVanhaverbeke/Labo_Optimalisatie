@@ -2,7 +2,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Solution {
 
@@ -22,28 +24,44 @@ public class Solution {
 
     //TODO EIND EN BEGINPOS CHECKEN
 
-
-
-
-
+    private Random rng;
 
     private LinkedList<int[]>[] solution;
     private LinkedList<Integer>[] truckTimes;
+    private LinkedList<Integer>[] truckVolumes;
 
     private int[][] timeMatrix;
     private int[][] distanceMatrix;
     private int[] startLocations;
     private int[] endLocations;
+    private int[][] machineStats;
+    private HashMap<Integer, Integer> serviceTimes;
+    private HashMap<Integer, LinkedList<int[]>> availableMachines;
 
     private Data data;
 
     public Solution(Data data) {
         this.solution = new LinkedList[data.getTrucklijst().size()];
+        this.truckVolumes = new LinkedList[data.getTrucklijst().size()];
+        this.truckTimes = new LinkedList[data.getTrucklijst().size()];
         this.distanceMatrix = data.getDistancematrix().getDistance();
         this.timeMatrix = data.getTimematrix().getTime();
         this.startLocations = new int[data.getTrucklijst().size()];
         this.endLocations = new int[data.getTrucklijst().size()];
         this.data = data;
+
+        this.machineStats = new int[data.getMachinelijst().size()][];
+        this.serviceTimes = new HashMap<>();
+        for (Machine machine: data.getMachinelijst()) {
+            this.serviceTimes.put(machine.getMachineTypeId(), machine.getServicetime());
+            this.machineStats[machine.getId()] = new int[]{
+                    machine.getMachineTypeId(),
+                    machine.getVolume(),
+                    machine.getServicetime()
+            };
+        }
+
+        this.rng = new Random(1);
     }
 
     /**
@@ -242,14 +260,28 @@ public class Solution {
         return feasibel;
     }
 
+    public void move(){
+
+        int firstTruck = rng.nextInt(solution.length);
+        int stop = rng.nextInt(solution[firstTruck].size());
+    }
+
     /**
      * Method to load initial solution into right format.
      *
      */
     public void load(){
 
+        // temporary variables -----------------------------------------------------------------------------------------
+        LinkedList<Integer> currentMachines;
+
         for(int truck = 0; truck < data.getTrucklijst().size(); truck++){
+            currentMachines = new LinkedList<>();
+
+            // route building ------------------------------------------------------------------------------------------
             solution[truck] = new LinkedList<>();
+            truckTimes[truck] = new LinkedList<>();
+            truckVolumes[truck] = new LinkedList<>();
             for(Stop stop: data.getTrucklijst().get(truck).getStoplijst()){
                 if(stop.getMachines().isEmpty()) solution[truck].addLast(new int[]{stop.getStoplocatieid(), -1});
                 else {
@@ -260,6 +292,23 @@ public class Solution {
                         });
                     }
                 }
+            }
+
+            // truck times and volumes updating ------------------------------------------------------------------------
+            for (int stop = 0; stop < solution[truck].size(); stop++) {
+                truckTimes[truck].addLast(
+                        (truckTimes[truck].isEmpty() ? 0 : truckTimes[truck].getLast()) +
+                        (stop < 1 ? 0 : timeMatrix[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
+                        (solution[truck].get(stop)[1] == -1 ? 0 : machineStats[solution[truck].get(stop)[1]][2])
+                );
+                if (solution[truck].get(stop)[1] != -1) {
+                    truckVolumes[truck].addLast(
+                            (truckVolumes[truck].isEmpty() ? 0 : truckVolumes[truck].getLast()) +
+                            (currentMachines.contains(solution[truck].get(stop)[1]) ? - machineStats[solution[truck].get(stop)[1]][1] : machineStats[solution[truck].get(stop)[1]][1])
+                    );
+                    if (!currentMachines.contains(solution[truck].get(stop)[1])) currentMachines.add(solution[truck].get(stop)[1]);
+                    else currentMachines.remove(new Integer(solution[truck].get(stop)[1]));
+                } else truckVolumes[truck].addLast(truckVolumes[truck].isEmpty() ? 0 : truckVolumes[truck].getLast());
             }
         }
     }
