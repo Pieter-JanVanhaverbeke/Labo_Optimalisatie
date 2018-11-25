@@ -10,10 +10,6 @@ public class Solution {
 
     public static final int MAX_TIME = 600;
 
-    /*
-    int[]: [locationId, machineId, drop/pickupId, ?miss nog link naar dropoff, wie weet? ,<machineTypeId>]
-     */
-
     //TODO VOLUME KUNNEN CHECKEN
 
     //TODO TIJD KUNNEN CHECKEN
@@ -26,9 +22,13 @@ public class Solution {
 
     private Random rng;
 
+    // per truck list:
+    //      int[]: [ locationId, machineId, drop/pickupId, link naar geconnecteerd drop/collect ,<machineTypeId> ]
     private LinkedList<int[]>[] solution;
     private LinkedList<Integer>[] truckTimes;
     private LinkedList<Integer>[] truckDistances;
+    // per truck list:
+    //      { machine id 1, machine id 2, ... }
     private LinkedList<LinkedList<Integer>>[] truckCurrentMachines;
 
     private int[][] timeMatrix;
@@ -262,6 +262,7 @@ public class Solution {
         return feasibel;
     }
 
+    // TODO reverse move if infeasible *********************************************************************************
     public void move(){
 
         // get first truck and matching stops --------------------------------------------------------------------------
@@ -277,6 +278,7 @@ public class Solution {
         // remove from first truck and update delta control structures --------------------------------------------------
         solution[firstTruck].remove(firstDropStop);
         solution[firstTruck].remove(firstCollectStop);
+        updateCouplingRemove(firstTruck, firstCollectStop, firstDropStop);
         update(firstTruck, firstCollectStop);
 
         //get second truck and locations for stops ---------------------------------------------------------------------
@@ -287,9 +289,28 @@ public class Solution {
                 rng.nextInt(solution[secondTruck].size() - secondCollectStop - 1);
 
         // add collect and drop to second truck and update delta control structures ------------------------------------
-        solution[secondTruck].add(secondCollectStop, collect);
+        // update coupling ---------------------------------------------------------------------------------------------
+        updateCouplingAdd(secondTruck, secondCollectStop, secondDropStop);
+        // add drop first because the list size and the indexes will change --------------------------------------------
         solution[secondTruck].add(secondDropStop, drop);
+        solution[secondTruck].add(secondCollectStop, collect);
+        drop[3] = secondCollectStop;
+        collect[3] = secondDropStop;
         update(secondTruck, secondCollectStop);
+    }
+
+    private void updateCouplingAdd(int truck, int start, int secondEdit){
+
+        for (int stop = start; start < solution[truck].size(); stop++) {
+            solution[truck].get(stop)[3] = solution[truck].get(stop)[3] + (stop >= secondEdit ? 2 : 1);
+        }
+    }
+
+    private void updateCouplingRemove(int truck, int start, int secondEdit){
+
+        for (int stop = start; start < solution[truck].size(); stop++) {
+            solution[truck].get(stop)[3] = solution[truck].get(stop)[3] - (stop >= secondEdit ? 2 : 1);
+        }
     }
 
     private void update(int truck, int start) {
