@@ -7,8 +7,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Solution {
-
-    public static final int MAX_TIME = 600;
+    private static final int MAX_WORKING_TIME = 600;
 
     //TODO VOLUME KUNNEN CHECKEN
 
@@ -109,13 +108,8 @@ public class Solution {
     public int calculateScore(){
 
         int score = 0;
-        for(int truck = 0; truck < solution.length; truck++){
-            for(int stop = 0; stop < solution[0].size(); stop++){
-                if(stop == solution[0].size() - 1 || solution[truck].get(stop) == null || solution[truck].get(stop + 1) == null) break;
-                else score += distanceMatrix
-                        [ solution[truck].get(stop)[0] ]
-                        [ solution[truck].get(stop + 1)[0] ];
-            }
+        for (LinkedList<Integer> truckTime: truckTimes) {
+            score += truckTime.getLast();
         }
         return score;
     }
@@ -225,23 +219,23 @@ public class Solution {
     public boolean checkFeasibility(){
         boolean feasibel = true;
 
-        for(int i=0; i<solution.length;i++){
-            LinkedList<int[]> truck = solution[i];
+        for(int truck = 0; truck < solution.length; truck++){
      //   for(LinkedList<int[]> truck: solution){
 
-            if(truck != null && truck.size() != 0){
+            if(solution[truck] != null && solution[truck].size() != 0){
 
                 //TODO EERST ALLES OVERLOPEN EN KIJKEN OF FEASABLE IS, LATER OPTIMALISEREN
 
 
                 //TODO TIJD KUNNEN CHECKEN --> optimaliseren
-                if(getTruckTime(truck)>MAX_TIME){
+                if(truckTimes[truck].getLast() > MAX_WORKING_TIME){
                     feasibel = false;
                     break;
                 }
 
                 //TODO EIND EN BEGINPOS CHECKEN -->optimaliseren
-                else if(data.getStartLocations().get(i)==truck.getFirst()[0] || data.getEndLocations().get(i)==truck.getLast()[0]) {
+                if(startLocations[truck] == solution[truck].getFirst()[0] ||
+                        endLocations[truck] == solution[truck].getLast()[0]) {
                     feasibel = false;
                     break;
                 }
