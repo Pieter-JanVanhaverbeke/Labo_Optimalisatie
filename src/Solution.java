@@ -3,11 +3,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Solution {
     private static final int MAX_WORKING_TIME = 600;
+    private static final int MAX_VOLUME = 100;
 
     //TODO VOLUME KUNNEN CHECKEN
 
@@ -35,8 +37,16 @@ public class Solution {
     private int[] startLocations;
     private int[] endLocations;
     private int[][] machineStats;
+    // [ machine type id, location id ]
+    private HashMap<Integer, int[]>  drops;
+    // [ machine id, location id ]
+    private HashMap<Integer, int[]>  collects;
+    // [ machine type id, location id ]
+    private HashMap<Integer, int[]> machines;
     private HashMap<Integer, Integer> serviceTimes;
+    // TODO hotswap machines *******************************************************************************************
     private HashMap<Integer, LinkedList<int[]>> availableMachines;
+
 
     private Data data;
 
@@ -49,8 +59,13 @@ public class Solution {
         this.timeMatrix = data.getTimematrix().getTime();
         this.startLocations = new int[data.getTrucklijst().size()];
         this.endLocations = new int[data.getTrucklijst().size()];
+        for (int truck = 0; truck < solution.length; truck++) {
+            startLocations[truck] = data.getStartLocations().get(truck);
+            endLocations[truck] = data.getTrucklijst().get(truck).getEndlocationid();
+        }
         this.data = data;
 
+        this.machines = new HashMap<>();
         this.machineStats = new int[data.getMachinelijst().size()][];
         this.serviceTimes = new HashMap<>();
         for (Machine machine: data.getMachinelijst()) {
@@ -60,6 +75,25 @@ public class Solution {
                     machine.getVolume(),
                     machine.getServicetime()
             };
+            this.machines.put(machine.getId(), new int[]{
+                    machine.getMachineTypeId(),
+                    machine.getLocation().getId()
+            });
+        }
+
+        this.drops = new HashMap<>();
+        for (Drop drop: data.getDroplijst()) {
+            this.drops.put(drop.getId(), new int[]{
+                    drop.getMachineTypeId(),
+                    drop.getLocation().getId()
+            });
+        }
+        this.collects = new HashMap<>();
+        for (Collect collect: data.getCollectlijst()) {
+            this.collects.put(collect.getId(), new int[]{
+                    collect.getMachine().getId(),
+                    collect.getMachine().getLocation().getId()
+            });
         }
 
         this.rng = new Random(1);
@@ -141,9 +175,6 @@ public class Solution {
             int id = -1;
             for(int truck = 0; truck < solution.length; truck++){
                 if(solution[truck]!= null && solution[truck].size() != 0){
-                    if(truck == 30){
-                        System.out.println("break");
-                    }
                     buffer.append(String.format("%d %d %d", truck, getTruckDistance(solution[truck]), getTruckTime(solution[truck])));
                     for(int[] stop: solution[truck]){
                         if(stop[0] != id){
@@ -217,43 +248,102 @@ public class Solution {
      */
 
     public boolean checkFeasibility(){
-        boolean feasibel = true;
 
-        for(int truck = 0; truck < solution.length; truck++){
-     //   for(LinkedList<int[]> truck: solution){
+        // temporary variables -----------------------------------------------------------------------------------------
+        boolean feasible = true;
+        int volume;
+        HashMap<Integer, int[]> tempDrops = new HashMap<>(drops);
+        HashMap<Integer, int[]> tempCollects = new HashMap<>(collects);
+        HashMap<Integer, int[]> tempMachines = new HashMap<>(machines);
+        HashSet<Integer> currentMachines;
 
+        // check all trucks --------------------------------------------------------------------------------------------
+        // assume all collects and drops handled? ----------------------------------------------------------------------
+        for(int truck = 0; truck < solution.length; truck++) {
+            // only check if truck has stop list ---------------------------------------------------------------------------
             if(solution[truck] != null && solution[truck].size() != 0){
 
-                //TODO EERST ALLES OVERLOPEN EN KIJKEN OF FEASABLE IS, LATER OPTIMALISEREN
+                // begin and end location ----------------------------------------------------------------------------------
+                if(startLocations[truck] != solution[truck].getFirst()[0] ||
+                        endLocations[truck] != solution[truck].getLast()[0]) {
+                    return false;
+                }
 
-
-                //TODO TIJD KUNNEN CHECKEN --> optimaliseren
+                // time check ----------------------------------------------------------------------------------------------
                 if(truckTimes[truck].getLast() > MAX_WORKING_TIME){
-                    feasibel = false;
-                    break;
+                    return false;
                 }
 
-                //TODO EIND EN BEGINPOS CHECKEN -->optimaliseren
-                if(startLocations[truck] == solution[truck].getFirst()[0] ||
-                        endLocations[truck] == solution[truck].getLast()[0]) {
-                    feasibel = false;
-                    break;
+                // volume check --------------------------------------------------------------------------------------------
+                for (LinkedList<Integer> machines: truckCurrentMachines[truck]) {
+                    volume = 0;
+                    for (Integer machine: machines) volume += machineStats[machine][1];
+                    if (volume > MAX_VOLUME) {
+                        return false;
+                    }
                 }
-
-
-                //TODO VOLUME KUNNEN CHECKEN
-
-                //Huidig volume bijhouden in linked list???
-
-                //TODO DROPS EN COLLECTS AFGEHANDELD KUNNEN CHECKEN
-
-                //
 
                 //TODO PICKUP VOOR COLLECT CHECKEN
-                
+                currentMachines = new HashSet<>();
+                for (int[] stop: solution[truck]) {
+                    // stop is drop or collect -------------------------------------------------------------------------
+                    if (stop.length >= 3 && stop[2] != -1) {
+                        // check if machine isn't already collected ----------------------------------------------------
+                        if (!currentMachines.contains(stop[1]) && collects.containsKey(stop[2])) {
+                            // check if machine id and location matche -------------------------------------------------
+                            if (stop[1] == collects.get(stop[2])[0] && stop[0] == collects.get(stop[2])[1]) {
+                                currentMachines.add(stop[1]);
+                                tempCollects.remove(stop[2]);
+                            } else {
+                                feasible = false;
+                                break;
+                            }
+                        }
+                        // check if machine isn't already dropped ------------------------------------------------------
+                        else if (currentMachines.contains(stop[1]) && drops.containsKey(stop[2])) {
+                            // check if machine type id and location matche --------------------------------------------
+                            if (stop[4] == drops.get(stop[2])[0] && stop[0] == collects.get(stop[2])[1]) {
+                                currentMachines.remove(stop[1]);
+                                tempDrops.remove(stop[2]);
+                            } else {
+                                feasible = false;
+                                break;
+                            }
+                        } else {
+                            feasible = false;
+                            break;
+                        }
+                    }
+                    // stop is pickup or drop off of machine at depot --------------------------------------------------
+                    else if (stop[1] != -1) {
+                        if (!currentMachines.contains(stop[1]) &&
+                                machines.containsKey(stop[1]) &&
+                                machines.get(stop[1])[1] == stop[0]) {
+                            currentMachines.add(stop[1]);
+                            machines.remove(stop[1]);
+                        } else if (currentMachines.contains(stop[1]) &&
+                                !machines.containsKey(stop[1])) {
+                            currentMachines.remove(stop[1]);
+                        } else {
+                            feasible = false;
+                            break;
+                        }
+                    }
+                }
+                // truck is still loaded -------------------------------------------------------------------------------
+                if (currentMachines.size() > 0) {
+                    feasible = false;
+                    break;
+                }
             }
         }
-        return feasibel;
+
+        // check if all drops and collects are done --------------------------------------------------------------------
+        if (!tempCollects.isEmpty() || !tempDrops.isEmpty()) {
+            feasible = false;
+        }
+
+        return feasible;
     }
 
     // TODO reverse move if infeasible *********************************************************************************
