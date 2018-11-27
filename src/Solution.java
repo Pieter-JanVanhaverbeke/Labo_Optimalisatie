@@ -142,8 +142,8 @@ public class Solution {
     public int calculateScore(){
 
         int score = 0;
-        for (LinkedList<Integer> truckTime: truckTimes) {
-            score += truckTime.getLast();
+        for (LinkedList<Integer> truckDistance: truckDistances) {
+            score += truckDistance.getLast();
         }
         return score;
     }
