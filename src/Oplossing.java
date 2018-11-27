@@ -42,7 +42,7 @@ public class Oplossing {
     }
 
 
-    public void start() {
+    public Solution start() {
         ArrayList<Drop> droplijst = data.getDroplijst();
         ArrayList<Collect> collectlijst = data.getCollectlijst();
         ArrayList<Depot> depotlijst = data.getDepotlijst();
@@ -149,9 +149,12 @@ public class Oplossing {
         System.out.println("totale distance: " + totalDistance());
 
         solution.load();
-        if (solution.checkFeasibility()) {
+        /*if (solution.checkFeasibility()) {
             System.out.println(solution.toString());
-        }
+        }*/
+
+        return solution;
+
     }
 
     private int totalDistance(){
@@ -180,47 +183,3 @@ public class Oplossing {
     }
 
 }
-
-
-/*
-    public void zetommatrixopl(){
-        int [] [] matrix;
-        //Zoeken naar langste route
-        int langste=0;
-        for(int i=0; i<data.getTrucklijst().size();i++){
-            Truck truck = data.getTrucklijst().get(i);
-
-           if(truck.getStoplijst().size()>langste){
-                langste=truck.getStoplijst().size();
-            }
-        }
-
-        //matrix initilialiseren
-        matrix = new int[data.getTrucklijst().size()][langste];
-        for(int i=0;i<data.getTrucklijst().size();i++){
-            for(int j=0; j<langste;j++){
-                matrix [i][j] = -1;
-            }
-        }
-
-        Truck truck;
-        for(int i=0; i<data.getTrucklijst().size();i++){
-            truck = data.getTrucklijst().get(i);
-            for(int j=0; j<truck.getStoplijst().size();j++){
-                matrix[i][j] = truck.getStoplijst().get(j).getId();              //locationid meegeven
-            }
-        }
-
-        oplossingsmatrix.setOplossing(matrix);
-
-        for(int i=0; i<data.getTrucklijst().size();i++){
-            for(int j=0; j<langste;j++){
-                System.out.print(oplossingsmatrix.getOplossing()[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("totale distance: " + totalDistance());
-
-    }
-*/

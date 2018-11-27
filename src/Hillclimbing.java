@@ -21,9 +21,6 @@ public class Hillclimbing {
     public void start(int aantalitteraties){
         while (teller<aantalitteraties){
             localSearch();
-
-
-
             teller++;
         }
 
@@ -35,17 +32,15 @@ public class Hillclimbing {
     }
 
     public void localSearch(){
+        huidigesolution = new Solution(bestesolution);
         huidigesolution.move();
         if(huidigesolution.checkFeasibility()){
             int huidigescore = huidigesolution.calculateScore();
             if(huidigescore<bestescore){
                 bestescore = huidigescore;
-//                bestesolution = new Solution(huidigesolution);
+                bestesolution = new Solution(huidigesolution);
             }
         }
-
-
-
     }
 
 

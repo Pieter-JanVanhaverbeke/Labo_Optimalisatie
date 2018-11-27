@@ -129,10 +129,6 @@ public class Solution {
         this.collects = (HashMap<Integer, int[]>) solution.collects.clone();
         this.machines = (HashMap<Integer, int[]>) solution.machines.clone();
         this.serviceTimes = (HashMap<Integer, Integer>) solution.serviceTimes.clone();
-        this.availableMachines = new HashMap<>();
-        for (Integer key: solution.availableMachines.keySet()) {
-            this.availableMachines.put(key, new LinkedList<>(solution.availableMachines.get(key)));
-        }
     }
 
     /**
