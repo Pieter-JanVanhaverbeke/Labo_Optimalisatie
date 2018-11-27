@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Random;
 
 public class Hillclimbing {
@@ -13,13 +14,14 @@ public class Hillclimbing {
         bestesolution = intitialsolution;
         huidigesolution = intitialsolution;
         huidigescore = 999999999;
-        bestescore = 999999999;
+        bestescore = intitialsolution.calculateScore();
         teller=0;
         this.rng = new Random(1);
     }
 
     public void start(int aantalitteraties){
-        while (teller<aantalitteraties){
+        System.out.println(huidigesolution.toString());
+        while (true){
             localSearch();
             teller++;
         }
@@ -32,13 +34,14 @@ public class Hillclimbing {
     }
 
     public void localSearch(){
-        huidigesolution = new Solution(bestesolution);
+        huidigesolution = new Solution(bestesolution, bestesolution.getRNG());
         huidigesolution.move();
-        if(huidigesolution.checkFeasibility()){
+        if (huidigesolution.checkFeasibility()) {
             int huidigescore = huidigesolution.calculateScore();
-            if(huidigescore<bestescore){
+            if (huidigescore < bestescore) {
+                System.out.println(huidigesolution.toString());
                 bestescore = huidigescore;
-                bestesolution = new Solution(huidigesolution);
+                bestesolution = new Solution(huidigesolution, huidigesolution.getRNG());
             }
         }
     }

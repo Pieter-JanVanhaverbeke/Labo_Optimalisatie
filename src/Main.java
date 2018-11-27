@@ -13,10 +13,10 @@ public class Main {
         File file = new File(fileName);
         data.leesData(file);
 
-
         //Starten oplossing
         Oplossing opl = new Oplossing(data);
         Solution initiele = opl.start();
+        initiele.writeSolution(file);
 
         Hillclimbing hillclimbing = new Hillclimbing(initiele);
         hillclimbing.start(10000);
