@@ -301,64 +301,6 @@ public class Truck {
     }
 
 
-   /* public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix, Depot depot){
-        Stop stop = null;
-        boolean verplaatst;
-        Drop drop = dichtsteDrop(droplijst,distancematrix);
-        Collect collect = dichtstePickup(collectlijst,distancematrix);
-
-
-           ArrayList<Machine> goedemachines = getAlleMachinesVanType(drop.getMachineTypeId());
-        if(kanAfzetten(goedemachines,timematrix)){                  //als machine kan afzetten, afzetten
-
-           // addStop(huidigestop);
-            verplaatst = this.verplaats(drop.getLocation().getId(),timematrix,distancematrix);
-
-            if(verplaatst){ //nieuwe stop plaatsen na verplaatsing
-                addStop(huidigestop);
-                huidigestop = new Stop(huidigeLocatie);
-            }
-
-                   Machine machine = goedemachines.get(0);
-                   dropOf(machine);
-                   droplijst.remove(drop);
-                   huidigestop.addMachine(machine);
-
-
-                   return true;
-               }
-
-        if(kanOpnemen(collect,timematrix)){              //kijkt of mogelijk is om machine op te nemen en later weer af te zetten
-              verplaatst = this.verplaats(collect.getMachine().getLocation().getId(),timematrix,distancematrix);   //verplaatsen naar collect
-            this.pickUp(collect.getMachine());                                                      //collect machine
-            collectlijst.remove(collect);
-
-
-                //ADDING TO STOPLIJST
-                if(verplaatst){
-                    stoplijst.add(huidigestop);
-                    huidigestop = new Stop(huidigeLocatie);
-                }
-
-                huidigestop.addMachine(collect.getMachine());
-               return true;
-            }
-            else {
-                keerTerug(timematrix, distancematrix);                                                  //terugkeren
-                stoplijst.add(huidigestop);             //adden huidige stop
-                 stop = new Stop(huidigeLocatie);
-                 huidigestop = stop;
-                truckLegen(depot,huidigestop);//truck legen van voorwerpen
-
-
-               return false;
-            }
-
-    }
-
-*/
-
-
 
 
     public Drop dichtsteDrop(ArrayList<Drop> droplijst,  DistanceMatrix distancematrix){
