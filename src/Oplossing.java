@@ -119,7 +119,38 @@ public class Oplossing {
             bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine, distancematrix, timematrix);
 
             if(bestetruck==null){
-                bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+                Truck vollgeladentruck;
+                ArrayList<Truck> vollgeladentrucks = new ArrayList<Truck>();
+                Depot afzetdepot = collect.getMachine().getLocation().getDichtstedepot(depotlijst,distancematrix);
+                for(int j=0; j<trucklijst.size();j++) {
+                    vollgeladentruck = trucklijst.get(j);
+                    if (vollgeladentruck.getVolume() > machine.getVolume()) {
+                        vollgeladentrucks.add(vollgeladentruck);
+                    }
+                }
+                //KIJK OF GEWICHT GROTER IS DAN MACHINELIJST.SIZE EN DEPOT LIGT IN DE BUURT
+                for(int j=0; j<vollgeladentrucks.size();j++) {
+                    Truck truck = vollgeladentrucks.get(j);
+                    if (truck.heefttijd(afzetdepot.getLocation().getId(), machine.getLocation().getId(), timematrix, machine.getServicetime())) {
+
+                        truck.verplaats(afzetdepot.getLocation().getId(), timematrix, distancematrix);
+                        stop = new Stop(afzetdepot.getLocation().getId());
+
+                        if(truck.getId()==4){
+                            System.out.println(truck.getVolume());
+                        }
+
+                        truck.truckLegen(stop);
+                        bestetruck = truck;
+                    }
+                }
+
+
+                //ABSOLUUT GEEN MOGELIJKHEID, DUMMY TRUCKS
+                if(bestetruck==null){
+                    bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+                 }
+
             }
 
             if (bestetruck.getStoplijst().size() == 0) {
@@ -161,7 +192,7 @@ public class Oplossing {
 
 
         //PRINTEN
-   /*  for(int i=0; i<data.getTrucklijst().size();i++){
+     for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
          if(truck.getStoplijst().size()!=0) {
 
@@ -195,7 +226,7 @@ public class Oplossing {
 
 
         System.out.println("totale distance: " + totalDistance());
-*/
+
         solution.load();
         /*if (solution.checkFeasibility()) {
             System.out.println(solution.toString());

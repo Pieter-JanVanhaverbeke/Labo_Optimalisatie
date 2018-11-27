@@ -76,6 +76,22 @@ public class Location {
         return bestedepot;
     }
 
+    public Depot getDichtstedepot(ArrayList<Depot> depotslijst,DistanceMatrix distancematrix){
+        Depot depot;
+        Depot bestedepot = null;
+        int bestedistance = 999999;
+
+        for(int i=0; i<depotslijst.size();i++) {
+            depot = depotslijst.get(i);
+                int distance = this.getDistance(depot.getLocation().getId(), distancematrix);
+                if (distance < bestedistance) {
+                    bestedepot = depot;
+                    bestedistance = distance;
+                }
+            }
+        return bestedepot;
+    }
+
     public Truck getDichtsteDummyTruck(ArrayList<Depot> depotslijst,DistanceMatrix distancematrix){
         Depot depot;
         Depot bestedepot = null;
