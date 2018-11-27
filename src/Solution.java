@@ -567,4 +567,9 @@ public class Solution {
     public Random getRNG() {
         return rng;
     }
+
+    public void printStats() {
+        System.out.println(String.format("DISTANCE: %d\n", getTotalDistance()));
+        System.out.println(String.format("TRUCKS: %d\n", getTotalTrucks()));
+    }
 }

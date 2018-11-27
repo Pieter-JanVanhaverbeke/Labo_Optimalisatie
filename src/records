@@ -1,0 +1,16 @@
+tvh 4
+"C:\Program Files\Java\jdk1.8.0_74\bin\java" -Dfile.encoding=windows-1252 -jar C:\dataFolder\programmeren\java\Labo_Optimalisatie\tvh-1.0-student.jar --problem=src/data/tvh_problem_4.txt --solution=src/data/solution
+FEASIBLE: true
+DISTANCE: 6681
+TIME: 10740
+
+tvh 5:
+DISTANCE: 8760
+
+TRUCKS: 33
+
+tvh 6:
+"C:\Program Files\Java\jdk1.8.0_74\bin\java" -Dfile.encoding=windows-1252 -jar C:\dataFolder\programmeren\java\Labo_Optimalisatie\tvh-1.0-student.jar --problem=src/data/tvh_problem_6.txt --solution=src/data/solution
+FEASIBLE: true
+DISTANCE: 8889
+TIME: 14050

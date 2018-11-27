@@ -20,17 +20,13 @@ public class Hillclimbing {
     }
 
     public void start(int aantalitteraties){
-        System.out.println(huidigesolution.toString());
-        while (true){
+        bestesolution.printStats();
+        long end = System.currentTimeMillis() + 600000;
+        while (System.currentTimeMillis() < end) {
             localSearch();
             teller++;
         }
-
-
-
-        //bestesolution.writeSolution();
-
-
+        bestesolution.printStats();
     }
 
     public void localSearch(){
@@ -39,7 +35,7 @@ public class Hillclimbing {
         if (huidigesolution.checkFeasibility()) {
             int huidigescore = huidigesolution.calculateScore();
             if (huidigescore < bestescore) {
-                System.out.println(huidigesolution.toString());
+                bestesolution.printStats();
                 bestescore = huidigescore;
                 bestesolution = new Solution(huidigesolution, huidigesolution.getRNG());
             }
