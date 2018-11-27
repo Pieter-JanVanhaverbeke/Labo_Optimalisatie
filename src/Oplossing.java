@@ -81,6 +81,11 @@ public class Oplossing {
             }
 
             bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix);  //dichtste depot
+
+            if(bestetruck==null){
+                bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+            }
+
             int beginlocatie = bestetruck.getHuidigeLocatie();
             verplaats = bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
             bestetruck.pickUp(machine);
@@ -113,6 +118,10 @@ public class Oplossing {
             machine = collect.getMachine();
             bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine, distancematrix, timematrix);
 
+            if(bestetruck==null){
+                bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+            }
+
             if (bestetruck.getStoplijst().size() == 0) {
                 stop = new Stop(bestetruck.getHuidigeLocatie());
                 bestetruck.addStop(stop);
@@ -138,9 +147,21 @@ public class Oplossing {
             truck.truckLegen();
         }
 
+        for (int i = 0; i < data.getReservetrucklijst().size(); i++) {
+            Truck truck = data.getReservetrucklijst().get(i);
+            if (truck.getHuidigeLocatie() != truck.getEndlocationid()) {
+                truck.keerTerug(timematrix, distancematrix);
+                stop = new Stop(truck.getHuidigeLocatie());
+                stop.addMachinelijst(truck.getMachinelijst());
+                truck.addStop(stop);
+            }
+            truck.truckLegen();
+        }
+
+
 
         //PRINTEN
-     for(int i=0; i<data.getTrucklijst().size();i++){
+   /*  for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
          if(truck.getStoplijst().size()!=0) {
 
@@ -153,6 +174,20 @@ public class Oplossing {
          }
 
      }
+        for(int i=0; i<data.getReservetrucklijst().size();i++){
+            Truck truck = data.getReservetrucklijst().get(i);
+            if(truck.getStoplijst().size()!=0) {
+                System.out.println();
+                System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
+                //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
+                for (int j = 0; j < truck.getStoplijst().size(); j++) {
+                    System.out.print(truck.getStoplijst().get(j).toString() + " ");
+                }
+            }
+
+        }
+
+
 
      System.out.println();
 
@@ -160,7 +195,7 @@ public class Oplossing {
 
 
         System.out.println("totale distance: " + totalDistance());
-
+*/
         solution.load();
         /*if (solution.checkFeasibility()) {
             System.out.println(solution.toString());
