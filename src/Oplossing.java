@@ -54,17 +54,30 @@ public class Oplossing {
         boolean verplaats = false;
 
 
+
         for (int i = 0; i < droplijst.size(); i++) {
             Drop drop = droplijst.get(i);
             dichtstecollect = drop.getLocation().getDichtsteCollect(collectlijst, drop.getMachineTypeId(), distancematrix);       //dichtste collect
+            Depot dichtsteDepot = drop.getLocation().getDichtsteDepot(depotlijst, drop.getMachineTypeId(), distancematrix);
+            int dichtstecollectdistance = 999999;
+            int dichtstedepotdistance = 999999;
 
-            if (dichtstecollect != null) {
+            if(dichtstecollect!=null){
+                 dichtstecollectdistance = drop.getLocation().getDistance(dichtstecollect.getMachine().getLocation().getId(),distancematrix);
+            }
+
+            if(dichtsteDepot!=null){
+                dichtstedepotdistance = drop.getLocation().getDistance(dichtsteDepot.getLocation().getId(),distancematrix);
+            }
+
+
+
+            if (dichtstecollectdistance<2*dichtstedepotdistance) {
                 machine = dichtstecollect.getMachine();  //machine van collect
                 collectlijst.remove(dichtstecollect);   //removing collect uit lijst
             } else {                                       //geen machine gevonden van collect
-                Depot depot = drop.getLocation().getDichtsteDepot(depotlijst, drop.getMachineTypeId(), distancematrix);
-                machine = depot.getMachine(drop.getMachineTypeId());
-                depot.removeMachine(machine);           //verwijderen uit depotlijst
+                machine = dichtsteDepot.getMachine(drop.getMachineTypeId());
+                dichtsteDepot.removeMachine(machine);           //verwijderen uit depotlijst
             }
 
             bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix);  //dichtste depot
@@ -127,7 +140,7 @@ public class Oplossing {
 
 
         //PRINTEN
-  /*   for(int i=0; i<data.getTrucklijst().size();i++){
+     for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
          if(truck.getStoplijst().size()!=0) {
 
@@ -143,7 +156,7 @@ public class Oplossing {
 
      System.out.println();
 
-     */
+
 
 
         System.out.println("totale distance: " + totalDistance());
