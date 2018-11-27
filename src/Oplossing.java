@@ -149,6 +149,9 @@ public class Oplossing {
         System.out.println("totale distance: " + totalDistance());
 
         solution.load();
+        if (solution.checkFeasibility()) {
+            System.out.println(solution.toString());
+        }
     }
 
     private int totalDistance(){
