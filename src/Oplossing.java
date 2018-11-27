@@ -54,20 +54,38 @@ public class Oplossing {
         boolean verplaats = false;
 
 
+
         for (int i = 0; i < droplijst.size(); i++) {
             Drop drop = droplijst.get(i);
             dichtstecollect = drop.getLocation().getDichtsteCollect(collectlijst, drop.getMachineTypeId(), distancematrix);       //dichtste collect
+            Depot dichtsteDepot = drop.getLocation().getDichtsteDepot(depotlijst, drop.getMachineTypeId(), distancematrix);
+            int dichtstecollectdistance = 999999;
+            int dichtstedepotdistance = 999999;
 
-            if (dichtstecollect != null) {
+            if(dichtstecollect!=null){
+                 dichtstecollectdistance = drop.getLocation().getDistance(dichtstecollect.getMachine().getLocation().getId(),distancematrix);
+            }
+
+            if(dichtsteDepot!=null){
+                dichtstedepotdistance = drop.getLocation().getDistance(dichtsteDepot.getLocation().getId(),distancematrix);
+            }
+
+
+
+            if (dichtstecollectdistance<2*dichtstedepotdistance) {
                 machine = dichtstecollect.getMachine();  //machine van collect
                 collectlijst.remove(dichtstecollect);   //removing collect uit lijst
             } else {                                       //geen machine gevonden van collect
-                Depot depot = drop.getLocation().getDichtsteDepot(depotlijst, drop.getMachineTypeId(), distancematrix);
-                machine = depot.getMachine(drop.getMachineTypeId());
-                depot.removeMachine(machine);           //verwijderen uit depotlijst
+                machine = dichtsteDepot.getMachine(drop.getMachineTypeId());
+                dichtsteDepot.removeMachine(machine);           //verwijderen uit depotlijst
             }
 
             bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix);  //dichtste depot
+
+            if(bestetruck==null){
+                bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+            }
+
             int beginlocatie = bestetruck.getHuidigeLocatie();
             verplaats = bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
             bestetruck.pickUp(machine);
@@ -100,6 +118,41 @@ public class Oplossing {
             machine = collect.getMachine();
             bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine, distancematrix, timematrix);
 
+            if(bestetruck==null){
+                Truck vollgeladentruck;
+                ArrayList<Truck> vollgeladentrucks = new ArrayList<Truck>();
+                Depot afzetdepot = collect.getMachine().getLocation().getDichtstedepot(depotlijst,distancematrix);
+                for(int j=0; j<trucklijst.size();j++) {
+                    vollgeladentruck = trucklijst.get(j);
+                    if (vollgeladentruck.getVolume() > machine.getVolume()) {
+                        vollgeladentrucks.add(vollgeladentruck);
+                    }
+                }
+                //KIJK OF GEWICHT GROTER IS DAN MACHINELIJST.SIZE EN DEPOT LIGT IN DE BUURT
+                for(int j=0; j<vollgeladentrucks.size();j++) {
+                    Truck truck = vollgeladentrucks.get(j);
+                    if (truck.heefttijd(afzetdepot.getLocation().getId(), machine.getLocation().getId(), timematrix, machine.getServicetime())) {
+
+                        truck.verplaats(afzetdepot.getLocation().getId(), timematrix, distancematrix);
+                        stop = new Stop(afzetdepot.getLocation().getId());
+
+                        if(truck.getId()==4){
+                            System.out.println(truck.getVolume());
+                        }
+
+                        truck.truckLegen(stop);
+                        bestetruck = truck;
+                    }
+                }
+
+
+                //ABSOLUUT GEEN MOGELIJKHEID, DUMMY TRUCKS
+                if(bestetruck==null){
+                    bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
+                 }
+
+            }
+
             if (bestetruck.getStoplijst().size() == 0) {
                 stop = new Stop(bestetruck.getHuidigeLocatie());
                 bestetruck.addStop(stop);
@@ -125,9 +178,21 @@ public class Oplossing {
             truck.truckLegen();
         }
 
+        for (int i = 0; i < data.getReservetrucklijst().size(); i++) {
+            Truck truck = data.getReservetrucklijst().get(i);
+            if (truck.getHuidigeLocatie() != truck.getEndlocationid()) {
+                truck.keerTerug(timematrix, distancematrix);
+                stop = new Stop(truck.getHuidigeLocatie());
+                stop.addMachinelijst(truck.getMachinelijst());
+                truck.addStop(stop);
+            }
+            truck.truckLegen();
+        }
+
+
 
         //PRINTEN
-  /*   for(int i=0; i<data.getTrucklijst().size();i++){
+     for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
          if(truck.getStoplijst().size()!=0) {
 
@@ -140,10 +205,24 @@ public class Oplossing {
          }
 
      }
+        for(int i=0; i<data.getReservetrucklijst().size();i++){
+            Truck truck = data.getReservetrucklijst().get(i);
+            if(truck.getStoplijst().size()!=0) {
+                System.out.println();
+                System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
+                //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
+                for (int j = 0; j < truck.getStoplijst().size(); j++) {
+                    System.out.print(truck.getStoplijst().get(j).toString() + " ");
+                }
+            }
+
+        }
+
+
 
      System.out.println();
 
-     */
+
 
 
         System.out.println("totale distance: " + totalDistance());

@@ -190,6 +190,7 @@ public class Truck {
         else return true;
     }
 
+
     public boolean heefttijd(int locationid,int locationid2,TimeMatrix timematrix, int servicetime){
         int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
         int tijdnodig2 = timematrix.getTime()[locationid][locationid2];
@@ -213,6 +214,7 @@ public class Truck {
 
         else return true;
     }
+
 
 
     //als tijd heeft + capaciteit heeft --> opnemen
@@ -247,20 +249,21 @@ public class Truck {
         huidigeLocatie = endlocationid;
     }
 
-    public void truckLegen(Depot depot, Stop stop){
+    public void truckLegen(Stop stop){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
           //  System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
             geredenminuten = geredenminuten + machine.getServicetime();
-            depot.addMachine(machine);
             stop.addMachine(machine);
         }
+        stoplijst.add(stop);
         machinelijst.clear();
         this.setVolume(0);  //alles legen, volume is 0
       //  addStop(stop);
 
     }
+
 
     public void truckLegen(){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
@@ -298,7 +301,7 @@ public class Truck {
     }
 
 
-    public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix, Depot depot){
+   /* public boolean dichtsteDropPickup(ArrayList<Drop> droplijst,ArrayList<Collect> collectlijst,DistanceMatrix distancematrix, TimeMatrix timematrix, Depot depot){
         Stop stop = null;
         boolean verplaatst;
         Drop drop = dichtsteDrop(droplijst,distancematrix);
@@ -353,7 +356,7 @@ public class Truck {
 
     }
 
-
+*/
 
 
 

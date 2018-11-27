@@ -13,6 +13,7 @@ public class Data {
     private ArrayList<Machine> machinelijst;
     private ArrayList<MachineType> machinetypelijst;
     private ArrayList<Truck> trucklijst;
+    private ArrayList<Truck> reservetrucklijst;
 
     private ArrayList<Integer> endLocations;
     private ArrayList<Integer> startLocations;
@@ -28,6 +29,7 @@ public class Data {
         machinelijst  = new ArrayList<Machine>() ;
         machinetypelijst = new ArrayList<MachineType>() ;
         trucklijst = new ArrayList<Truck>() ;
+        reservetrucklijst = new ArrayList<Truck>();
 
         startLocations = new ArrayList<Integer>();
         endLocations = new ArrayList<Integer>();
@@ -123,6 +125,14 @@ public class Data {
 
     public void setStartLocations(ArrayList<Integer> startLocations) {
         this.startLocations = startLocations;
+    }
+
+    public ArrayList<Truck> getReservetrucklijst() {
+        return reservetrucklijst;
+    }
+
+    public void setReservetrucklijst(ArrayList<Truck> reservetrucklijst) {
+        this.reservetrucklijst = reservetrucklijst;
     }
 
     public void leesData(File file) throws FileNotFoundException {
@@ -343,7 +353,12 @@ public class Data {
             }
         }
 
-
+        for(int i=0; i<depotlijst.size();i++){
+            Depot depot = depotlijst.get(i);
+            Truck truck = new Truck(trucklijst.size() + i, depot.getLocation().getId(),depot.getLocation().getId(),"dummy");
+            depot.addDummyTruck(truck);
+            reservetrucklijst.add(truck);
+        }
 
 
     }
