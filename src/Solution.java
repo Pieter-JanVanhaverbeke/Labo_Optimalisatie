@@ -10,6 +10,7 @@ import java.util.Random;
 public class Solution {
     private static final int MAX_WORKING_TIME = 600;
     private static final int MAX_VOLUME = 100;
+    private static final int SEED = 1;
 
     //TODO VOLUME KUNNEN CHECKEN
 
@@ -96,7 +97,42 @@ public class Solution {
             });
         }
 
-        this.rng = new Random(1);
+        this.rng = new Random(SEED);
+    }
+
+    public Solution(Solution solution) {
+
+        this.rng = new Random(SEED);
+
+        this.solution = new LinkedList[solution.solution.length];
+        for (int truck = 0; truck < solution.solution.length; truck++) {
+            this.solution[truck] = new LinkedList<>(solution.solution[truck]);
+        }
+        this.truckTimes = new LinkedList[solution.truckTimes.length];
+        for (int truck = 0; truck < solution.truckTimes.length; truck++) {
+            this.truckTimes[truck] = new LinkedList<>(solution.truckTimes[truck]);
+        }
+        this.truckDistances = new LinkedList[solution.truckDistances.length];
+        for (int truck = 0; truck < solution.truckDistances.length; truck++) {
+            this.truckDistances[truck] = new LinkedList<>(solution.truckDistances[truck]);
+        }
+        this.truckCurrentMachines = new LinkedList[solution.truckCurrentMachines.length];
+        for (int truck = 0; truck < solution.truckCurrentMachines.length; truck++) {
+            this.truckCurrentMachines[truck] = new LinkedList<>(solution.truckCurrentMachines[truck]);
+        }
+        this.timeMatrix = solution.timeMatrix.clone();
+        this.distanceMatrix = solution.distanceMatrix.clone();
+        this.startLocations = solution.startLocations.clone();
+        this.endLocations = solution.endLocations.clone();
+        this.machineStats = solution.machineStats.clone();
+        this.drops = (HashMap<Integer, int[]>) solution.drops.clone();
+        this.collects = (HashMap<Integer, int[]>) solution.collects.clone();
+        this.machines = (HashMap<Integer, int[]>) solution.machines.clone();
+        this.serviceTimes = (HashMap<Integer, Integer>) solution.serviceTimes.clone();
+        this.availableMachines = new HashMap<>();
+        for (Integer key: solution.availableMachines.keySet()) {
+            this.availableMachines.put(key, new LinkedList<>(solution.availableMachines.get(key)));
+        }
     }
 
     /**
