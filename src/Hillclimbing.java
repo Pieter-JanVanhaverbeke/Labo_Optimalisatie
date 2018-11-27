@@ -19,25 +19,43 @@ public class Hillclimbing {
     }
 
     public void start(int aantalitteraties){
-        while (aantalitteraties<100000){
-            firstImprovment();
+        while (teller<aantalitteraties){
+            localSearch();
 
 
 
-            aantalitteraties++;
+            teller++;
         }
+
+
 
         //bestesolution.writeSolution();
 
 
     }
 
+    public void localSearch(){
+        huidigesolution.move();
+        if(huidigesolution.checkFeasibility()){
+            int huidigescore = huidigesolution.calculateScore();
+            if(huidigescore<bestescore){
+                bestescore = huidigescore;
+//                bestesolution = new Solution(huidigesolution);
+            }
+        }
+
+
+
+    }
+
+
+
     public void firstImprovment(){
 
 
-      int randomtruck = rng.nextInt(huidigesolution.getSolution().length);
+//      int randomtruck = rng.nextInt(huidigesolution.getSolution().length);
       int randomstop = rng.nextInt();
-      int randomtruck2 = rng.nextInt(huidigesolution.getSolution().length);
+  //    int randomtruck2 = rng.nextInt(huidigesolution.getSolution().length);
       int randomstop2 = rng.nextInt();
 
       //RANDOM TRUCK MET RANDOM STOP WISSELEN MET ALLE STOPS VAN TRUCK
@@ -45,15 +63,15 @@ public class Hillclimbing {
           int randomtruck2size = 0;
           for(int i=0;i<randomtruck2size;i++){
               int stop2 = 0;
-              huidigesolution.swap(randomtruck,randomstop,randomtruck2,stop2);              //ALLE NEIGHBOURS ZIJN ALLE SWAPS VAN RANDOM TRUCK EN RANDOM STOP MET ANDERE TRUCK ZIJN STOPS
+ //             huidigesolution.swap(randomtruck,randomstop,randomtruck2,stop2);              //ALLE NEIGHBOURS ZIJN ALLE SWAPS VAN RANDOM TRUCK EN RANDOM STOP MET ANDERE TRUCK ZIJN STOPS
               if(huidigesolution.checkFeasibility()){
-                  if(huidigesolution.getTotaldistance()<bestesolution.getTotaldistance()){
+  //                if(huidigesolution.getTotaldistance()<bestesolution.getTotaldistance()){
 //                      bestesolution = new Solution(huidigesolution);
-                      bestescore = bestesolution.getTotaldistance();
+  //                    bestescore = bestesolution.getTotaldistance();
                   }
               }
           }
-      }
+  //    }
 
 
         /*
