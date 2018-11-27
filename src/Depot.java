@@ -6,12 +6,14 @@ public class Depot {
 
     private ArrayList<Machine> machinelijst;
     private ArrayList<Truck> trucklijst;
+    private ArrayList<Truck> dummytrucklijst;
 
     public Depot(int id,Location location) {
         this.id = id;
         this.location = location;
         trucklijst = new ArrayList<Truck>();
         machinelijst = new ArrayList<Machine>();
+        dummytrucklijst = new ArrayList<Truck>();
     }
 
     public int getId() {
@@ -44,6 +46,14 @@ public class Depot {
 
     public void setTrucklijst(ArrayList<Truck> trucklijst) {
         this.trucklijst = trucklijst;
+    }
+
+    public ArrayList<Truck> getDummytrucklijst() {
+        return dummytrucklijst;
+    }
+
+    public void setDummytrucklijst(ArrayList<Truck> dummytrucklijst) {
+        this.dummytrucklijst = dummytrucklijst;
     }
 
     @Override
@@ -98,5 +108,9 @@ public class Depot {
     }
 
     public void addTruck(Truck truck) {trucklijst.add(truck);}
+
+    public void addDummyTruck(Truck truck){dummytrucklijst.add(truck);}
+
+
 
 }
