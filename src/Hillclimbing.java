@@ -19,9 +19,10 @@ public class Hillclimbing {
         this.rng = new Random(1);
     }
 
-    public void start(int aantalitteraties){
+    public void start(int aantalminuten){
+        aantalminuten = aantalminuten*60000;
         bestesolution.printStats();
-        long end = System.currentTimeMillis() + 600000;
+        long end = System.currentTimeMillis() + aantalminuten;
         while (System.currentTimeMillis() < end) {
             localSearch();
             teller++;

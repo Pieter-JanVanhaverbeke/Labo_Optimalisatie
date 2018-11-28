@@ -54,25 +54,26 @@ public class Oplossing {
         boolean verplaats = false;
 
 
-
+        //TODO COLLECTS NIET METEEN UITVOEREN? MAAR EERST IEDERE TRUCK LIJST GEVEN
         for (int i = 0; i < droplijst.size(); i++) {
+            //TODO TOEWIJZEN DROPS TO TRUCKS
+
             Drop drop = droplijst.get(i);
             dichtstecollect = drop.getLocation().getDichtsteCollect(collectlijst, drop.getMachineTypeId(), distancematrix);       //dichtste collect
             Depot dichtsteDepot = drop.getLocation().getDichtsteDepot(depotlijst, drop.getMachineTypeId(), distancematrix);
             int dichtstecollectdistance = 999999;
             int dichtstedepotdistance = 999999;
 
-            if(dichtstecollect!=null){
-                 dichtstecollectdistance = drop.getLocation().getDistance(dichtstecollect.getMachine().getLocation().getId(),distancematrix);
+            if (dichtstecollect != null) {
+                dichtstecollectdistance = drop.getLocation().getDistance(dichtstecollect.getMachine().getLocation().getId(), distancematrix);
             }
 
-            if(dichtsteDepot!=null){
-                dichtstedepotdistance = drop.getLocation().getDistance(dichtsteDepot.getLocation().getId(),distancematrix);
+            if (dichtsteDepot != null) {
+                dichtstedepotdistance = drop.getLocation().getDistance(dichtsteDepot.getLocation().getId(), distancematrix);
             }
 
 
-
-            if (dichtstecollectdistance<2*dichtstedepotdistance) {
+            if (dichtstecollectdistance < 2 * dichtstedepotdistance) {
                 machine = dichtstecollect.getMachine();  //machine van collect
                 collectlijst.remove(dichtstecollect);   //removing collect uit lijst
             } else {                                       //geen machine gevonden van collect
@@ -82,35 +83,50 @@ public class Oplossing {
 
             bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix);  //dichtste depot
 
-            if(bestetruck==null){
-                bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst,distancematrix);
-            }
+            //ALS NIET COLLECT OPNEMEN, DUMMYTRUCK
+            if (bestetruck == null) {
+              //  bestetruck = machine.getLocation().getDichtsteDummyTruck(depotlijst, distancematrix);
+                bestetruck  = dichtsteDepot.getDummytrucklijst().get(0);
+                bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
 
-            int beginlocatie = bestetruck.getHuidigeLocatie();
-            verplaats = bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
-            bestetruck.pickUp(machine);
+                //ADDEN STOP DUMMYTRUCK
+                stop = new Stop(machine.getLocation().getId());
+                stop.addMachine(machine);
+                bestetruck.setHuidigestop(stop);
+                bestetruck.addStop(stop);
 
-            if (verplaats && bestetruck.getEndlocationid() == beginlocatie) {
-                stop = new Stop(beginlocatie);   //solve bug
+                //VERPLAATSEN NAAR COLLECT
+                bestetruck.verplaats(drop.getLocation().getId(), timematrix, distancematrix);
+                stop = new Stop(drop.getLocation().getId());
+                stop.addMachine(machine);
+                bestetruck.addStop(stop);
+            } else {
+
+                int beginlocatie = bestetruck.getHuidigeLocatie();
+                verplaats = bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
+                bestetruck.pickUp(machine);
+
+                if (verplaats && bestetruck.getEndlocationid() == beginlocatie) {
+                    stop = new Stop(beginlocatie);   //solve bug
+                    bestetruck.addStop(stop);
+                }
+
+                stop = new Stop(machine.getLocation().getId());
+                stop.addMachine(machine);
+                bestetruck.setHuidigestop(stop);
+                bestetruck.addStop(stop);
+
+
+                bestetruck.verplaats(drop.getLocation().getId(), timematrix, distancematrix);
+                bestetruck.dropOf(machine);
+
+                stop = new Stop(drop.getLocation().getId());
+                stop.addMachine(machine);
+                bestetruck.setHuidigestop(stop);
                 bestetruck.addStop(stop);
             }
 
-            stop = new Stop(machine.getLocation().getId());
-            stop.addMachine(machine);
-            bestetruck.setHuidigestop(stop);
-            bestetruck.addStop(stop);
-
-
-            bestetruck.verplaats(drop.getLocation().getId(), timematrix, distancematrix);
-            bestetruck.dropOf(machine);
-
-            stop = new Stop(drop.getLocation().getId());
-            stop.addMachine(machine);
-            bestetruck.setHuidigestop(stop);
-            bestetruck.addStop(stop);
         }
-
-
         //OVERIGE COLLECTS AFHANDELEN
 
         for (int i = 0; i < collectlijst.size(); i++) {
@@ -135,10 +151,6 @@ public class Oplossing {
 
                         truck.verplaats(afzetdepot.getLocation().getId(), timematrix, distancematrix);
                         stop = new Stop(afzetdepot.getLocation().getId());
-
-                        if(truck.getId()==4){
-                            System.out.println(truck.getVolume());
-                        }
 
                         truck.truckLegen(stop);
                         bestetruck = truck;
