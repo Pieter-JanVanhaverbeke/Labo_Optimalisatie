@@ -33,7 +33,7 @@ public class Simulated_Annealing {
     }
 
     public void simannealing(){
-        buursolution = new Solution(huidigesolution);
+        buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
         buursolution.move();
 
         //eerst checken of feasible is
@@ -47,8 +47,8 @@ public class Simulated_Annealing {
                 if (buurscore < bestescore) {
                     bestesolution.printStats();
                     bestescore = huidigescore;
-                    bestesolution = new Solution(buursolution);
-                    huidigesolution = new Solution(buursolution);
+                    bestesolution = new Solution(buursolution, buursolution.getRNG());
+                    huidigesolution = new Solution(buursolution,buursolution.getRNG());
                //     buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
                     cooling();
                 }
@@ -63,7 +63,7 @@ public class Simulated_Annealing {
 
 
                 if(!slechtere){
-                    buursolution = new Solution(huidigesolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
+                    buursolution = new Solution(huidigesolution, bestesolution.getRNG());               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = buurscore;
                     cooling();
                 }
