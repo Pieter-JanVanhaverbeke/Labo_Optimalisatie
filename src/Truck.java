@@ -150,9 +150,9 @@ public class Truck {
 
     }
 
-    public boolean verplaats(int locationid, TimeMatrix timematrix, DistanceMatrix distancematrix){              //truck gaat naar locationid
-        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
-        int distancenodig = distancematrix.getDistance()[huidigeLocatie][locationid];
+    public boolean verplaats(int locationid, int[][] timematrix, int[][] distancematrix){              //truck gaat naar locationid
+        int tijdnodig = timematrix[huidigeLocatie][locationid];
+        int distancenodig = distancematrix[huidigeLocatie][locationid];
 
         geredenminuten = geredenminuten + tijdnodig;                    //updaten tijd
         distance = distance + distancenodig;                            //updaten distance
@@ -167,11 +167,11 @@ public class Truck {
 
     }
 
-    public boolean heefttijd(int locationid,TimeMatrix timematrix, int servicetime){
-        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
+    public boolean heefttijd(int locationid,int[][] timematrix, int servicetime){
+        int tijdnodig = timematrix[huidigeLocatie][locationid];
 
         int nodigeminuten = geredenminuten + tijdnodig;                             //tijd voor verplaatsing + meerekenen huidige tijd
-        int terugkeertijd = timematrix.getTime()[locationid][endlocationid];        //tijd voor naar eindlocatie te gaan
+        int terugkeertijd = timematrix[locationid][endlocationid];        //tijd voor naar eindlocatie te gaan
 
         int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
 
@@ -191,12 +191,12 @@ public class Truck {
     }
 
 
-    public boolean heefttijd(int locationid,int locationid2,TimeMatrix timematrix, int servicetime){
-        int tijdnodig = timematrix.getTime()[huidigeLocatie][locationid];
-        int tijdnodig2 = timematrix.getTime()[locationid][locationid2];
+    public boolean heefttijd(int locationid,int locationid2,int[][] timematrix, int servicetime){
+        int tijdnodig = timematrix[huidigeLocatie][locationid];
+        int tijdnodig2 = timematrix[locationid][locationid2];
 
         int nodigeminuten = geredenminuten + tijdnodig + tijdnodig2;                             //tijd voor verplaatsing + meerekenen huidige tijd
-        int terugkeertijd = timematrix.getTime()[locationid2][endlocationid];        //tijd voor naar eindlocatie te gaan
+        int terugkeertijd = timematrix[locationid2][endlocationid];        //tijd voor naar eindlocatie te gaan
 
         int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
 
@@ -218,7 +218,7 @@ public class Truck {
 
 
     //als tijd heeft + capaciteit heeft --> opnemen
-    public boolean kanOpnemen(Collect collect, TimeMatrix timematrix){
+    public boolean kanOpnemen(Collect collect, int[][] timematrix){
         if(collect==null){
             return false;
         }
@@ -234,7 +234,7 @@ public class Truck {
     }
 
 
-    public boolean kanAfzetten(ArrayList<Machine> machines, TimeMatrix timematrix){
+    public boolean kanAfzetten(ArrayList<Machine> machines, int[][] timematrix){
         if(machines.size()!=0){
             int servicetime = machines.get(0).getServicetime();
             if(heefttijd(machines.get(0).getLocation().getId(),timematrix,servicetime)){
@@ -244,7 +244,7 @@ public class Truck {
         return false;
     }
 
-    public void keerTerug(TimeMatrix timematrix, DistanceMatrix distancematrix){
+    public void keerTerug(int[][] timematrix, int[][] distancematrix){
         verplaats(endlocationid, timematrix, distancematrix);
         huidigeLocatie = endlocationid;
     }

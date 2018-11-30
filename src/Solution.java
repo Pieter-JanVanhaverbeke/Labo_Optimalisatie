@@ -35,21 +35,10 @@ public class Solution {
     //      { machine id 1, machine id 2, ... }
     private LinkedList<LinkedList<Integer>>[] truckCurrentMachines;
 
-    private int[][] timeMatrix;
-    private int[][] distanceMatrix;
     private int[] startLocations;
     private int[] endLocations;
-    private int[][] machineStats;
-    // [ machine type id, location id ]
-    private HashMap<Integer, int[]>  drops;
-    // [ machine id, location id ]
-    private HashMap<Integer, int[]>  collects;
-    // [ machine type id, location id ]
-    private HashMap<Integer, int[]> machines;
-    private HashMap<Integer, Integer> serviceTimes;
     // TODO hotswap machines *******************************************************************************************
     private HashMap<Integer, LinkedList<int[]>> availableMachines;
-
 
     private Data data;
 
@@ -60,8 +49,6 @@ public class Solution {
         this.truckCurrentMachines = new LinkedList[data.getTrucklijst().size()];
         this.truckTimes = new LinkedList[data.getTrucklijst().size()];
         this.truckDistances = new LinkedList[data.getTrucklijst().size()];
-        this.distanceMatrix = data.getDistancematrix().getDistance();
-        this.timeMatrix = data.getTimematrix().getTime();
         this.startLocations = new int[data.getTrucklijst().size()];
         this.endLocations = new int[data.getTrucklijst().size()];
         for (int truck = 0; truck < solution.length; truck++) {
@@ -76,37 +63,6 @@ public class Solution {
                     data.getTrucklijst().get(truck).getEndlocationid();
         }
         this.data = data;
-
-        this.machines = new HashMap<>();
-        this.machineStats = new int[data.getMachinelijst().size()][];
-        this.serviceTimes = new HashMap<>();
-        for (Machine machine: data.getMachinelijst()) {
-            this.serviceTimes.put(machine.getMachineTypeId(), machine.getServicetime());
-            this.machineStats[machine.getId()] = new int[]{
-                    machine.getMachineTypeId(),
-                    machine.getVolume(),
-                    machine.getServicetime()
-            };
-            this.machines.put(machine.getId(), new int[]{
-                    machine.getMachineTypeId(),
-                    machine.getLocation().getId()
-            });
-        }
-
-        this.drops = new HashMap<>();
-        for (Drop drop: data.getDroplijst()) {
-            this.drops.put(drop.getId(), new int[]{
-                    drop.getMachineTypeId(),
-                    drop.getLocation().getId()
-            });
-        }
-        this.collects = new HashMap<>();
-        for (Collect collect: data.getCollectlijst()) {
-            this.collects.put(collect.getId(), new int[]{
-                    collect.getMachine().getId(),
-                    collect.getMachine().getLocation().getId()
-            });
-        }
 
         this.rng = new Random(SEED);
     }
@@ -140,15 +96,9 @@ public class Solution {
         for (int truck = 0; truck < solution.truckCurrentMachines.length; truck++) {
             this.truckCurrentMachines[truck] = new LinkedList<>(solution.truckCurrentMachines[truck]);
         }
-        this.timeMatrix = solution.timeMatrix.clone();
-        this.distanceMatrix = solution.distanceMatrix.clone();
         this.startLocations = solution.startLocations.clone();
         this.endLocations = solution.endLocations.clone();
-        this.machineStats = solution.machineStats.clone();
-        this.drops = (HashMap<Integer, int[]>) solution.drops.clone();
-        this.collects = (HashMap<Integer, int[]>) solution.collects.clone();
-        this.machines = (HashMap<Integer, int[]>) solution.machines.clone();
-        this.serviceTimes = (HashMap<Integer, Integer>) solution.serviceTimes.clone();
+
     }
 
     /**
@@ -231,7 +181,7 @@ public class Solution {
     private int getTruckDistance(LinkedList<int[]> truck) {
         int distance = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
-            distance += distanceMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
+            distance += data.getDistancematrix()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
         return distance;
     }
@@ -239,10 +189,10 @@ public class Solution {
     private int getTruckTime(LinkedList<int[]> truck) {
         int time = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
-            if(truck.get(stop)[1] >= 0) time += machineStats[truck.get(stop)[1]][2];
-            time += timeMatrix[truck.get(stop)[0]][truck.get(stop + 1)[0]];
+            if(truck.get(stop)[1] >= 0) time += data.getMachineStats()[truck.get(stop)[1]][2];
+            time += data.getTimematrix()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
-        if(truck.getLast()[1] >= 0) time += machineStats[truck.getLast()[1]][2];
+        if(truck.getLast()[1] >= 0) time += data.getMachineStats()[truck.getLast()[1]][2];
         return time;
     }
 
@@ -305,7 +255,7 @@ public class Solution {
                 // volume check --------------------------------------------------------------------------------------------
                 for (LinkedList<Integer> machines: truckCurrentMachines[truck]) {
                     volume = 0;
-                    for (Integer machine: machines) volume += machineStats[machine][1];
+                    for (Integer machine: machines) volume += data.getMachineStats()[machine][1];
                     if (volume > MAX_VOLUME) {
                         return false;
                     }
@@ -407,13 +357,13 @@ public class Solution {
             // updating trucks driven time -----------------------------------------------------------------------------
             truckTimes[truck].addLast(
                     (truckTimes[truck].isEmpty() ? 0 : truckTimes[truck].getLast()) +
-                    (stop < 1 ? 0 : timeMatrix[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
-                    (solution[truck].get(stop)[1] == -1 ? 0 : machineStats[solution[truck].get(stop)[1]][2])
+                    (stop < 1 ? 0 : data.getTimematrix()[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
+                    (solution[truck].get(stop)[1] == -1 ? 0 : data.getMachineStats()[solution[truck].get(stop)[1]][2])
             );
             // updating trucks driven distance -------------------------------------------------------------------------
             truckDistances[truck].addLast(
                     (truckDistances[truck].isEmpty() ? 0 : truckDistances[truck].getLast()) +
-                    (stop < 1 ? 0 : distanceMatrix[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]])
+                    (stop < 1 ? 0 : data.getDistancematrix()[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]])
             );
 
             // updating machines on truck at certain stop --------------------------------------------------------------

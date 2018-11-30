@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="working move update">
+    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="array sizes fix">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Data.java" afterPath="$PROJECT_DIR$/src/Data.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Location.java" afterPath="$PROJECT_DIR$/src/Location.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Oplossing.java" afterPath="$PROJECT_DIR$/src/Oplossing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Solution.java" afterPath="$PROJECT_DIR$/src/Solution.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/solution" afterPath="$PROJECT_DIR$/src/data/solution" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Truck.java" afterPath="$PROJECT_DIR$/src/Truck.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,21 +70,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="records" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/records">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Oplossing.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Oplossing.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Oplossing.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="281">
-                  <caret line="246" column="0" lean-forward="false" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+                <state relative-caret-position="315">
+                  <caret line="98" column="126" lean-forward="false" selection-start-line="98" selection-start-column="126" selection-end-line="98" selection-end-column="126" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -89,11 +82,41 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Solution.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Location.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Location.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="273">
+                  <caret line="159" column="127" lean-forward="false" selection-start-line="159" selection-start-column="127" selection-end-line="159" selection-end-column="127" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Truck.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Truck.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="378">
+                  <caret line="198" column="38" lean-forward="false" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TimeMatrix.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/TimeMatrix.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="42">
+                  <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Solution.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Solution.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="113">
-                  <caret line="70" column="78" lean-forward="false" selection-start-line="70" selection-start-column="78" selection-end-line="70" selection-end-column="78" />
+                <state relative-caret-position="-1800">
+                  <caret line="365" column="60" lean-forward="false" selection-start-line="365" selection-start-column="60" selection-end-line="365" selection-end-column="60" />
                   <folding />
                 </state>
               </provider>
@@ -102,10 +125,18 @@
           <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Data.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="6426">
-                  <caret line="357" column="121" lean-forward="false" selection-start-line="357" selection-start-column="121" selection-end-line="357" selection-end-column="121" />
+                <state relative-caret-position="1">
+                  <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
                   <folding>
-                    <marker date="1543349705413" expanded="true" signature="12309:12315" ph="{...}" />
+                    <element signature="e#1912#1913#0" expanded="true" />
+                    <element signature="e#1947#1948#0" expanded="true" />
+                    <element signature="e#2004#2005#0" expanded="true" />
+                    <element signature="e#2052#2053#0" expanded="true" />
+                    <element signature="e#2110#2111#0" expanded="true" />
+                    <element signature="e#2145#2146#0" expanded="true" />
+                    <element signature="e#2220#2221#0" expanded="true" />
+                    <element signature="e#2268#2269#0" expanded="true" />
+                    <marker date="1543565538824" expanded="true" signature="13164:13170" ph="{...}" />
                   </folding>
                 </state>
               </provider>
@@ -121,16 +152,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="LinkedList.java" pinned="false" current-in-tab="false">
-            <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/util/LinkedList.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="10815">
-                  <caret line="554" column="0" lean-forward="false" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Main.java">
               <provider selected="true" editor-type-id="text-editor">
@@ -139,16 +160,6 @@
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tvh_problem_4.txt" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/data/tvh_problem_4.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="20391">
-                  <caret line="971" column="4" lean-forward="false" selection-start-line="971" selection-start-column="0" selection-end-line="971" selection-end-column="4" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -210,6 +221,8 @@
       <find>move()</find>
       <find>currentMA</find>
       <find>coupling</find>
+      <find>machines</find>
+      <find>updateCou</find>
     </findStrings>
     <replaceStrings>
       <replace>*</replace>
@@ -229,18 +242,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Drop.java" />
-        <option value="$PROJECT_DIR$/src/Data.java" />
         <option value="$PROJECT_DIR$/src/Machine.java" />
         <option value="$PROJECT_DIR$/src/Collect.java" />
         <option value="$PROJECT_DIR$/src/Depot.java" />
-        <option value="$PROJECT_DIR$/src/Location.java" />
-        <option value="$PROJECT_DIR$/src/Truck.java" />
         <option value="$PROJECT_DIR$/src/records" />
         <option value="$PROJECT_DIR$/src/Hillclimbing.java" />
         <option value="$PROJECT_DIR$/src/data/solution" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/Oplossing.java" />
+        <option value="$PROJECT_DIR$/src/Truck.java" />
+        <option value="$PROJECT_DIR$/src/Location.java" />
+        <option value="$PROJECT_DIR$/src/Data.java" />
         <option value="$PROJECT_DIR$/src/Solution.java" />
+        <option value="$PROJECT_DIR$/src/Oplossing.java" />
       </list>
     </option>
   </component>
@@ -431,7 +444,7 @@
       <workItem from="1543410725819" duration="9855000" />
       <workItem from="1543425229370" duration="690000" />
       <workItem from="1543481737850" duration="3946000" />
-      <workItem from="1543562581294" duration="562000" />
+      <workItem from="1543562581294" duration="2250000" />
     </task>
     <task id="LOCAL-00001" summary="load fixed, v2.0">
       <created>1542818085873</created>
@@ -482,11 +495,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543562610795</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="array sizes fix">
+      <created>1543563154687</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1543563154687</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71777000" />
+    <option name="totallyTimeSpent" value="73465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -616,7 +636,8 @@
     <MESSAGE value="working move" />
     <MESSAGE value="shit's working yo!" />
     <MESSAGE value="working move update" />
-    <option name="LAST_COMMIT_MESSAGE" value="working move update" />
+    <MESSAGE value="array sizes fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="array sizes fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -653,37 +674,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>532</line>
-          <properties />
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>117</line>
+          <line>73</line>
           <properties />
           <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>279</line>
+          <line>229</line>
           <properties />
           <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>302</line>
+          <line>252</line>
           <properties />
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>199</line>
+          <line>149</line>
           <properties />
           <option name="timeStamp" value="147" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>440</line>
+          <line>390</line>
           <properties />
           <option name="timeStamp" value="150" />
         </line-breakpoint>
@@ -695,13 +710,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Oplossing.java</url>
-          <line>246</line>
+          <line>241</line>
           <properties />
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>328</line>
+          <line>278</line>
           <properties />
           <option name="timeStamp" value="158" />
         </line-breakpoint>
@@ -774,7 +789,15 @@
         <state relative-caret-position="42">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <marker date="1543349705413" expanded="true" signature="12309:12315" ph="{...}" />
+            <element signature="e#1912#1913#0" expanded="true" />
+            <element signature="e#1947#1948#0" expanded="true" />
+            <element signature="e#2004#2005#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
+            <element signature="e#2110#2111#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2220#2221#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <marker date="1543565538824" expanded="true" signature="13164:13170" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -790,12 +813,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1512">
           <caret line="113" column="19" lean-forward="false" selection-start-line="113" selection-start-column="19" selection-end-line="113" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2691#2692#0" expanded="false" />
-            <element signature="e#2726#2727#0" expanded="false" />
-            <marker date="1543410763744" expanded="true" signature="8420:8699" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -849,13 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TimeMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Oplossingsmatrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -868,7 +879,15 @@
         <state relative-caret-position="1050">
           <caret line="180" column="56" lean-forward="false" selection-start-line="180" selection-start-column="56" selection-end-line="180" selection-end-column="56" />
           <folding>
-            <marker date="1543349705413" expanded="true" signature="12309:12315" ph="{...}" />
+            <element signature="e#1912#1913#0" expanded="true" />
+            <element signature="e#1947#1948#0" expanded="true" />
+            <element signature="e#2004#2005#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
+            <element signature="e#2110#2111#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2220#2221#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <marker date="1543565538824" expanded="true" signature="13164:13170" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -891,12 +910,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1281">
           <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2691#2692#0" expanded="false" />
-            <element signature="e#2726#2727#0" expanded="false" />
-            <marker date="1543410763744" expanded="true" signature="8420:8699" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -971,30 +985,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DistanceMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Truck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="115" column="16" lean-forward="false" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2691#2692#0" expanded="false" />
-            <element signature="e#2726#2727#0" expanded="false" />
-            <marker date="1543410763744" expanded="true" signature="8420:8699" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1059,16 +1053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6426">
-          <caret line="357" column="121" lean-forward="false" selection-start-line="357" selection-start-column="121" selection-end-line="357" selection-end-column="121" />
-          <folding>
-            <marker date="1543349705413" expanded="true" signature="12309:12315" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -1097,16 +1081,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Oplossing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="246" column="0" lean-forward="false" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -1115,11 +1089,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TimeMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Truck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="198" column="38" lean-forward="false" selection-start-line="198" selection-start-column="38" selection-end-line="198" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="159" column="127" lean-forward="false" selection-start-line="159" selection-start-column="127" selection-end-line="159" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="e#1912#1913#0" expanded="true" />
+            <element signature="e#1947#1948#0" expanded="true" />
+            <element signature="e#2004#2005#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
+            <element signature="e#2110#2111#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+            <element signature="e#2220#2221#0" expanded="true" />
+            <element signature="e#2268#2269#0" expanded="true" />
+            <marker date="1543565538824" expanded="true" signature="13164:13170" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="70" column="78" lean-forward="false" selection-start-line="70" selection-start-column="78" selection-end-line="70" selection-end-column="78" />
+        <state relative-caret-position="-1800">
+          <caret line="365" column="60" lean-forward="false" selection-start-line="365" selection-start-column="60" selection-end-line="365" selection-end-column="60" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Oplossing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="98" column="126" lean-forward="false" selection-start-line="98" selection-start-column="126" selection-end-line="98" selection-end-column="126" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
