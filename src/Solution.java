@@ -11,6 +11,7 @@ public class Solution {
     private static final int MAX_WORKING_TIME = 600;
     private static final int MAX_VOLUME = 100;
     private static final int SEED = 100;
+    private static final int TRUCK_COUNT = 40;
 
     //TODO VOLUME KUNNEN CHECKEN
 
@@ -27,6 +28,7 @@ public class Solution {
     // per truck list:
     //      int[]: [ locationId, machineId, drop/pickupId, link naar geconnecteerd drop/collect ,<machineTypeId> ]
     private LinkedList<int[]>[] solution;
+    private int truckCount;
     private LinkedList<Integer>[] truckTimes;
     private LinkedList<Integer>[] truckDistances;
     // per truck list:
@@ -52,7 +54,18 @@ public class Solution {
     private Data data;
 
     public Solution(Data data) {
+
+        // add extra trucks --------------------------------------------------------------------------------------------
+        for (Truck truck: data.getReservetrucklijst()) {
+            if (!truck.getStoplijst().isEmpty()) {
+                data.getTrucklijst().add(truck);
+                data.getStartLocations().add(truck.getStoplijst().get(0).getStoplocatieid());
+                data.getEndLocations().add(truck.getStoplijst().get(0).getStoplocatieid());
+            }
+        }
+
         this.solution = new LinkedList[data.getTrucklijst().size()];
+        this.truckCount = this.solution.length;
         this.truckCurrentMachines = new LinkedList[data.getTrucklijst().size()];
         this.truckTimes = new LinkedList[data.getTrucklijst().size()];
         this.truckDistances = new LinkedList[data.getTrucklijst().size()];
@@ -104,8 +117,14 @@ public class Solution {
 
         this.rng = random;
 
-        this.solution = new LinkedList[solution.solution.length];
-        for (int truck = 0; truck < solution.solution.length; truck++) {
+        this.solution = new LinkedList[solution.truckCount];
+        this.truckCount = solution.truckCount;
+        for (int truck = 0; truck < truckCount; truck++) {
+            // remove last truck if unused -----------------------------------------------------------------------------
+            if (truckCount > TRUCK_COUNT && truck == truckCount - 1 && solution.solution[truck].size() == 2) {
+                truckCount--;
+                continue;
+            }
             this.solution[truck] = new LinkedList<>();
             for (int[] data: solution.solution[truck]) this.solution[truck].addLast(data.clone());
         }
@@ -267,10 +286,6 @@ public class Solution {
         // temporary variables -----------------------------------------------------------------------------------------
         boolean feasible = true;
         int volume;
-        HashMap<Integer, int[]> tempDrops = new HashMap<>(drops);
-        HashMap<Integer, int[]> tempCollects = new HashMap<>(collects);
-        HashMap<Integer, int[]> tempMachines = new HashMap<>(machines);
-        HashSet<Integer> currentMachines;
 
         // check all trucks --------------------------------------------------------------------------------------------
         // assume all collects and drops handled? ----------------------------------------------------------------------
@@ -297,61 +312,6 @@ public class Solution {
                         return false;
                     }
                 }
-
-                /*
-                //TODO PICKUP VOOR COLLECT CHECKEN
-                currentMachines = new HashSet<>();
-                for (int[] stop: solution[truck]) {
-                    // stop is drop or collect -------------------------------------------------------------------------
-                    if (stop.length >= 3 && stop[2] != -1) {
-                        // check if machine isn't already collected ----------------------------------------------------
-                        if (!currentMachines.contains(stop[1]) && collects.containsKey(stop[2])) {
-                            // check if machine id and location matche -------------------------------------------------
-                            if (stop[1] == collects.get(stop[2])[0] && stop[0] == collects.get(stop[2])[1]) {
-                                currentMachines.add(stop[1]);
-                                tempCollects.remove(stop[2]);
-                            } else {
-                                feasible = false;
-                                break;
-                            }
-                        }
-                        // check if machine isn't already dropped ------------------------------------------------------
-                        else if (currentMachines.contains(stop[1]) && drops.containsKey(stop[2])) {
-                            // check if machine type id and location matche --------------------------------------------
-                            if (stop[4] == drops.get(stop[2])[0] && stop[0] == collects.get(stop[2])[1]) {
-                                currentMachines.remove(stop[1]);
-                                tempDrops.remove(stop[2]);
-                            } else {
-                                feasible = false;
-                                break;
-                            }
-                        } else {
-                            feasible = false;
-                            break;
-                        }
-                    }
-                    // stop is pickup or drop off of machine at depot --------------------------------------------------
-                    else if (stop[1] != -1) {
-                        if (!currentMachines.contains(stop[1]) &&
-                                machines.containsKey(stop[1]) &&
-                                machines.get(stop[1])[1] == stop[0]) {
-                            currentMachines.add(stop[1]);
-                            machines.remove(stop[1]);
-                        } else if (currentMachines.contains(stop[1]) &&
-                                !machines.containsKey(stop[1])) {
-                            currentMachines.remove(stop[1]);
-                        } else {
-                            feasible = false;
-                            break;
-                        }
-                    }
-                }
-                // truck is still loaded -------------------------------------------------------------------------------
-                if (currentMachines.size() > 0) {
-                    feasible = false;
-                    break;
-                }
-                */
             }
         }
 
@@ -366,7 +326,7 @@ public class Solution {
         // get collect and drop from first truck -----------------------------------------------------------------------
         int firstTruck;
         do {
-            firstTruck = rng.nextInt(solution.length);
+            firstTruck = rng.nextInt(truckCount);
         } while (solution[firstTruck].size() <= 2);
         int firstStop = 1 + rng.nextInt(solution[firstTruck].size() - 2);
         int firstCollect = Math.min(firstStop, solution[firstTruck].get(firstStop)[3]);
@@ -384,7 +344,7 @@ public class Solution {
         // get second truck and positions ------------------------------------------------------------------------------
         int secondTruck;
         do {
-            secondTruck = rng.nextInt(solution.length);
+            secondTruck = rng.nextInt(TRUCK_COUNT);
         } while (solution[secondTruck].size() <= 2);
         int secondCollect = 1 + rng.nextInt(solution[secondTruck].size() - 2);
         int secondDrop = secondCollect + rng.nextInt(solution[secondTruck].size() - 1 - secondCollect);

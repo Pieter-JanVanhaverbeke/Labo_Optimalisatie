@@ -6,7 +6,7 @@ public class Main {
 
         String fileName;
         if(args.length > 0) fileName = args[0];
-        else fileName = "src/data/tvh_problem_6.txt";
+        else fileName = "src/data/tvh_problem_5.txt";
 
         //Beginnen met inlezen:
         Data data = new Data();
@@ -19,7 +19,7 @@ public class Main {
         initiele.writeSolution(file);
 
         Hillclimbing hillclimbing = new Hillclimbing(initiele);
-        hillclimbing.start(10000);
+        hillclimbing.start(1);
         hillclimbing.getBestesolution().writeSolution(file);
     }
 }
