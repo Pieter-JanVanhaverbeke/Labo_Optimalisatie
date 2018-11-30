@@ -34,9 +34,9 @@ public class Hillclimbing {
         if (huidigesolution.checkFeasibility()) {
             int huidigescore = huidigesolution.calculateScore();
             if (huidigescore < bestescore) {
-                bestesolution.printStats();
                 bestescore = huidigescore;
                 bestesolution = new Solution(huidigesolution);
+                bestesolution.printStats();
             }
         }
     }
