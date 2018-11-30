@@ -199,6 +199,18 @@ public class Oplossing {
             truck.truckLegen();
         }
 
+        //DUMMY TRUCKS ADDEN AAN TRUCKLIJST
+        ArrayList<Truck> trucks = data.getTrucklijst();
+        for(int i=0; i<depotlijst.size();i++){
+            Depot depot = depotlijst.get(i);
+            trucks.addAll(depot.getDummytrucklijst());
+        }
+
+    //    data.setTrucklijst(trucks);
+
+
+
+
 
 
         //PRINTEN
@@ -215,6 +227,7 @@ public class Oplossing {
          }
 
      }
+     /*
         for(int i=0; i<data.getReservetrucklijst().size();i++){
             Truck truck = data.getReservetrucklijst().get(i);
             if(truck.getStoplijst().size()!=0) {
@@ -228,6 +241,7 @@ public class Oplossing {
 
         }
 
+*/
 
 
      System.out.println();
