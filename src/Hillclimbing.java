@@ -7,7 +7,6 @@ public class Hillclimbing {
     private int bestescore;
     private int huidigescore;
     private int teller;
-    private Data data;
     private Random rng;
 
     public Hillclimbing(Solution intitialsolution) {
@@ -40,71 +39,6 @@ public class Hillclimbing {
                 bestesolution = new Solution(huidigesolution);
             }
         }
-    }
-
-
-
-    public void firstImprovment(){
-
-
-//      int randomtruck = rng.nextInt(huidigesolution.getSolution().length);
-      int randomstop = rng.nextInt();
-  //    int randomtruck2 = rng.nextInt(huidigesolution.getSolution().length);
-      int randomstop2 = rng.nextInt();
-
-      //RANDOM TRUCK MET RANDOM STOP WISSELEN MET ALLE STOPS VAN TRUCK
-
-          int randomtruck2size = 0;
-          for(int i=0;i<randomtruck2size;i++){
-              int stop2 = 0;
- //             huidigesolution.swap(randomtruck,randomstop,randomtruck2,stop2);              //ALLE NEIGHBOURS ZIJN ALLE SWAPS VAN RANDOM TRUCK EN RANDOM STOP MET ANDERE TRUCK ZIJN STOPS
-              if(huidigesolution.checkFeasibility()){
-  //                if(huidigesolution.getTotaldistance()<bestesolution.getTotaldistance()){
-//                      bestesolution = new Solution(huidigesolution);
-  //                    bestescore = bestesolution.getTotaldistance();
-                  }
-              }
-          }
-  //    }
-
-
-        /*
-
-        1) Voor 2 random trucks, swap alle stops met elkaar
-                //IF(improvement)
-                THEN bestesolution = huidige solution
-
-            IF(
-         */
-
-        /*for(int i=0; i<data.getTrucklijst().size();i++){
-            Truck truck = data.getTrucklijst().get(i);
-            huidigesolution.swap(i,);
-        }
-        Solution solution = huidigesolution;
-
-        solution.swap(0,0,0,0);
-        solution.
-
-
-
-    public void swap(int truck, int stop, int otherTruck, int otherStop){
-        int[] temp = solution[truck].get(stop);
-        solution[truck].set(stop, solution[otherTruck].get(otherStop));
-        solution[otherTruck].set(otherStop, temp);
-    }
-
-
-        */
-
-
-
-
-
-
-
-    public void steepestdescent(){
-
     }
 
     public Solution getBestesolution() {
