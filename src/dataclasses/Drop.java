@@ -1,3 +1,5 @@
+package dataclasses;
+
 public class Drop {
     private int id;
     private int machineTypeId;          //van lijst van machines die elk id hebben

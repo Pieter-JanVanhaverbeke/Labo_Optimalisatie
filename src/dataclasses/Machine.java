@@ -1,3 +1,5 @@
+package dataclasses;
+
 public class Machine {
     private int id;
     private int machineTypeId;      //TODO nog denken over id of machine meegeven
@@ -75,7 +77,7 @@ public class Machine {
 
     @Override
     public String toString() {
-        return "Machine{" +
+        return "dataclasses.Machine{" +
                 "id=" + id +
                 ", machineTypeId=" + machineTypeId +
                 ", location=" + location +

@@ -1,3 +1,7 @@
+package heuristics;
+
+import solution.Solution;
+
 public class TabuSearch {
     Solution bestesolution;
     Solution huidigesolution;
@@ -18,9 +22,10 @@ public class TabuSearch {
     }
 
 
-    public Solution start(){
+    public Solution start(long time){
+        long end = System.currentTimeMillis() + (time * 1000);
         //AANTAL ITERATIES
-        while(teller<10000){
+        while(System.currentTimeMillis() < end){
 
             //ZOEK BESTE OPL
             searchNeighbourhood();

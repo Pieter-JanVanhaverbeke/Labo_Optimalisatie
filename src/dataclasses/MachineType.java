@@ -1,3 +1,5 @@
+package dataclasses;
+
 public class MachineType {
     private int id;
     private int volume;
@@ -45,7 +47,7 @@ public class MachineType {
 
     @Override
     public String toString() {
-        return "MachineType{" +
+        return "dataclasses.MachineType{" +
                 "id=" + id +
                 ", volume=" + volume +
                 ", servicetime=" + servicetime +

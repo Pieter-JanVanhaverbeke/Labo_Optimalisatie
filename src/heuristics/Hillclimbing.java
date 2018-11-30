@@ -1,3 +1,7 @@
+package heuristics;
+
+import solution.Solution;
+
 import java.io.File;
 import java.util.Random;
 
@@ -83,7 +87,7 @@ public class Hillclimbing {
 
     @Override
     public String toString() {
-        return "Hillclimbing{" +
+        return "heuristics.Hillclimbing{" +
                 "bestesolution=" + bestesolution +
                 ", huidigesolution=" + huidigesolution +
                 ", bestescore=" + bestescore +

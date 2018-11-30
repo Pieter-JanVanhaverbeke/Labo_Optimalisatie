@@ -1,14 +1,14 @@
+package heuristics;
+
+import dataclasses.*;
+import solution.Solution;
+
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class Oplossing {
 
     private Data data;
-    private Oplossingsmatrix oplossingsmatrix;
     private Solution solution;
 
 
@@ -16,7 +16,6 @@ public class Oplossing {
     public Oplossing(Data data) {
         this.data = data;
         this.data.buildLastArrays();
-        oplossingsmatrix = new Oplossingsmatrix(); //Na oplossing toevoegen
     }
 
     public Data getData() {
@@ -26,15 +25,6 @@ public class Oplossing {
     public void setData(Data data) {
         this.data = data;
     }
-
-    public Oplossingsmatrix getOplossingsmatrix() {
-        return oplossingsmatrix;
-    }
-
-    public void setOplossingsmatrix(Oplossingsmatrix oplossingsmatrix) {
-        this.oplossingsmatrix = oplossingsmatrix;
-    }
-
 
     public Solution start() {
         ArrayList<Drop> droplijst = data.getDroplijst();
@@ -226,7 +216,7 @@ public class Oplossing {
      }
      /*
         for(int i=0; i<data.getReservetrucklijst().size();i++){
-            Truck truck = data.getReservetrucklijst().get(i);
+            dataclasses.Truck truck = data.getReservetrucklijst().get(i);
             if(truck.getStoplijst().size()!=0) {
                 System.out.println();
                 System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
@@ -266,21 +256,13 @@ public class Oplossing {
         return totaledistance;
     }
 
-    private int neededTrucks(){
-        int neededTrucks = 0;
-        for(int i=0; i<oplossingsmatrix.getOplossing().length;i++) {
-            if(oplossingsmatrix.getOplossing()[i][0] != -1) neededTrucks++;
-        }
-        return neededTrucks;
-    }
-
     private boolean isFeasible(){
         return true;
     }
 
-    public void writeSolution(File original){
+    public void writeSolution(File original, File output){
 
-        solution.writeSolution(original);
+        solution.writeSolution(original, output);
     }
 
 }

@@ -1,3 +1,5 @@
+package dataclasses;
+
 public class Collect {
     private int id;
     private Machine machine;
@@ -29,7 +31,7 @@ public class Collect {
 
     @Override
     public String toString() {
-        return "Collect{" +
+        return "dataclasses.Collect{" +
                 "id=" + id +
                 ", machine=" + machine +
                 '}';

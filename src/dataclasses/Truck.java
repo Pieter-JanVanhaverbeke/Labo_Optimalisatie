@@ -1,6 +1,6 @@
-import javax.crypto.Mac;
+package dataclasses;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Truck {
@@ -134,7 +134,7 @@ public class Truck {
     }
 
     public void pickUp(Machine machine){
-     //   System.out.println("Truck " + id + " neemt " + machine.getId() + " op locatie: "  + huidigeLocatie);
+     //   System.out.println("dataclasses.Truck " + id + " neemt " + machine.getId() + " op locatie: "  + huidigeLocatie);
         machinelijst.add(machine);
         volume = volume + machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
@@ -142,7 +142,7 @@ public class Truck {
     }
 
     public void dropOf(Machine machine){
-     //   System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: "  + huidigeLocatie);
+     //   System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: "  + huidigeLocatie);
         volume = volume - machine.getVolume();
         geredenminuten = geredenminuten + machine.getServicetime();
         machinelijst.remove(machine);
@@ -252,7 +252,7 @@ public class Truck {
     public void truckLegen(Stop stop){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
-          //  System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
+          //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
             geredenminuten = geredenminuten + machine.getServicetime();
             stop.addMachine(machine);
@@ -268,7 +268,7 @@ public class Truck {
     public void truckLegen(){
         for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
             Machine machine = machinelijst.get(i);
-            //  System.out.println("Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
+            //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
             geredenminuten = geredenminuten + machine.getServicetime();
         }
@@ -349,7 +349,7 @@ public class Truck {
 
     @Override
     public String toString() {
-        return "Truck{" +
+        return "dataclasses.Truck{" +
                 "huidigeLocatie=" + huidigeLocatie +
                 ", endlocationid=" + endlocationid +
                 ", id=" + id +

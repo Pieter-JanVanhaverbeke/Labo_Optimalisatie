@@ -1,3 +1,8 @@
+package solution;
+
+import dataclasses.Data;
+import dataclasses.Stop;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -164,11 +169,11 @@ public class Solution {
      * @param original  original file specifying the problem.
      */
 
-    public void writeSolution(File original){
+    public void writeSolution(File original, File ouputFile){
 
         try {
             // TODO make output file variable
-            BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("src/data/solution")));
+            BufferedWriter buffer = new BufferedWriter(new FileWriter(ouputFile));
             buffer.append(String.format("PROBLEM: %s\n", original.getName()));
             buffer.append(this.toString());
             buffer.close();

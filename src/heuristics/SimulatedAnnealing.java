@@ -1,3 +1,8 @@
+package heuristics;
+
+import solution.Solution;
+import tvh.interfaces.ScoreUpdater;
+
 import java.util.Random;
 
 public class SimulatedAnnealing {
@@ -11,29 +16,34 @@ public class SimulatedAnnealing {
     private double probability;
     private Random rng;
 
-    public SimulatedAnnealing(Solution intitiele) {
+    private ScoreUpdater updater;
+    private long start;
+
+    public SimulatedAnnealing(Solution intitiele, long seed, ScoreUpdater updater) {
         this.bestesolution = intitiele;
         this.huidigesolution = intitiele;
         this.buursolution = intitiele;                //SOLUTION DAT JE BIJHOUDT MET VERGELEKEN
         this.bestescore = intitiele.calculateScore();
         this.huidigescore = intitiele.calculateScore();
         this.buurscore = intitiele.calculateScore();
-        this.rng = new Random(1);
+        this.rng = new Random(seed);
         this.temperatuur = 10000;
+        this.updater = updater;
     }
 
-    public void start(){
-        //  aantalminuten = aantalminuten*60000;
-        bestesolution.printStats();
-        //  long end = System.currentTimeMillis() + aantalminuten;
-        while (temperatuur>0) {
+    public void start(long time){
+        long end = System.currentTimeMillis() + (1000 * time);
+        start = end - (1000 * time);
+        updater.updateScore(bestescore, 0);
+
+        while (temperatuur > 0 && System.currentTimeMillis() < end) {
             simannealing();
         }
         bestesolution.printStats();
     }
 
     public void simannealing(){
-      //  buursolution = new Solution(huidigesolution);
+      //  buursolution = new solution.Solution(huidigesolution);
         buursolution = huidigesolution.getBestNeighbour();
 
 
@@ -63,7 +73,8 @@ public class SimulatedAnnealing {
                 probability =  Math.exp(-delta/temperatuur);
                 int prob = (int) (probability*1000);            //boolean setten
                 //Random random = new Random
-                int kans = rng.nextInt(1000);
+                // TODO moet het ni zo? nog is delen door 1000? ********************************************************
+                int kans = rng.nextInt(1000) / 1000;
               //  System.out.println("kans: " + kans);
                 boolean neembuursolution = kans<prob;
 
@@ -73,11 +84,11 @@ public class SimulatedAnnealing {
                 if(neembuursolution){
                     huidigesolution = new Solution(buursolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = huidigesolution.calculateScore();
-                    buursolution.printStats();
+                    updater.updateScore(huidigescore, System.currentTimeMillis() - start);
                     cooling();
                 }
                 else{
-                    //      huidigesolution = new Solution(buursolution,bestesolution.getRNG());                //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
+                    //      huidigesolution = new solution.Solution(buursolution,bestesolution.getRNG());                //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
                     cooling();
                 }
 

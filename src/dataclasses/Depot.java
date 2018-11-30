@@ -1,3 +1,5 @@
+package dataclasses;
+
 import java.util.ArrayList;
 
 public class Depot {
@@ -58,7 +60,7 @@ public class Depot {
 
     @Override
     public String toString() {
-        return "Depot{" +
+        return "dataclasses.Depot{" +
                 "id=" + id +
                 ", location=" + location +
                 '}';

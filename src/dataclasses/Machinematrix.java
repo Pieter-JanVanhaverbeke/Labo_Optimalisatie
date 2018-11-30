@@ -1,3 +1,5 @@
+package dataclasses;
+
 import java.util.ArrayList;
 
 public class Machinematrix {

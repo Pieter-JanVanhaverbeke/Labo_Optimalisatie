@@ -1,3 +1,5 @@
+package dataclasses;
+
 import java.util.ArrayList;
 
 public class Location {
@@ -182,7 +184,7 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
+        return "dataclasses.Location{" +
                 "id=" + id +
                 ", latitude=" + latitude +
                 ", longtitude=" + longtitude +
