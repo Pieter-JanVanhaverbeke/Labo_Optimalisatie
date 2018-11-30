@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Data {
     private ArrayList<Depot> depotlijst;
@@ -18,8 +15,10 @@ public class Data {
     private ArrayList<Integer> endLocations;
     private ArrayList<Integer> startLocations;
 
-    private DistanceMatrix distancematrix;
-    private TimeMatrix timematrix;
+    private int[][] timematrix;
+    private int[][] distancematrix;
+    private int[][] machineStats;
+    private HashMap<Integer, Integer> serviceTimes;
 
     public Data(){
         depotlijst = new ArrayList<Depot>();
@@ -37,6 +36,35 @@ public class Data {
 
        //  Distancematrix distancematrix = new Distancematrix();
        //  Timematrix timematrix = new Timematrix();
+    }
+
+    public void buildLastArrays() {
+        this.machineStats = new int[this.getMachinelijst().size()][];
+        this.serviceTimes = new HashMap<>();
+        for (Machine machine: this.getMachinelijst()) {
+            this.serviceTimes.put(machine.getMachineTypeId(), machine.getServicetime());
+            this.machineStats[machine.getId()] = new int[]{
+                    machine.getMachineTypeId(),
+                    machine.getVolume(),
+                    machine.getServicetime()
+            };
+        }
+    }
+
+    public int[][] getMachineStats() {
+        return machineStats;
+    }
+
+    public void setMachineStats(int[][] machineStats) {
+        this.machineStats = machineStats;
+    }
+
+    public HashMap<Integer, Integer> getServiceTimes() {
+        return serviceTimes;
+    }
+
+    public void setServiceTimes(HashMap<Integer, Integer> serviceTimes) {
+        this.serviceTimes = serviceTimes;
     }
 
     public ArrayList<Depot> getDepotlijst() {
@@ -95,19 +123,19 @@ public class Data {
         this.trucklijst = trucklijst;
     }
 
-    public DistanceMatrix getDistancematrix() {
+    public int[][] getDistancematrix() {
         return distancematrix;
     }
 
-    public void setDistancematrix(DistanceMatrix distancematrix) {
+    public void setDistancematrix(int[][] distancematrix) {
         this.distancematrix = distancematrix;
     }
 
-    public TimeMatrix getTimematrix() {
+    public int[][] getTimematrix() {
         return timematrix;
     }
 
-    public void setTimematrix(TimeMatrix timematrix) {
+    public void setTimematrix(int[][] timematrix) {
         this.timematrix = timematrix;
     }
 
@@ -292,7 +320,7 @@ public class Data {
 
             } else if (line.contains("TIME_MATRIX")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
-                timematrix = new TimeMatrix(aantal, aantal);
+                timematrix = new int[aantal][aantal];
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
 
@@ -302,13 +330,13 @@ public class Data {
 
                     for (int j = 0; j < aantal; j++) {
                         String[] values = line.split("\\s+");
-                        timematrix.addTime(i, j, Integer.parseInt(values[j]));
+                        timematrix[i][j] = Integer.parseInt(values[j]);
                     }
                 }
 
             } else if (line.contains("DISTANCE_MATRIX: ")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();
-                distancematrix = new DistanceMatrix(aantal, aantal);
+                distancematrix = new int[aantal][aantal];
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
                     while (line.charAt(0) == ' ') {
@@ -317,7 +345,7 @@ public class Data {
 
                     for (int j = 0; j < aantal; j++) {
                         String[] values = line.split("\\s+");
-                        distancematrix.addDistance(i, j, Integer.parseInt(values[j]));
+                        distancematrix[i][j] = Integer.parseInt(values[j]);
                     }
                 }
 

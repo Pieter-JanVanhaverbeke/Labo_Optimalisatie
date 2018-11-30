@@ -46,17 +46,17 @@ public class Location {
         this.name = name;
     }
 
-    public int getDistance(int locationid, DistanceMatrix distancematrix){
-       int distance = distancematrix.getDistance()[id][locationid];
+    public int getDistance(int locationid, int[][] distancematrix){
+       int distance = distancematrix[id][locationid];
        return distance;
     }
 
-    public int getTime(int locationid, TimeMatrix timematrix){
-        int time = timematrix.getTime()[id][locationid];
+    public int getTime(int locationid, int[][] timematrix){
+        int time = timematrix[id][locationid];
         return time;
     }
 
-    public Depot getDichtsteDepot(ArrayList<Depot> depotslijst,int machineTypeId,DistanceMatrix distancematrix){
+    public Depot getDichtsteDepot(ArrayList<Depot> depotslijst,int machineTypeId,int[][] distancematrix){
         Depot depot;
         Depot bestedepot = null;
         int bestedistance = 999999;
@@ -76,7 +76,7 @@ public class Location {
         return bestedepot;
     }
 
-    public Depot getDichtstedepot(ArrayList<Depot> depotslijst,DistanceMatrix distancematrix){
+    public Depot getDichtstedepot(ArrayList<Depot> depotslijst,int[][] distancematrix){
         Depot depot;
         Depot bestedepot = null;
         int bestedistance = 999999;
@@ -92,7 +92,7 @@ public class Location {
         return bestedepot;
     }
 
-    public Truck getDichtsteDummyTruck(ArrayList<Depot> depotslijst,DistanceMatrix distancematrix){
+    public Truck getDichtsteDummyTruck(ArrayList<Depot> depotslijst,int[][] distancematrix){
         Depot depot;
         Depot bestedepot = null;
         int bestedistance = 999999;
@@ -112,7 +112,7 @@ public class Location {
 
 
 
-    public Collect getDichtsteCollect(ArrayList<Collect> collectlijst, int machineTypeId,DistanceMatrix distancematrix){
+    public Collect getDichtsteCollect(ArrayList<Collect> collectlijst, int machineTypeId, int[][] distancematrix){
         Collect collect;
         Collect bestecollect = null;
         int bestedistance = 999999;
@@ -135,7 +135,7 @@ public class Location {
 
 
 
-    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, DistanceMatrix distancematrix, TimeMatrix timeMatrix){
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int[][] distancematrix, int[][] timeMatrix){
         Truck truck;
         Truck bestetruck = null;
         int bestedistance = 999999;
@@ -157,7 +157,7 @@ public class Location {
 
 
 
-    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int droplocatie, DistanceMatrix distancematrix, TimeMatrix timeMatrix){
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int droplocatie, int[][] distancematrix, int[][] timeMatrix){
         Truck truck;
         Truck bestetruck = null;
         int bestedistance = 999999;
