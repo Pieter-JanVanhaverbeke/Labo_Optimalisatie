@@ -23,9 +23,9 @@ public class Simulated_Annealing {
     }
 
     public void start(){
-      //  aantalminuten = aantalminuten*60000;
+        //  aantalminuten = aantalminuten*60000;
         bestesolution.printStats();
-      //  long end = System.currentTimeMillis() + aantalminuten;
+        //  long end = System.currentTimeMillis() + aantalminuten;
         while (temperatuur>0) {
             simannealing();
         }
@@ -49,7 +49,7 @@ public class Simulated_Annealing {
                     bestescore = huidigescore;
                     bestesolution = new Solution(buursolution);
                     huidigesolution = new Solution(buursolution);
-               //     buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
+                    //     buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
                     cooling();
                 }
             }
@@ -57,18 +57,18 @@ public class Simulated_Annealing {
             //GEEN BETERE NEIGHBOUR
             else{
                 probability =  Math.exp(-delta/temperatuur);
-                int prob = (int) (probability*100);            //boolean setten
-                boolean slechtere = rng.nextInt(100)<prob;
+                int prob = (int) (probability*1000);            //boolean setten
+                boolean neembuursolution = rng.nextInt(1000)>prob;
                 System.out.println("prob: " + prob);
 
 
-                if(!slechtere){
+                if(neembuursolution){
                     buursolution = new Solution(huidigesolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = buurscore;
                     cooling();
                 }
                 else{
-              //      huidigesolution = new Solution(buursolution,bestesolution.getRNG());                //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
+                    //      huidigesolution = new Solution(buursolution,bestesolution.getRNG());                //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
                     cooling();
                 }
 
@@ -77,7 +77,7 @@ public class Simulated_Annealing {
 
         }
 
-        }
+    }
 
 
     //TODO TEMPERATUUR OP GOEDE MANIER KOELEN
