@@ -33,7 +33,7 @@ public class Simulated_Annealing {
     }
 
     public void simannealing(){
-        buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
+        buursolution = new Solution(huidigesolution, bestesolution.getRNG());
         buursolution.move();
 
         //eerst checken of feasible is
@@ -47,8 +47,8 @@ public class Simulated_Annealing {
                 if (buurscore < bestescore) {
                     bestesolution.printStats();
                     bestescore = huidigescore;
-                    bestesolution = new Solution(buursolution, buursolution.getRNG());
-                    huidigesolution = new Solution(buursolution,buursolution.getRNG());
+                    bestesolution = new Solution(buursolution, bestesolution.getRNG());
+                    huidigesolution = new Solution(buursolution,bestesolution.getRNG());
                //     buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
                     cooling();
                 }
@@ -57,12 +57,12 @@ public class Simulated_Annealing {
             //GEEN BETERE NEIGHBOUR
             else{
                 probability =  Math.exp(-delta/temperatuur);
-                int prob = (int) (probability*100);            //boolean setten
-                boolean slechtere = rng.nextInt(100)<prob;
+                int prob = (int) (probability*1000);            //boolean setten
+                boolean neembuursolution = rng.nextInt(1000)>prob;
                 System.out.println("prob: " + prob);
 
 
-                if(!slechtere){
+                if(neembuursolution){
                     buursolution = new Solution(huidigesolution, bestesolution.getRNG());               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = buurscore;
                     cooling();
