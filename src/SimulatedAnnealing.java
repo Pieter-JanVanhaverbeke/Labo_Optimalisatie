@@ -19,7 +19,7 @@ public class SimulatedAnnealing {
         this.huidigescore = intitiele.calculateScore();
         this.buurscore = intitiele.calculateScore();
         this.rng = new Random(1);
-        this.temperatuur = 5000;
+        this.temperatuur = 10000;
     }
 
     public void start(){
@@ -33,23 +33,27 @@ public class SimulatedAnnealing {
     }
 
     public void simannealing(){
-        buursolution = new Solution(huidigesolution);
-        buursolution.move();
+      //  buursolution = new Solution(huidigesolution);
+        buursolution = huidigesolution.getBestNeighbour();
+
 
         //eerst checken of feasible is
         if (buursolution.checkFeasibility()) {
             buurscore = buursolution.calculateScore();      //setten score
 
-            double delta = buurscore - huidigescore;   //TODO DELTA DECLAREREN
+            double delta = (buurscore - huidigescore);   //TODO DELTA DECLAREREN
+
+
+
             if (delta < 0) {            //NEG IS BETERE OPL
+                huidigesolution = new Solution(buursolution);
+                huidigescore = huidigesolution.calculateScore();
 
                 //SCORE IS BETER DAN BESTE UPDATEN      //TODO BUURSCORE ZETTEN
                 if (buurscore < bestescore) {
-                    bestesolution.printStats();
-                    bestescore = huidigescore;
+                    bestescore = buurscore;
                     bestesolution = new Solution(buursolution);
-                    huidigesolution = new Solution(buursolution);
-                    //     buursolution = new Solution(huidigesolution, huidigesolution.getRNG());
+                    bestesolution.printStats();
                     cooling();
                 }
             }
@@ -58,13 +62,18 @@ public class SimulatedAnnealing {
             else{
                 probability =  Math.exp(-delta/temperatuur);
                 int prob = (int) (probability*1000);            //boolean setten
-                boolean neembuursolution = rng.nextInt(1000)>prob;
-                System.out.println("prob: " + prob);
+                //Random random = new Random
+                int kans = rng.nextInt(1000);
+              //  System.out.println("kans: " + kans);
+                boolean neembuursolution = kans<prob;
+
+              //  System.out.println("prob: " + prob);
 
 
                 if(neembuursolution){
-                    buursolution = new Solution(huidigesolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
-                    huidigescore = buurscore;
+                    huidigesolution = new Solution(buursolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
+                    huidigescore = huidigesolution.calculateScore();
+                    buursolution.printStats();
                     cooling();
                 }
                 else{
@@ -82,8 +91,8 @@ public class SimulatedAnnealing {
 
     //TODO TEMPERATUUR OP GOEDE MANIER KOELEN
     private void cooling(){
-        temperatuur = temperatuur-50;
-        System.out.println(temperatuur);
+        temperatuur = temperatuur-1;
+//        System.out.println(temperatuur);
     }
 
 
