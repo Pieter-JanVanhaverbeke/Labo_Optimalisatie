@@ -55,15 +55,6 @@ public class Solution {
 
     public Solution(Data data) {
 
-        // add extra trucks --------------------------------------------------------------------------------------------
-        for (Truck truck: data.getReservetrucklijst()) {
-            if (!truck.getStoplijst().isEmpty()) {
-                data.getTrucklijst().add(truck);
-                data.getStartLocations().add(truck.getStoplijst().get(0).getStoplocatieid());
-                data.getEndLocations().add(truck.getStoplijst().get(0).getStoplocatieid());
-            }
-        }
-
         this.solution = new LinkedList[data.getTrucklijst().size()];
         this.truckCount = this.solution.length;
         this.truckCurrentMachines = new LinkedList[data.getTrucklijst().size()];
@@ -74,8 +65,15 @@ public class Solution {
         this.startLocations = new int[data.getTrucklijst().size()];
         this.endLocations = new int[data.getTrucklijst().size()];
         for (int truck = 0; truck < solution.length; truck++) {
-            startLocations[truck] = data.getStartLocations().get(truck);
-            endLocations[truck] = data.getTrucklijst().get(truck).getEndlocationid();
+            startLocations[truck] = data.getStartLocations().size() > truck ?
+                    data.getStartLocations().get(truck) :
+                    (data.getTrucklijst().get(truck).getStoplijst().isEmpty() ?
+                            data.getTrucklijst().get(truck).getEndlocationid() :
+                            data.getTrucklijst().get(truck).getStoplijst().get(0).getStoplocatieid()
+                    );
+            endLocations[truck] =  data.getEndLocations().size() > truck ?
+                    data.getEndLocations().get(truck) :
+                    data.getTrucklijst().get(truck).getEndlocationid();
         }
         this.data = data;
 
