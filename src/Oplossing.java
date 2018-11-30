@@ -15,6 +15,7 @@ public class Oplossing {
 
     public Oplossing(Data data) {
         this.data = data;
+        this.data.buildLastArrays();
         oplossingsmatrix = new Oplossingsmatrix(); //Na oplossing toevoegen
     }
 
@@ -96,6 +97,7 @@ public class Oplossing {
             } else {
 
                 int beginlocatie = bestetruck.getHuidigeLocatie();
+                verplaats = bestetruck.verplaats(machine.getLocation().getId(), data.getTimematrix(), data.getDistancematrix());
                 verplaats = bestetruck.verplaats(machine.getLocation().getId(), data.getTimematrix(), data.getDistancematrix());
                 bestetruck.pickUp(machine);
 

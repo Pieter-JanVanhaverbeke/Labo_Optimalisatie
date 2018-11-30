@@ -98,7 +98,7 @@ public class Solution {
         }
         this.startLocations = solution.startLocations.clone();
         this.endLocations = solution.endLocations.clone();
-
+        this.data = solution.data;
     }
 
     /**

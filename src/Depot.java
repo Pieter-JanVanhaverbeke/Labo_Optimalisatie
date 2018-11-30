@@ -84,7 +84,7 @@ public class Depot {
     }
 
 
-    public Truck getGoedeTruck(int locationid,TimeMatrix timeMatrix, int servicetime){
+    public Truck getGoedeTruck(int locationid,int[][] timeMatrix, int servicetime){
 
         Truck goedetruck=null;
         for(int i=0; i<trucklijst.size();i++){
