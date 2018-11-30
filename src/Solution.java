@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -66,9 +67,9 @@ public class Solution {
         this.rng = new Random(SEED);
     }
 
-    public Solution(Solution solution) {
+    public Solution(Solution solution, Random random) {
 
-        this.rng = solution.rng;
+        this.rng = random;
 
         this.solution = new LinkedList[solution.truckCount];
         this.truckCount = solution.truckCount;
@@ -232,46 +233,37 @@ public class Solution {
     public boolean checkFeasibility(){
         // temporary variables -----------------------------------------------------------------------------------------
         boolean feasible = true;
+        int volume;
 
         // check all trucks --------------------------------------------------------------------------------------------
         // assume all collects and drops handled? ----------------------------------------------------------------------
         for(int truck = 0; truck < solution.length; truck++) {
-            feasible = checkTruckFeasibility(truck);
-            if (!feasible) break;
-        }
+            // only check if truck has stop list ---------------------------------------------------------------------------
+            if(solution[truck] != null && solution[truck].size() > 2){
 
-        return feasible;
-    }
-
-    private boolean checkTruckFeasibility(int truck) {
-        // temporary variable ------------------------------------------------------------------------------------------
-        int volume;
-
-        // only check if truck has stop list ---------------------------------------------------------------------------
-        if(solution[truck] != null && solution[truck].size() > 2){
-
-            // begin and end location ----------------------------------------------------------------------------------
-            if(startLocations[truck] != solution[truck].getFirst()[0] ||
-                    endLocations[truck] != solution[truck].getLast()[0]) {
-                return false;
-            }
-
-            // time check ----------------------------------------------------------------------------------------------
-            if(truckTimes[truck].getLast() > MAX_WORKING_TIME){
-                return false;
-            }
-
-            // volume check --------------------------------------------------------------------------------------------
-            for (LinkedList<Integer> machines: truckCurrentMachines[truck]) {
-                volume = 0;
-                for (Integer machine: machines) volume += data.getMachineStats()[machine][1];
-                if (volume > MAX_VOLUME) {
+                // begin and end location ----------------------------------------------------------------------------------
+                if(startLocations[truck] != solution[truck].getFirst()[0] ||
+                        endLocations[truck] != solution[truck].getLast()[0]) {
                     return false;
+                }
+
+                // time check ----------------------------------------------------------------------------------------------
+                if(truckTimes[truck].getLast() > MAX_WORKING_TIME){
+                    return false;
+                }
+
+                // volume check --------------------------------------------------------------------------------------------
+                for (LinkedList<Integer> machines: truckCurrentMachines[truck]) {
+                    volume = 0;
+                    for (Integer machine: machines) volume += data.getMachineStats()[machine][1];
+                    if (volume > MAX_VOLUME) {
+                        return false;
+                    }
                 }
             }
         }
 
-        return true;
+        return feasible;
     }
 
     // TODO reverse move if infeasible *********************************************************************************
@@ -304,7 +296,18 @@ public class Solution {
         } while (solution[secondTruck].size() <= 2);
         int secondCollect = 1 + rng.nextInt(solution[secondTruck].size() - 2);
         int secondDrop = secondCollect + rng.nextInt(solution[secondTruck].size() - 1 - secondCollect);
-
+/*
+        // TODO remove *************************************************************************************************
+        System.out.println(String.format(
+                "moving from truck %d: %d:%d -> %d:%d\n\titem %d\nto truck %d\n",
+                firstTruck,
+                collect[0], collect[1],
+                drop[0], drop[1],
+                (drop[1] == collect[1] ? drop[1] : -1),
+                secondTruck
+        ));
+        // TODO remove *************************************************************************************************
+*/
         // update all couplings ----------------------------------------------------------------------------------------
         drop[3] = secondCollect;
         collect[3] = secondDrop + 1;
@@ -376,82 +379,6 @@ public class Solution {
                 } else truckCurrentMachines[truck].getLast().addLast(solution[truck].get(stop)[1]);
             }
         }
-    }
-
-    public Solution getBestNeighbour() {
-
-        // temporary variables -----------------------------------------------------------------------------------------
-        Solution best = new Solution(this);
-        int bestTimeDelta = Integer.MIN_VALUE;
-        Solution base;
-        Solution current;
-        int firstTruck;
-        int firstStop;
-        int firstCollect;
-        int firstDrop;
-        int[] drop;
-        int[] collect;
-
-        // get drop and collect from first truck -----------------------------------------------------------------------
-        do {
-            firstTruck = rng.nextInt(truckCount);
-        } while (solution[firstTruck].size() <= 2);
-        firstStop = 1 + rng.nextInt(solution[firstTruck].size() - 2);
-        firstCollect = Math.min(firstStop, solution[firstTruck].get(firstStop)[3]);
-        firstDrop = Math.max(firstStop, solution[firstTruck].get(firstStop)[3]);
-
-        // make new default solution -----------------------------------------------------------------------------------
-        base = new Solution(this);
-
-        // update first truck in base ----------------------------------------------------------------------------------
-        base.updateCouplingRemove(firstTruck, firstCollect, firstDrop);
-        drop = base.solution[firstTruck].remove(firstDrop);
-        collect = base.solution[firstTruck].remove(firstCollect);
-        if (drop[1] != collect[1]) {
-            throw new RuntimeException();
-        }
-        base.update(firstTruck, firstCollect);
-
-        // check all other trucks for best new solution ----------------------------------------------------------------
-        for (int truck = 0; truck < TRUCK_COUNT; truck++) {
-            current = new Solution(base);
-            for (int collectStop = 1; collectStop < current.solution[truck].size(); collectStop++) {
-                current.solution[truck].add(collectStop, collect.clone());
-
-                // only check possible drops if collect can be done ----------------------------------------------------
-                for (int dropStop = collectStop + 1; dropStop < current.solution[truck].size(); dropStop++) {
-                    current.solution[truck].add(dropStop, drop.clone());
-
-                    // only check time if feasible ---------------------------------------------------------------------
-                    current.update(truck, collectStop);
-                    if (current.checkTruckFeasibility(truck)) {
-                        if (base.truckTimes[truck].getLast() - current.truckTimes[truck].getLast() > bestTimeDelta) {
-
-                            // new best solution and update coupling for added collect and drop ------------------------
-                            best = new Solution(base);
-                            best.updateCouplingAdd(truck, collectStop, dropStop - 1);
-                            best.solution[truck].add(collectStop, collect.clone());
-                            best.solution[truck].add(dropStop, drop.clone());
-                            best.solution[truck].get(collectStop)[3] = dropStop;
-                            best.solution[truck].get(dropStop)[3] = collectStop;
-                            best.update(truck, collectStop);
-
-                            // update best time delta ------------------------------------------------------------------
-                            bestTimeDelta = base.truckTimes[truck].getLast() - best.truckTimes[truck].getLast();
-                        }
-                    }
-
-                    // revert drop -------------------------------------------------------------------------------------
-                    current.solution[truck].remove(dropStop);
-                }
-
-                // revert collect --------------------------------------------------------------------------------------
-                current.solution[truck].remove(collectStop);
-                current.update(truck, collectStop);
-            }
-        }
-
-        return best;
     }
 
     /**
@@ -543,6 +470,10 @@ public class Solution {
         }
 
         return buffer.toString();
+    }
+
+    public Random getRNG() {
+        return rng;
     }
 
     public void printStats() {
