@@ -31,14 +31,13 @@ public class Hillclimbing {
     }
 
     public void localSearch(){
-        huidigesolution = new Solution(bestesolution, bestesolution.getRNG());
-        huidigesolution.move();
+        huidigesolution = bestesolution.getBestNeighbour();
         if (huidigesolution.checkFeasibility()) {
             int huidigescore = huidigesolution.calculateScore();
             if (huidigescore < bestescore) {
                 bestesolution.printStats();
                 bestescore = huidigescore;
-                bestesolution = new Solution(huidigesolution, huidigesolution.getRNG());
+                bestesolution = new Solution(huidigesolution);
             }
         }
     }

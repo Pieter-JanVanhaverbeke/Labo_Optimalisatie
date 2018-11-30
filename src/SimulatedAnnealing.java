@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Simulated_Annealing {
+public class SimulatedAnnealing {
     private Solution bestesolution;
     private Solution huidigesolution;
     private Solution buursolution;
@@ -11,7 +11,7 @@ public class Simulated_Annealing {
     private double probability;
     private Random rng;
 
-    public Simulated_Annealing(Solution intitiele) {
+    public SimulatedAnnealing(Solution intitiele) {
         this.bestesolution = intitiele;
         this.huidigesolution = intitiele;
         this.buursolution = intitiele;                //SOLUTION DAT JE BIJHOUDT MET VERGELEKEN
