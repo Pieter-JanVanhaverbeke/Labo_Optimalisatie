@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import tvh.gui.controllers.TVHController;
 
-public class TVHApplication extends Application{
+import java.util.ArrayList;
 
-    private TVHController controller;
+public class TVHApplication extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -18,14 +18,13 @@ public class TVHApplication extends Application{
         Scene scene = new Scene(root);
         primaryStage.setTitle("TVH - Solver");
         primaryStage.setScene(scene);
-        controller = loader.getController();
         primaryStage.show();
     }
 
     @Override
     public void stop() throws Exception {
         super.stop();
-        if (controller.getSolver() != null) controller.getSolver().interrupt();
+        if (TVHController.solver != null) TVHController.solver.interrupt();
         System.exit(0);
     }
 

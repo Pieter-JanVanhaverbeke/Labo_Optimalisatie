@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tvh.gui.controllers.RunningHeuristicController"
+            alignment="CENTER" HBox.hgrow="ALWAYS" prefWidth="500">
+    <Label fx:id="clock" style="-fx-font-size: 20px" />
+    <AnchorPane fx:id="progressAnchor" HBox.hgrow="ALWAYS">
+        <HBox fx:id="progressBar" style="-fx-background-color: blue" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0"/>
+        <HBox fx:id="bestProgressBar" style="-fx-background-color: forestgreen" visible="false" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0"/>
+        <Label fx:id="scoreLabel" HBox.hgrow="ALWAYS" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="0" style="-fx-text-fill: white"/>
+    </AnchorPane>
+    <Button fx:id="runOrStop" text="run" onAction="#runOrStop"/>
+</HBox>

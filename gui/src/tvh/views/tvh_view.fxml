@@ -5,44 +5,35 @@
 
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="tvh.gui.controllers.TVHController"
-            minWidth="800" minHeight="600">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tvh.gui.controllers.TVHController"
+      minWidth="800" minHeight="600">
     <TabPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-        <tabs>
-            <Tab text="graph" closable="false">
-                <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                    <VBox style="-fx-background-color: black">
-                        <AnchorPane fx:id="progressAnchor" VBox.vgrow="ALWAYS" style="-fx-background-color: white">
-                            <VBox.margin>
-                                <Insets right="1"/>
-                            </VBox.margin>
-                            <VBox fx:id="progressBar" prefWidth="25" minWidth="20" maxWidth="20" style="-fx-background-color: blue" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"/>
-                            <VBox fx:id="bestProgressBar" prefWidth="25" minWidth="20" maxWidth="20" style="-fx-background-color: forestgreen" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" visible="false"/>
-                        </AnchorPane>
-                    </VBox>
-                    <VBox VBox.vgrow="ALWAYS" >
-                        <AnchorPane fx:id="scoreAnchor" VBox.vgrow="ALWAYS">
-                            <Label fx:id="scoreLabel" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0"/>
-                        </AnchorPane>
-                    </VBox>
-                    <AnchorPane HBox.hgrow="ALWAYS">
-                        <LineChart fx:id="scoreGraph" title="tvh - score" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
-                            <xAxis>
-                                <NumberAxis label="time [ms]" fx:id="xAxis" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis label="score [km]" fx:id="score" />
-                            </yAxis>
-                        </LineChart>
-                    </AnchorPane>
-                </HBox>
-            </Tab>
-        </tabs>
+        <Tab text="graph" closable="false">
+            <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                <AnchorPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <LineChart fx:id="scoreGraph" title="tvh - score" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+                        <xAxis>
+                            <NumberAxis label="iteration" fx:id="xAxis" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="score" fx:id="score" />
+                        </yAxis>
+                    </LineChart>
+                </AnchorPane>
+                <TabPane fx:id="runningHeuristics" HBox.hgrow="ALWAYS" style="-fx-border-color: #BBBBBB; -fx-border-width: 2px 0px 0px 0px">
+                    <Tab text="new" closable="false">
+                        <HBox HBox.hgrow="ALWAYS" style="-fx-background-color: blue" alignment="CENTER" onMouseClicked="#newHeuristic" onMouseEntered="#newHeuristic" onMouseExited="#newHeuristic" onMousePressed="#newHeuristic" onMouseReleased="#newHeuristic">
+                            <Label text="new" style="-fx-text-fill: white; -fx-font-size: 20px" />
+                        </HBox>
+                    </Tab>
+                </TabPane>
+            </VBox>
+        </Tab>
+        <Tab text="map" closable="false">
+        </Tab>
     </TabPane>
-    <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" style="-fx-border-color: #BBBBBB; -fx-border-width: 2px 0px 0px 0px">
-        <Label fx:id="clock" style="-fx-font-size: 20px"/>
-    </HBox>
 </VBox>
