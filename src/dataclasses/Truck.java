@@ -134,17 +134,14 @@ public class Truck {
     }
 
     public void pickUp(Machine machine){
-     //   System.out.println("dataclasses.Truck " + id + " neemt " + machine.getId() + " op locatie: "  + huidigeLocatie);
         machinelijst.add(machine);
         volume = volume + machine.getVolume();
-        geredenminuten = geredenminuten + machine.getServicetime();
+        geredenminuten = geredenminuten + 2*machine.getServicetime();   //tijd al meerekenen voor het afzetten, daarom 2X servicetime
 
     }
 
     public void dropOf(Machine machine){
-     //   System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: "  + huidigeLocatie);
         volume = volume - machine.getVolume();
-        geredenminuten = geredenminuten + machine.getServicetime();
         machinelijst.remove(machine);
 
 
@@ -179,10 +176,9 @@ public class Truck {
             machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
         }
 
-        int totaletijdnodig = nodigeminuten + terugkeertijd + machinesafzettentijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
+        int totaletijdnodig = nodigeminuten + terugkeertijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
 
 
-        // if(geredenminuten+nodigeminuten+terugkeertijd+servicetime>TRUCK_WORKING_TIME){
         if(totaletijdnodig>TRUCK_WORKING_TIME){
             return false;
         }
@@ -204,10 +200,8 @@ public class Truck {
             machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
         }
 
-        int totaletijdnodig = nodigeminuten + terugkeertijd + machinesafzettentijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
+        int totaletijdnodig = nodigeminuten + terugkeertijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
 
-
-        // if(geredenminuten+nodigeminuten+terugkeertijd+servicetime>TRUCK_WORKING_TIME){
         if(totaletijdnodig>TRUCK_WORKING_TIME){
             return false;
         }
@@ -217,32 +211,6 @@ public class Truck {
 
 
 
-    //als tijd heeft + capaciteit heeft --> opnemen
-    public boolean kanOpnemen(Collect collect, int[][] timematrix){
-        if(collect==null){
-            return false;
-        }
-        int servicetime = collect.getMachine().getServicetime();
-        Machine machine = collect.getMachine();
-
-        if(heefttijd(collect.getMachine().getLocation().getId(),timematrix,servicetime) && heeftcapacity(machine) ){
-            return true;
-        }
-
-
-        return false;
-    }
-
-
-    public boolean kanAfzetten(ArrayList<Machine> machines, int[][] timematrix){
-        if(machines.size()!=0){
-            int servicetime = machines.get(0).getServicetime();
-            if(heefttijd(machines.get(0).getLocation().getId(),timematrix,servicetime)){
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void keerTerug(int[][] timematrix, int[][] distancematrix){
         verplaats(endlocationid, timematrix, distancematrix);
@@ -254,7 +222,7 @@ public class Truck {
             Machine machine = machinelijst.get(i);
           //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
-            geredenminuten = geredenminuten + machine.getServicetime();
+          //  geredenminuten = geredenminuten + machine.getServicetime();
             stop.addMachine(machine);
         }
         stoplijst.add(stop);
@@ -270,7 +238,7 @@ public class Truck {
             Machine machine = machinelijst.get(i);
             //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
-            geredenminuten = geredenminuten + machine.getServicetime();
+         //   geredenminuten = geredenminuten + machine.getServicetime();
         }
         machinelijst.clear();
         this.setVolume(0);  //alles legen, volume is 0
@@ -302,37 +270,6 @@ public class Truck {
 
 
 
-
-    public Drop dichtsteDrop(ArrayList<Drop> droplijst,  DistanceMatrix distancematrix){
-        int mindistance = 999999;
-        Drop dichtstedrop = null;
-        for(int i=0; i<droplijst.size();i++){
-           Location droplocatie = droplijst.get(i).getLocation();
-           int distance = this.getDistance(droplocatie, distancematrix);
-           if(distance<mindistance){
-               mindistance = distance;                              //min afstand
-               dichtstedrop = droplijst.get(i);                     //dichtste drop
-           }
-        }
-
-        return dichtstedrop;
-    }
-
-    public Collect dichtstePickup(ArrayList<Collect> collectlijst,  DistanceMatrix distancematrix){
-        int mindistance = 999999;
-        Collect dichtstecollect = null;
-        for(int i=0; i<collectlijst.size();i++){
-            Location collectloc = collectlijst.get(i).getMachine().getLocation();
-            int distance = this.getDistance(collectloc, distancematrix);
-            if(distance<mindistance){
-                mindistance = distance;                              //min afstand
-                dichtstecollect = collectlijst.get(i);                     //dichtste drop
-            }
-        }
-
-        return dichtstecollect;
-
-    }
 
     public ArrayList<Machine> getAlleMachinesVanType(int type){
         ArrayList<Machine> lijst = new ArrayList<Machine>();
