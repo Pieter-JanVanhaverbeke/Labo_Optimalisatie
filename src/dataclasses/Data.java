@@ -227,13 +227,21 @@ public class Data {
                     int startlocationid = Integer.parseInt(values[1]);
                     int enlocationid = Integer.parseInt(values[2]);
 
-                    Location huidigelocatie = locationlijst.get(startlocationid);
 
                     endLocations.add(enlocationid);
                     startLocations.add(startlocationid);
 
 
                     Truck truck = new Truck(id, startlocationid, enlocationid, null);
+
+                    if(enlocationid>=depotlijst.size()){         //TODO GAAN ER VANUIT DAT DEPOTIDS ALTIJD EERSTE IDS ZIJN
+                        truck.setEndlocationdepot(false);
+                    }
+
+                    if(startlocationid>=depotlijst.size()){
+                        truck.setBeginlocatiedepot(false);
+                    }
+
                     trucklijst.add(truck);
                 }
 
@@ -375,9 +383,8 @@ public class Data {
             Depot depot = depotlijst.get(i);
             for(int j=0; j<trucklijst.size();j++){
                 Truck truck = trucklijst.get(j);
-
-
-                if(truck.getEndlocationid()==depot.getLocation().getId()){
+                if(truck.getHuidigeLocatie()==depot.getLocation().getId()){
+                 //   System.out.println(truck.getId() + " " +  truck.getHuidigeLocatie() + " " + depot.getLocation().getId());
                     depot.addTruck(truck);
                 }
             }

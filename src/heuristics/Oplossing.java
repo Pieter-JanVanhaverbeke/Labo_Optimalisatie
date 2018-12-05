@@ -32,6 +32,7 @@ public class Oplossing {
         ArrayList<Collect> collectlijst = data.getCollectlijst();
         ArrayList<Depot> depotlijst = data.getDepotlijst();
         ArrayList<Truck> trucklijst = data.getTrucklijst();
+        ArrayList<Location> locationlijst = data.getLocationlijst();
         int [] [] timematrix = data.getTimematrix();
         int [] [] distancematrix = data.getDistancematrix();
         Collect dichtstecollect;
@@ -69,7 +70,8 @@ public class Oplossing {
                 dichtsteDepot.removeMachine(machine);           //verwijderen uit depotlijst
             }
 
-            bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix);  //dichtste depot
+            Depot dichtsteDepot2 = drop.getLocation().getDichtstedepot(depotlijst, distancematrix);
+            bestetruck = machine.getLocation().getDichtsteTruck(trucklijst, machine, drop.getLocation().getId(), distancematrix, timematrix,dichtsteDepot2.getLocation().getId());  //dichtste depot
 
             //ALS NIET COLLECT OPNEMEN, DUMMYTRUCK
             if (bestetruck == null) {
@@ -90,11 +92,12 @@ public class Oplossing {
                 bestetruck.addStop(stop);
             } else {
 
+
                 int beginlocatie = bestetruck.getHuidigeLocatie();
                 verplaats = bestetruck.verplaats(machine.getLocation().getId(), timematrix, distancematrix);
                 bestetruck.pickUp(machine);
 
-                if (verplaats && bestetruck.getEndlocationid() == beginlocatie) {
+                if (verplaats) {
                     stop = new Stop(beginlocatie);   //solve bug
                     bestetruck.addStop(stop);
                 }
@@ -115,12 +118,16 @@ public class Oplossing {
             }
 
         }
+
+
+
         //OVERIGE COLLECTS AFHANDELEN
 
         for (int i = 0; i < collectlijst.size(); i++) {
             Collect collect = collectlijst.get(i);
             machine = collect.getMachine();
-            bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine, distancematrix, timematrix);
+            Location dichstedepot = collect.getMachine().getLocation().getDichtstedepot(depotlijst,distancematrix).getLocation();
+            bestetruck = collect.getMachine().getLocation().getDichtsteTruck(trucklijst, machine, distancematrix, timematrix,dichstedepot.getId());
 
             if(bestetruck==null){
                 Truck vollgeladentruck;
@@ -135,7 +142,8 @@ public class Oplossing {
                 //KIJK OF GEWICHT GROTER IS DAN MACHINELIJST.SIZE EN DEPOT LIGT IN DE BUURT
                 for(int j=0; j<vollgeladentrucks.size();j++) {
                     Truck truck = vollgeladentrucks.get(j);
-                    if (truck.heefttijd(afzetdepot.getLocation().getId(), machine.getLocation().getId(), timematrix, machine.getServicetime())) {
+
+                    if (truck.heefttijdNieuw(afzetdepot.getLocation().getId(), machine.getLocation().getId(), timematrix, machine.getServicetime(),afzetdepot.getId())) {
 
                         truck.verplaats(afzetdepot.getLocation().getId(), timematrix, distancematrix);
                         stop = new Stop(afzetdepot.getLocation().getId());
@@ -169,14 +177,30 @@ public class Oplossing {
         //IEDERE TRUCK NAAR EINDLOCATIE VERPLAATSEN
         for (int i = 0; i < trucklijst.size(); i++) {
             Truck truck = trucklijst.get(i);
-            if (truck.getHuidigeLocatie() != truck.getEndlocationid()) {
+            if (truck.isEndlocationdepot()) {
                 truck.keerTerug(timematrix, distancematrix);
                 stop = new Stop(truck.getHuidigeLocatie());
                 stop.addMachinelijst(truck.getMachinelijst());
                 truck.addStop(stop);
+                truck.truckLegen();
             }
-            truck.truckLegen();
+
+            else{
+                Location location = locationlijst.get(truck.getHuidigeLocatie());
+                Depot depot = location.getDichtstedepot(depotlijst,distancematrix);
+                truck.verplaats(depot.getLocation().getId(),distancematrix,timematrix);
+                stop = new Stop(truck.getHuidigeLocatie());
+                stop.addMachinelijst(truck.getMachinelijst());
+                truck.addStop(stop);
+                truck.truckLegen();
+                truck.verplaats(truck.getEndlocationid(),timematrix,distancematrix);
+                stop = new Stop(truck.getHuidigeLocatie());
+                truck.addStop(stop);
+            }
+
         }
+
+
 
         for (int i = 0; i < data.getReservetrucklijst().size(); i++) {
             Truck truck = data.getReservetrucklijst().get(i);

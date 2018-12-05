@@ -137,7 +137,7 @@ public class Location {
 
 
 
-    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int[][] distancematrix, int[][] timeMatrix){
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int[][] distancematrix, int[][] timeMatrix, int depotlocationid){
         Truck truck;
         Truck bestetruck = null;
         int bestedistance = 999999;
@@ -145,7 +145,7 @@ public class Location {
 
         for(int i=0; i<trucklijst.size();i++) {
             truck = trucklijst.get(i);
-            if(truck.heeftcapacity(machine)&&truck.heefttijd(machine.getLocation().getId(),timeMatrix,machine.getServicetime())) {    //truck moet machine hebben
+            if(truck.heeftcapacity(machine)&&truck.heefttijdNieuw(machine.getLocation().getId(),timeMatrix,machine.getServicetime(),depotlocationid)) {    //truck moet machine hebben
                 int distance = this.getDistance(truck.getHuidigeLocatie(), distancematrix);     //huidige locatie
                 if (distance < bestedistance) {
                     bestetruck = truck;
@@ -159,7 +159,7 @@ public class Location {
 
 
 
-    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int droplocatie, int[][] distancematrix, int[][] timeMatrix){
+    public Truck getDichtsteTruck(ArrayList<Truck> trucklijst,Machine machine, int droplocatie, int[][] distancematrix, int[][] timeMatrix, int depotlocationid){
         Truck truck;
         Truck bestetruck = null;
         int bestedistance = 999999;
@@ -167,7 +167,7 @@ public class Location {
 
         for(int i=0; i<trucklijst.size();i++) {
             truck = trucklijst.get(i);
-                if(truck.heeftcapacity(machine)&&truck.heefttijd(machine.getLocation().getId(),droplocatie,timeMatrix,machine.getServicetime())) {    //truck moet machine hebben
+                if(truck.heeftcapacity(machine)&&truck.heefttijdNieuw(machine.getLocation().getId(),droplocatie,timeMatrix,machine.getServicetime(),depotlocationid)) {    //truck moet machine hebben
                     int distance = this.getDistance(truck.getHuidigeLocatie(), distancematrix);     //huidige locatie
                     if (distance < bestedistance) {
                         bestetruck = truck;

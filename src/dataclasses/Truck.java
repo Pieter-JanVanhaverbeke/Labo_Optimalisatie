@@ -16,8 +16,8 @@ public class Truck {
     private int geredenminuten;
     private int volume;
     private int distance;
-
-
+    private boolean endlocationdepot;
+    private boolean beginlocatiedepot;
 
 
     private ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
@@ -36,6 +36,8 @@ public class Truck {
         machinelijst = new ArrayList<Machine>();
         stoplijst = new ArrayList<Stop>();
         huidigestop = new Stop(huidigeLocatie);
+        endlocationdepot = true;
+        beginlocatiedepot = true;
     }
 
 
@@ -49,8 +51,6 @@ public class Truck {
     public void dropOf(Machine machine){
         volume = volume - machine.getVolume();
         machinelijst.remove(machine);
-
-
     }
 
     public boolean verplaats(int locationid, int[][] timematrix, int[][] distancematrix){              //truck gaat naar locationid
@@ -76,12 +76,6 @@ public class Truck {
         int nodigeminuten = geredenminuten + tijdnodig;                             //tijd voor verplaatsing + meerekenen huidige tijd
         int terugkeertijd = timematrix[locationid][endlocationid];        //tijd voor naar eindlocatie te gaan
 
-        int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
-
-        for(int i=0; i<machinelijst.size();i++){
-            machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
-        }
-
         int totaletijdnodig = nodigeminuten + terugkeertijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
 
 
@@ -100,11 +94,6 @@ public class Truck {
         int nodigeminuten = geredenminuten + tijdnodig + tijdnodig2;                             //tijd voor verplaatsing + meerekenen huidige tijd
         int terugkeertijd = timematrix[locationid2][endlocationid];        //tijd voor naar eindlocatie te gaan
 
-        int machinesafzettentijd = 0;                                                       //tijd voor alle machines af te zetten
-
-        for(int i=0; i<machinelijst.size();i++){
-            machinesafzettentijd = machinesafzettentijd + machinelijst.get(i).getServicetime();
-        }
 
         int totaletijdnodig = nodigeminuten + terugkeertijd + 2*servicetime;     //2 keer servicetime, want ook nog eens afzetten
 
@@ -115,8 +104,48 @@ public class Truck {
         else return true;
     }
 
+    public boolean heefttijdNieuw(int locationid,int[][] timematrix, int servicetime,int depotlocationid) {
+        if (!endlocationdepot) {
+            int tijdnodig = timematrix[huidigeLocatie][locationid];
+            int terugkeertijd = timematrix[locationid][depotlocationid] + timematrix[depotlocationid][endlocationid];           //TODO DEPOTID
+
+            int totaletijdnodig = geredenminuten + tijdnodig + terugkeertijd + 2 * servicetime;
+
+            if (totaletijdnodig > TRUCK_WORKING_TIME) {
+                return false;
+            }
+            else return true;
+        }
+
+        else{
+           return heefttijd(locationid,timematrix,servicetime);
+        }
+    }
 
 
+        public boolean heefttijdNieuw(int locationid,int locationid2, int[][] timematrix, int servicetime, int depotlocationid){
+        if(!endlocationdepot){
+            int tijdnodig = timematrix[huidigeLocatie][locationid];
+            int tijdnodig2 = timematrix[locationid][locationid2];
+            int terugkeertijd = timematrix[locationid2][depotlocationid] + timematrix[depotlocationid][endlocationid];           //TODO DEPOTID
+
+            int totaletijdnodig = geredenminuten + tijdnodig + tijdnodig2 + terugkeertijd + 2*servicetime;
+
+            if(totaletijdnodig>TRUCK_WORKING_TIME){
+                return false;
+            }
+
+            else return true;
+        }
+
+
+
+        //TODO GEEN OUDE METHODE WERKT
+        else{
+           return heefttijd(locationid,locationid2,timematrix,servicetime);
+        }
+
+    }
 
 
 
@@ -283,6 +312,22 @@ public class Truck {
 
     public void setStoplijst(ArrayList<Stop> stoplijst) {
         this.stoplijst = stoplijst;
+    }
+
+    public boolean isEndlocationdepot() {
+        return endlocationdepot;
+    }
+
+    public void setEndlocationdepot(boolean endlocationdepot) {
+        this.endlocationdepot = endlocationdepot;
+    }
+
+    public boolean isBeginlocatiedepot() {
+        return beginlocatiedepot;
+    }
+
+    public void setBeginlocatiedepot(boolean beginlocatiedepot) {
+        this.beginlocatiedepot = beginlocatiedepot;
     }
 
     @Override
