@@ -21,11 +21,11 @@ public class Main {
         //Starten oplossing
         Oplossing opl = new Oplossing(data);
         Solution initiele = opl.start();
-        initiele.writeSolution(file, new File("src/data/solution"));
+        initiele.writeSolution(file, new File("src/data/solution_4"));
 
         Hillclimbing hillclimbing = new Hillclimbing(initiele);
-        hillclimbing.start(1);
-        hillclimbing.getBestesolution().writeSolution(file, new File("src/data/solution"));
+        hillclimbing.start(15);
+        hillclimbing.getBestesolution().writeSolution(file, new File("src/data/solution_4"));
     }
 }
 

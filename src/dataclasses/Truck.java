@@ -1,6 +1,7 @@
 package dataclasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Truck {
@@ -20,7 +21,7 @@ public class Truck {
     private boolean beginlocatiedepot;
 
 
-    private ArrayList<Machine> machinelijst;        //huidige lijst van machines dat truck meedraagt
+    private HashMap<Machine, Integer> machinelijst;        //huidige lijst van machines dat truck meedraagt
     private ArrayList<Stop> stoplijst;
     private Stop huidigestop;
 
@@ -33,16 +34,16 @@ public class Truck {
         this.geredenminuten = 0;
         this.volume = 0;
         this.distance = 0;
-        machinelijst = new ArrayList<Machine>();
-        stoplijst = new ArrayList<Stop>();
+        machinelijst = new HashMap<>();
+        stoplijst = new ArrayList<>();
         huidigestop = new Stop(huidigeLocatie);
         endlocationdepot = true;
         beginlocatiedepot = true;
     }
 
 
-    public void pickUp(Machine machine){
-        machinelijst.add(machine);
+    public void pickUp(Machine machine, int pickupId){
+        machinelijst.put(machine, pickupId);
         volume = volume + machine.getVolume();
         geredenminuten = geredenminuten + 2*machine.getServicetime();   //tijd al meerekenen voor het afzetten, daarom 2X servicetime
 
@@ -156,12 +157,11 @@ public class Truck {
     }
 
     public void truckLegen(Stop stop){
-        for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
-            Machine machine = machinelijst.get(i);
+        for(Machine machine: machinelijst.keySet()){            //alles terug afzetten.
           //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
           //  geredenminuten = geredenminuten + machine.getServicetime();
-            stop.addMachine(machine);
+            stop.addMachine(machine, machinelijst.get(machine));
         }
         stoplijst.add(stop);
         machinelijst.clear();
@@ -172,8 +172,7 @@ public class Truck {
 
 
     public void truckLegen(){
-        for(int i=0; i<machinelijst.size();i++){            //alles terug afzetten.
-            Machine machine = machinelijst.get(i);
+        for(Machine machine: machinelijst.keySet()){        //alles terug afzetten.
             //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
          //   geredenminuten = geredenminuten + machine.getServicetime();
@@ -213,8 +212,7 @@ public class Truck {
 
     public ArrayList<Machine> getAlleMachinesVanType(int type){
         ArrayList<Machine> lijst = new ArrayList<Machine>();
-        for(int i=0; i<machinelijst.size();i++){
-            Machine machine = machinelijst.get(i);
+        for (Machine machine: machinelijst.keySet()){
             if(machine.getMachineTypeId()==type){
                 lijst.add(machine);
             }
@@ -286,11 +284,11 @@ public class Truck {
         this.distance = distance;
     }
 
-    public ArrayList<Machine> getMachinelijst() {
+    public HashMap<Machine, Integer> getMachinelijst() {
         return machinelijst;
     }
 
-    public void setMachinelijst(ArrayList<Machine> machinelijst) {
+    public void setMachinelijst(HashMap<Machine, Integer> machinelijst) {
         this.machinelijst = machinelijst;
     }
 

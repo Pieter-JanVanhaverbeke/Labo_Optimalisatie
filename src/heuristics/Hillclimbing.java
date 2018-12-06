@@ -34,7 +34,7 @@ public class Hillclimbing {
     }
 
     public void localSearch(){
-        huidigesolution = bestesolution.getBestNeighbour();
+        huidigesolution = bestesolution.getBestNeighbourImproved();
         if (huidigesolution.checkFeasibility()) {
             int huidigescore = huidigesolution.calculateScore();
             if (huidigescore < bestescore) {

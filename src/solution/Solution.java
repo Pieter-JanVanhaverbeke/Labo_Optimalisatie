@@ -1,6 +1,7 @@
 package solution;
 
 import dataclasses.Data;
+import dataclasses.Machine;
 import dataclasses.Stop;
 
 import java.io.BufferedWriter;
@@ -102,6 +103,13 @@ public class Solution {
         }
         this.startLocations = solution.startLocations.clone();
         this.endLocations = solution.endLocations.clone();
+        this.availableMachines = new HashMap<>();
+        for (Integer type: solution.availableMachines.keySet()) {
+            this.availableMachines.computeIfAbsent(type, k -> new LinkedList<>());
+            for (int[] data: solution.availableMachines.get(type)) {
+                this.availableMachines.get(type).addLast(data.clone());
+            }
+        }
         this.data = solution.data;
     }
 
@@ -194,7 +202,7 @@ public class Solution {
         int time = 0;
         for (int stop = 0; stop < truck.size() - 1; stop++) {
             if(truck.get(stop)[1] >= 0) time += data.getMachineStats()[truck.get(stop)[1]][2];
-            time += data.getTimematrix()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
+            time += data.getTimeMatrix()[truck.get(stop)[0]][truck.get(stop + 1)[0]];
         }
         if(truck.getLast()[1] >= 0) time += data.getMachineStats()[truck.getLast()[1]][2];
         return time;
@@ -282,8 +290,6 @@ public class Solution {
     // TODO reverse move if infeasible *********************************************************************************
     public void move(){
 
-        // TODO swap to "empt" truck list ******************************************************************************
-
         // get collect and drop from first truck -----------------------------------------------------------------------
         int firstTruck;
         do {
@@ -304,18 +310,33 @@ public class Solution {
 
         // get second truck and positions ------------------------------------------------------------------------------
         int secondTruck;
-        do {
-            secondTruck = rng.nextInt(TRUCK_COUNT);
-        } while (solution[secondTruck].size() <= 2);
-        int secondCollect = 1 + rng.nextInt(solution[secondTruck].size() - 2);
-        int secondDrop = secondCollect + rng.nextInt(solution[secondTruck].size() - 1 - secondCollect);
+        secondTruck = rng.nextInt(data.getTruckCount());
+        int secondCollect;
+        int secondDrop;
+        if (solution[secondTruck].size() > 2) {
+            secondCollect = 1 + rng.nextInt(solution[secondTruck].size() - 2);
+            secondDrop = secondCollect + rng.nextInt(solution[secondTruck].size() - 1 - secondCollect);
+        } else {
+            secondCollect = 1;
+            secondDrop = 1;
+        }
 
         // update all couplings ----------------------------------------------------------------------------------------
-        drop[3] = secondCollect;
-        collect[3] = secondDrop + 1;
         updateCouplingAdd(secondTruck, secondCollect, secondDrop);
         solution[secondTruck].add(secondDrop, drop);
         solution[secondTruck].add(secondCollect, collect);
+        // hot swap collect --------------------------------------------------------------------------------------------
+        if (collect[2] == -1 && availableMachines.get(data.getMachineStats()[collect[1]][0]) != null) {
+            collect = fullSwapCollect(solution[secondTruck], collect, secondCollect);
+            drop[1] = collect[1];
+            solution[secondTruck].set(secondCollect, collect);
+        }
+        // hot swap drop location --------------------------------------------------------------------------
+        if (drop[2] == -1) {
+            drop[0] = hotSwapDrop(solution[secondTruck], drop, secondDrop);
+        }
+        drop[3] = secondCollect;
+        collect[3] = secondDrop + 1;
         update(secondTruck, secondCollect);
     }
 
@@ -346,6 +367,53 @@ public class Solution {
         }
     }
 
+    private int[] hotSwapCollect(
+            LinkedList<int[]> route,
+            int[] collect,
+            int collectStop,
+            HashMap<Integer, LinkedList<int[]>> availableMachines) {
+
+        int[] best = collect;
+        for (int[] available : availableMachines.get(data.getMachineStats()[collect[1]][0])) {
+            if (data.getTimeMatrix()[route.get(collectStop - 1)[0]][available[0]] +
+                    data.getTimeMatrix()[available[0]][route.get(collectStop + 1)[0]] <
+                    data.getTimeMatrix()[route.get(collectStop - 1)[0]][collect[0]] +
+                            data.getTimeMatrix()[collect[0]][route.get(collectStop + 1)[0]]
+                    ) {
+                best = available;
+            }
+        }
+
+        return best;
+    }
+
+    private int[] fullSwapCollect(
+            LinkedList<int[]> route,
+            int[] collect,
+            int collectStop) {
+        int[] bestCollect;
+
+        availableMachines.get(data.getMachineStats()[collect[1]][0]).addLast(collect);
+        bestCollect = hotSwapCollect(route, collect, collectStop, availableMachines);
+        availableMachines.get(data.getMachineStats()[collect[1]][0]).remove(bestCollect);
+
+        return bestCollect;
+    }
+
+    private int hotSwapDrop(LinkedList<int[]> truck, int[] drop, int dropStop) {
+        int best = drop[0];
+        for (int depot : data.getDepotArray()) {
+            if (data.getTimeMatrix()[truck.get(dropStop - 1)[0]][depot] +
+                    data.getTimeMatrix()[depot][truck.get(dropStop + 1)[0]] <
+                    data.getTimeMatrix()[truck.get(dropStop - 1)[0]][drop[0]] +
+                            data.getTimeMatrix()[drop[0]][truck.get(dropStop + 1)[0]]
+                    ) {
+                best = depot;
+            }
+        }
+        return best;
+    }
+
     private void update(int truck, int start) {
 
         // truck times and volumes updating ----------------------------------------------------------------------------
@@ -359,7 +427,7 @@ public class Solution {
             // updating trucks driven time -----------------------------------------------------------------------------
             truckTimes[truck].addLast(
                     (truckTimes[truck].isEmpty() ? 0 : truckTimes[truck].getLast()) +
-                            (stop < 1 ? 0 : data.getTimematrix()[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
+                            (stop < 1 ? 0 : data.getTimeMatrix()[solution[truck].get(stop - 1)[0]][solution[truck].get(stop)[0]]) +
                             (solution[truck].get(stop)[1] == -1 ? 0 : data.getMachineStats()[solution[truck].get(stop)[1]][2])
             );
             // updating trucks driven distance -------------------------------------------------------------------------
@@ -459,6 +527,134 @@ public class Solution {
         return best;
     }
 
+    public Solution getBestNeighbourImproved() {
+
+        // temporary variables -----------------------------------------------------------------------------------------
+        HashMap<Integer, LinkedList<int[]>> availableMachinesCopy;
+        Solution best = new Solution(this);
+        int bestTimeDelta = Integer.MIN_VALUE;
+        Solution base;
+        Solution current;
+        int firstTruck;
+        int firstStop;
+        int firstCollect;
+        int firstDrop;
+        int[] drop;
+        int[] collect;
+        int[] originalCollect;
+        int[] originalDrop;
+
+        // get drop and collect from first truck -----------------------------------------------------------------------
+        do {
+            firstTruck = rng.nextInt(truckCount);
+        } while (solution[firstTruck].size() <= 2);
+        firstStop = 1 + rng.nextInt(solution[firstTruck].size() - 2);
+        firstCollect = Math.min(firstStop, solution[firstTruck].get(firstStop)[3]);
+        firstDrop = Math.max(firstStop, solution[firstTruck].get(firstStop)[3]);
+
+        // make new default solution -----------------------------------------------------------------------------------
+        base = new Solution(this);
+
+        // update first truck in base ----------------------------------------------------------------------------------
+        base.updateCouplingRemove(firstTruck, firstCollect, firstDrop);
+        drop = base.solution[firstTruck].remove(firstDrop);
+        collect = base.solution[firstTruck].remove(firstCollect);
+        originalCollect = collect.clone();
+        originalDrop = drop.clone();
+        base.update(firstTruck, firstCollect);
+        if (collect[1] == 20) {
+            System.out.println(String.format("removing 20 from %d", firstTruck));
+        }
+
+        // check all other trucks for best new solution ----------------------------------------------------------------
+        for (int truck = 0; truck < data.getTruckCount(); truck++) {
+            // generate new current solution from base and reset available machines ------------------------------------
+            current = new Solution(base);
+            availableMachinesCopy = new HashMap<>();
+            for (Integer key: availableMachines.keySet()) {
+                availableMachinesCopy.put(key, new LinkedList<>());
+                for (int[] machineList: availableMachines.get(key)) {
+                    availableMachinesCopy.get(key).addLast(machineList.clone());
+                }
+            }
+            // reset to original ---------------------------------------------------------------------------------------
+            collect = originalCollect.clone();
+            drop = originalDrop.clone();
+
+            for (int collectStop = 1; collectStop < current.solution[truck].size(); collectStop++) {
+                // hot swap collect ------------------------------------------------------------------------------------
+                current.solution[truck].add(collectStop, collect);
+                if (collect[2] == -1 &&
+                        availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]) != null) {
+                    availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]).addLast(collect);
+                    collect = hotSwapCollect(
+                            current.solution[truck],
+                            collect,
+                            collectStop,
+                            availableMachinesCopy
+                    );
+                    availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]).remove(collect);
+                    drop[1] = collect[1];
+                    current.solution[truck].set(collectStop, collect);
+                }
+
+                // only check possible drops if collect can be done ----------------------------------------------------
+                for (int dropStop = collectStop + 1; dropStop < current.solution[truck].size(); dropStop++) {
+                    // hot swap drop -----------------------------------------------------------------------------------
+                    current.solution[truck].add(dropStop, drop);
+                    if (drop[2] == -1) {
+                        drop[0] = hotSwapDrop(
+                                current.solution[truck],
+                                drop,
+                                dropStop
+                        );
+                    }
+
+                    // only check time if feasible ---------------------------------------------------------------------
+                    current.update(truck, collectStop);
+                    if (current.checkTruckFeasibility(truck)) {
+                        if (base.truckTimes[truck].getLast() - current.truckTimes[truck].getLast() > bestTimeDelta) {
+
+                            if (collect[1] == 20) {
+                                System.out.println(String.format("adding 20 to %d", truck));
+                            }
+                            // new best solution and update coupling for added collect and drop ------------------------
+                            best = new Solution(base);
+                            best.availableMachines = new HashMap<>();
+                            for (Integer key: availableMachinesCopy.keySet()) {
+                                best.availableMachines.put(key, new LinkedList<>());
+                                for (int[] machineList : availableMachinesCopy.get(key)) {
+                                    best.availableMachines.get(key).addLast(machineList.clone());
+                                }
+                            }
+                            best.updateCouplingAdd(truck, collectStop, dropStop - 1);
+                            best.solution[truck].add(collectStop, collect.clone());
+                            best.solution[truck].add(dropStop, drop.clone());
+                            best.solution[truck].get(collectStop)[3] = dropStop;
+                            best.solution[truck].get(dropStop)[3] = collectStop;
+                            best.update(truck, collectStop);
+                            if (drop[1] != collect[1]) {
+                                throw new RuntimeException();
+                            }
+
+                            // update best time delta ------------------------------------------------------------------
+                            bestTimeDelta = base.truckTimes[truck].getLast() - best.truckTimes[truck].getLast();
+                        }
+                    }
+
+                    // revert drop -------------------------------------------------------------------------------------
+                    current.solution[truck].remove(dropStop);
+                }
+
+                // revert collect --------------------------------------------------------------------------------------
+                current.solution[truck].remove(collectStop);
+                current.update(truck, collectStop);
+            }
+        }
+
+        return best;
+    }
+
     /**
      * Method to load initial solution into right format.
      *
@@ -468,6 +664,8 @@ public class Solution {
         // temporary variables -----------------------------------------------------------------------------------------
         HashMap<Integer, Integer> currentMachines;
         Stop stop;
+        LinkedList<Machine> machines = new LinkedList<>();
+        for (Machine machine: data.getMachinelijst()) machines.addLast(machine);
 
         for(int truck = 0; truck < data.getTrucklijst().size(); truck++){
             currentMachines = new HashMap<>();
@@ -478,21 +676,37 @@ public class Solution {
             truckDistances[truck] = new LinkedList<>();
             truckCurrentMachines[truck] = new LinkedList<>();
             solution[truck].addLast(new int[]{startLocations[truck], -1});
+
+            // TODO fuse insertion and bidirectional coupling into one loop ********************************************
             for(int stopId = 0; stopId < data.getTrucklijst().get(truck).getStoplijst().size(); stopId++){
                 stop = data.getTrucklijst().get(truck).getStoplijst().get(stopId);
 
                 // adding stop to solution matrix ----------------------------------------------------------------------
-                for(Integer machine: stop.getMachines()){
-                    solution[truck].addLast(new int[]{
-                            stop.getStoplocatieid(),
-                            machine,
-                            -1,
-                            -1
-                    });
+                for(Machine machine: stop.getMachines().keySet()){
+                    if (currentMachines.containsKey(machine.getId())) {
+                        solution[truck].addLast(new int[]{
+                                stop.getStoplocatieid(),
+                                machine.getId(),
+                                stop.getMachines().get(machine),
+                                -1,
+                                machine.getMachineTypeId()
+                        });
+                        currentMachines.remove(machine.getId());
+                    } else if (!currentMachines.containsKey(machine.getId())) {
+                        solution[truck].addLast(new int[]{
+                                stop.getStoplocatieid(),
+                                machine.getId(),
+                                stop.getMachines().get(machine),
+                                -1
+                        });
+                        currentMachines.put(machine.getId(), 0);
+                        machines.remove(machine);
+                    }
                 }
             }
             solution[truck].addLast(new int[]{endLocations[truck], -1});
 
+            currentMachines = new HashMap<>();
             for (int stopId = 0; stopId < solution[truck].size(); stopId++) {
 
                 // setting bidirectional coupling of collect and drop ------------------------------------------
@@ -513,6 +727,18 @@ public class Solution {
 
             // updating datastructures for delta evaluation ------------------------------------------------------------
             update(truck, 0);
+        }
+
+        // load available machines -------------------------------------------------------------------------------------
+        availableMachines = new HashMap<>();
+        for (Machine machine: machines) {
+            availableMachines.computeIfAbsent(machine.getMachineTypeId(), k -> new LinkedList<>());
+            availableMachines.get(machine.getMachineTypeId()).addLast(new int[]{
+                    machine.getLocation().getId(),
+                    machine.getId(),
+                    -1,
+                    -1
+            });
         }
     }
 

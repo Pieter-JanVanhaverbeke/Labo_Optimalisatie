@@ -1,15 +1,17 @@
 package dataclasses;
 
+import javax.crypto.Mac;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Stop {
     private int stoplocatieid;
-    private ArrayList<Integer> machines;
+    private HashMap<Machine, Integer> machines;
 
     public Stop(int stoplocatieid){
         this.stoplocatieid=stoplocatieid;
-        machines = new ArrayList<Integer>();
+        machines = new HashMap<>();
     }
 
     public int getStoplocatieid() {
@@ -20,21 +22,21 @@ public class Stop {
         this.stoplocatieid = stoplocatieid;
     }
 
-    public ArrayList<Integer> getMachines() {
+    public HashMap<Machine, Integer> getMachines() {
         return machines;
     }
 
-    public void setMachines(ArrayList<Integer> machines) {
+    public void setMachines(HashMap<Machine, Integer> machines) {
         this.machines = machines;
     }
 
-    public void addMachine(Machine machine){
-        machines.add(machine.getId());
+    public void addMachine(Machine machine, int collectDropId){
+        machines.put(machine, collectDropId);
     }
 
-    public void addMachinelijst(List<Machine> machinelijst){
-        for(int i=0; i<machinelijst.size();i++){
-            machines.add(machinelijst.get(i).getId());
+    public void addMachinelijst(HashMap<Machine, Integer> machinelijst){
+        for (Machine machine: machinelijst.keySet()){
+            machines.put(machine, machinelijst.get(machine));
         }
     }
 

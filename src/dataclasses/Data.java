@@ -20,7 +20,9 @@ public class Data {
     private int[][] timematrix;
     private int[][] distancematrix;
     private int[][] machineStats;
+    private int[] depotArray;
     private HashMap<Integer, Integer> serviceTimes;
+    private int truckCount;
 
     public Data(){
         depotlijst = new ArrayList<Depot>();
@@ -51,6 +53,9 @@ public class Data {
                     machine.getServicetime()
             };
         }
+        this.depotArray = new int[depotlijst.size()];
+        for (Depot depot: depotlijst) this.depotArray[depot.getId()] = depot.getLocation().getId();
+        this.truckCount = trucklijst.size();
     }
 
     public int[][] getMachineStats() {
@@ -133,7 +138,7 @@ public class Data {
         this.distancematrix = distancematrix;
     }
 
-    public int[][] getTimematrix() {
+    public int[][] getTimeMatrix() {
         return timematrix;
     }
 
@@ -163,6 +168,26 @@ public class Data {
 
     public void setReservetrucklijst(ArrayList<Truck> reservetrucklijst) {
         this.reservetrucklijst = reservetrucklijst;
+    }
+
+    public int[][] getTimematrix() {
+        return timematrix;
+    }
+
+    public int[] getDepotArray() {
+        return depotArray;
+    }
+
+    public void setDepotArray(int[] depotArray) {
+        this.depotArray = depotArray;
+    }
+
+    public int getTruckCount() {
+        return truckCount;
+    }
+
+    public void setTruckCount(int truckCount) {
+        this.truckCount = truckCount;
     }
 
     public void leesData(File file) throws FileNotFoundException {
