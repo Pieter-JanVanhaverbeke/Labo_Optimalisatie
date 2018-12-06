@@ -227,7 +227,7 @@ public class Oplossing {
 
 
         //PRINTEN
-     for(int i=0; i<data.getTrucklijst().size();i++){
+  /*   for(int i=0; i<data.getTrucklijst().size();i++){
          Truck truck = data.getTrucklijst().get(i);
          if(truck.getStoplijst().size()!=0) {
 
@@ -242,9 +242,9 @@ public class Oplossing {
      }
 
 
+*/
 
-
-        System.out.println("totale distance: " + totalDistance());
+//        System.out.println("totale distance: " + totalDistance());
 
         this.solution = new Solution(data);
         solution.load();
