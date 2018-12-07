@@ -1,6 +1,7 @@
 package heuristics;
 
 import solution.Solution;
+import tvh.interfaces.ScoreUpdater;
 
 import java.io.File;
 import java.util.Random;
@@ -11,18 +12,22 @@ public class Hillclimbing {
     private int bestescore;
     private int huidigescore;
     private int teller;
+    private ScoreUpdater scoreUpdater;
     private Random rng;
 
-    public Hillclimbing(Solution intitialsolution) {
+    public Hillclimbing(Solution intitialsolution, long seed, ScoreUpdater updater) {
         bestesolution = intitialsolution;
         huidigesolution = intitialsolution;
         huidigescore = 999999999;
         bestescore = intitialsolution.calculateScore();
         teller=0;
-        this.rng = new Random(1);
+        this.rng = new Random(seed);
+        this.scoreUpdater = updater;
+
+
     }
 
-    public void start(int aantalminuten){
+    public void start(long aantalminuten){
         aantalminuten = aantalminuten*60000;
         bestesolution.printStats();
         long end = System.currentTimeMillis() + aantalminuten;
@@ -40,6 +45,7 @@ public class Hillclimbing {
             if (huidigescore < bestescore) {
                 bestescore = huidigescore;
                 bestesolution = new Solution(huidigesolution);
+                scoreUpdater.updateScore(bestescore,System.currentTimeMillis());
                 bestesolution.printStats();
             }
         }

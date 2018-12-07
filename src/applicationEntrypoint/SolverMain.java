@@ -1,6 +1,7 @@
 package applicationEntrypoint;
 
 import dataclasses.Data;
+import heuristics.Hillclimbing;
 import heuristics.Oplossing;
 import heuristics.SimulatedAnnealing;
 import heuristics.TabuSearch;
@@ -90,8 +91,9 @@ public class SolverMain {
                 case "randomsearch":
                     System.out.println(String.format("%s not implemented", heuristic));
                     break;
-                case "localsearch":
-                    System.out.println(String.format("%s not implemented", heuristic));
+                case "hillclimbing":
+                    Hillclimbing hillclimbing = new Hillclimbing(initial, seed, updater);
+                    hillclimbing.start(time);
                     break;
                 case "ruin-rebuild":
                     System.out.println(String.format("%s not implemented", heuristic));

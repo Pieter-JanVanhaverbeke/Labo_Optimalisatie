@@ -17,10 +17,10 @@
                 <AnchorPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                     <LineChart fx:id="scoreGraph" title="tvh - score" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
                         <xAxis>
-                            <NumberAxis label="iteration" fx:id="xAxis" />
+                            <NumberAxis label="iteration" fx:id="xAxis"  forceZeroInRange="false"/>
                         </xAxis>
                         <yAxis>
-                            <NumberAxis label="score" fx:id="score" />
+                            <NumberAxis label="score" fx:id="score" forceZeroInRange="false"/>
                         </yAxis>
                     </LineChart>
                 </AnchorPane>
