@@ -178,16 +178,20 @@ public class Solution {
      * @param original  original file specifying the problem.
      */
 
-    public void writeSolution(File original, File ouputFile){
+    public void writeSolution(File original, File outputFile){
 
         try {
-            // TODO make output file variable
-            BufferedWriter buffer = new BufferedWriter(new FileWriter(ouputFile));
+            BufferedWriter buffer = new BufferedWriter(new FileWriter(outputFile));
             buffer.append(String.format("PROBLEM: %s\n", original.getName()));
             buffer.append(this.toString());
             buffer.close();
+            System.out.println(String.format("output written to %s", outputFile.getAbsolutePath()));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(String.format(
+                    "could not open output at location %s\nwriting to default output solution.txt",
+                    outputFile.getAbsolutePath()
+            ));
+            this.writeSolution(original, new File("solution.txt"));
         }
     }
 
