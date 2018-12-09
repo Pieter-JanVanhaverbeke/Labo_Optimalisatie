@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -653,6 +654,129 @@ public class Solution {
         }
 
         return best;
+    }
+
+    /**
+     * Method to improve a certain trucks route itself. This method will take a random collect/drop pair and try to
+     * fins the best possible point to put it in the route. When trying to find the best place an attempt will be made
+     * to find a better collect or drop location, in case the collect or drop does not have a drop or collect id. A
+     * better collect will be selected from a list of available machines and a better drop will be selected from a list
+     * of depot locations. The new route time will be returned.
+     *
+     * @param truck the truck id of the truck to be optimised
+     * @return      the new route time
+     */
+    public int improveTruck(int truck) {
+
+        if (solution[truck].size() < 6) return -1;
+        // temporary variables -----------------------------------------------------------------------------------------
+        int bestTime = truckTimes[truck].getLast();
+        int time;
+        HashMap<Integer, LinkedList<int[]>> availableMachinesCopy = new HashMap<>();
+        for (Integer key: availableMachines.keySet()) {
+            availableMachinesCopy.put(key, new LinkedList<>());
+            for (int[] machineList: availableMachines.get(key)) {
+                availableMachinesCopy.get(key).addLast(machineList.clone());
+            }
+        }
+        LinkedList<int[]> copy = new LinkedList<>();
+        for (int[] data: solution[truck]) copy.addLast(data.clone());
+        LinkedList<int[]> current = new LinkedList<>();
+        for (int[] data: solution[truck]) current.addLast(data.clone());
+        int firstStop;
+        int[] collect;
+        int firstCollect;
+        int[] drop;
+        int firstDrop;
+
+        // get drop/collect pair to swap -------------------------------------------------------------------------------
+        firstStop = 1 + rng.nextInt(solution[truck].size() - 2);
+        firstCollect = Math.min(firstStop, solution[truck].get(firstStop)[3]);
+        firstDrop = Math.max(firstStop, solution[truck].get(firstStop)[3]);
+        drop = current.remove(firstDrop);
+        collect = current.remove(firstCollect);
+
+        for (int collectStop = 1; collectStop < current.size(); collectStop++) {
+            // hot swap collect ----------------------------------------------------------------------------------------
+            current.add(collectStop, collect);
+            if (collect[2] == -1 && availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]) != null) {
+                availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]).addLast(collect);
+                collect = hotSwapCollect(current, collect, collectStop, availableMachinesCopy);
+                availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]).remove(collect);
+                drop[1] = collect[1];
+                current.set(collectStop, collect);
+            }
+
+            for (int dropStop = collectStop + 1; dropStop < current.size(); dropStop++) {
+                // hot swap drop location ------------------------------------------------------------------------------
+                current.add(dropStop, drop);
+                if (drop[2] == -1) {
+                    drop[0] = hotSwapDrop(current, drop, dropStop);
+                }
+
+                if ((time = checkTime(current)) != -1 && time < bestTime) {
+                    solution[truck] = new LinkedList<>();
+                    for (int[] data: copy) solution[truck].addLast(data.clone());
+                    if (collect[2] == -1 && availableMachinesCopy.get(data.getMachineStats()[collect[1]][0]) != null) {
+                        availableMachines.put(data.getMachineStats()[collect[1]][0], new LinkedList<>());
+                        for (int[] machine : availableMachinesCopy.get(data.getMachineStats()[collect[1]][0])) {
+                            availableMachines.get(data.getMachineStats()[collect[1]][0]).addLast(machine.clone());
+                        }
+                    }
+                    updateCouplingRemove(truck, firstCollect, firstDrop);
+                    solution[truck].remove(firstDrop);
+                    solution[truck].remove(firstCollect);
+                    updateCouplingAdd(truck, collectStop, dropStop - 1);
+                    collect[3] = dropStop;
+                    drop[3] = collectStop;
+                    solution[truck].add(collectStop, collect.clone());
+                    solution[truck].add(dropStop, drop.clone());
+
+                    update(truck, 0);
+                    bestTime = time;
+                }
+                current.remove(dropStop);
+            }
+            current.remove(collectStop);
+        }
+
+        return bestTime;
+    }
+
+    /**
+     * Method to check parial feasibility of a route. This will only check the volume and the total time of the route
+     * and return the new route time if the route is feasible, -1 will will be returned in case the route is infeasible.
+     *
+     * @param tempRoute the route to be checked
+     * @return          the new time for the route if feasible, -1 otherwise
+     */
+    private int checkTime(LinkedList<int[]> tempRoute) {
+
+        // temporary variables -----------------------------------------------------------------------------------------
+        int volume = 0;
+        int time = 0;
+        HashSet<Integer> currentMachines = new HashSet<>();
+
+        // check all stops to check volume -----------------------------------------------------------------------------
+        for (int stop = 0; stop < tempRoute.size() - 1; stop++) {
+            time += data.getTimeMatrix()[tempRoute.get(stop)[0]][tempRoute.get(stop + 1)[0]];
+            if (tempRoute.get(stop).length > 2) {
+                time += data.getMachineStats()[tempRoute.get(stop)[1]][2];
+                if (!currentMachines.contains(tempRoute.get(stop)[1])) {
+                    currentMachines.add(tempRoute.get(stop)[1]);
+                    volume += data.getMachineStats()[tempRoute.get(stop)[1]][1];
+                } else {
+                    currentMachines.add(tempRoute.get(stop)[1]);
+                    volume -= data.getMachineStats()[tempRoute.get(stop)[1]][1];
+                }
+            }
+            if (volume > data.getTruckCapacity() || time > data.getTruckWorkingTime()) {
+                time = -1;
+                break;
+            }
+        }
+
+        return time;
     }
 
     /**

@@ -21,6 +21,8 @@ public class Data {
     private int[][] distancematrix;
     private int[][] machineStats;
     private int[] depotArray;
+    private int truckCapacity;
+    private int truckWorkingTime;
     private HashMap<Integer, Integer> serviceTimes;
     private int truckCount;
 
@@ -188,6 +190,22 @@ public class Data {
 
     public void setTruckCount(int truckCount) {
         this.truckCount = truckCount;
+    }
+
+    public int getTruckCapacity() {
+        return truckCapacity;
+    }
+
+    public void setTruckCapacity(int truckCapacity) {
+        this.truckCapacity = truckCapacity;
+    }
+
+    public int getTruckWorkingTime() {
+        return truckWorkingTime;
+    }
+
+    public void setTruckWorkingTime(int truckWorkingTime) {
+        this.truckWorkingTime = truckWorkingTime;
     }
 
     public void leesData(File file) throws FileNotFoundException {
