@@ -50,16 +50,16 @@ public class JarMain {
 
         // return on missing variables ---------------------------------------------------------------------------------
         if (problem == null) {
-            System.out.println("missing --problem...");
+            System.out.println("missing --problem");
             return;
         } else if (solution == null) {
-            System.out.println("missing --solution...");
+            System.out.println("missing --solution");
             return;
         } else if (seed == -1) {
-            System.out.println("missing --seed...");
+            System.out.println("missing --seed");
             return;
         } else if (time == -1) {
-            System.out.println("missing --time...");
+            System.out.println("missing --time");
             return;
         }
         System.out.println(String.format(
@@ -114,12 +114,12 @@ public class JarMain {
             @Override
             public void updateScore(int score, long iteration) {
                 if (score < best) best = score;
-                System.out.println(String.format("time: %d ms\t - score: %d", iteration - startTime, score));
+                System.out.println(String.format("time: %d ms\t - distance: %d", iteration - startTime, score));
             }
         });
         // calculate new runtime taking into consideration the time already passed -------------------------------------
         hillclimbing.start(
-                (time * 1000) - (System.currentTimeMillis() - start) - 20000
+                ((time * 1000) - (System.currentTimeMillis() - start) - 20000)
         );
 
         // write output ------------------------------------------------------------------------------------------------

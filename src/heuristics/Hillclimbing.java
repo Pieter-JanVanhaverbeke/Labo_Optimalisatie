@@ -27,10 +27,9 @@ public class Hillclimbing {
 
     }
 
-    public void start(long aantalminuten){
-        aantalminuten = aantalminuten*60000;
+    public void start(long runtime){
         bestesolution.printStats();
-        long end = System.currentTimeMillis() + aantalminuten;
+        long end = System.currentTimeMillis() + runtime;
         while (System.currentTimeMillis() < end) {
             localSearch();
             teller++;
