@@ -1,39 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="jar build initial structure fic">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ArgBundle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JarIteratedMain.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OvernightMain.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/gui.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/gui/TVHApplication.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/gui/controllers/NewHeuristicController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/gui/controllers/RunningHeuristicController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/gui/controllers/TVHController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/views/belgium.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/views/new_heuristic.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/views/running_heuristic_tab.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gui/src/tvh/views/tvh_view.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/interfaces/interfaces.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/interfaces/src/tvh/dataClasses/Location.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/interfaces/src/tvh/interfaces/ScoreUpdater.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/applicationEntrypoint/SolverMain$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/applicationEntrypoint/SolverMain.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/applicationEntrypoint/SolverMain.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/JarMain.java" afterPath="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/Main.class" afterPath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/Main.class" />
+    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="overnight main to run heuristic as chain -&gt; fixed">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/Hillclimbing.class" afterPath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/Hillclimbing.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/SimulatedAnnealing.class" afterPath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/SimulatedAnnealing.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/gui/tvh/gui/controllers/TVHController.class" afterPath="$PROJECT_DIR$/out/production/gui/tvh/gui/controllers/TVHController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Labo_Optimalisatie.iml" afterPath="$PROJECT_DIR$/Labo_Optimalisatie.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/heuristics/Hillclimbing.java" afterPath="$PROJECT_DIR$/src/heuristics/Hillclimbing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JarHillClimbingMain.java" afterPath="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JarIteratedMain.java" afterPath="$PROJECT_DIR$/src/JarIteratedMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OvernightMain.java" afterPath="$PROJECT_DIR$/src/OvernightMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" afterPath="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java" afterPath="$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/solution/Solution.java" afterPath="$PROJECT_DIR$/src/solution/Solution.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,69 +56,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Solution.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/solution/Solution.java">
+      <file leaf-file-name="tvh_solution_3.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/tvh_solution_3.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2566">
-              <caret line="913" column="1" lean-forward="true" selection-start-line="913" selection-start-column="1" selection-end-line="913" selection-end-column="1" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <file leaf-file-name="IL_solution_3.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/IL_solution_3.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Hillclimbing.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/heuristics/Hillclimbing.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state relative-caret-position="189">
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimulatedAnnealing.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="45" column="11" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IteratedLocalSearch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1513">
-              <caret line="140" column="25" lean-forward="false" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5006#5007#0" expanded="true" />
-                <element signature="e#5039#5040#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OvernightMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OvernightMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OvernightMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="42" column="63" lean-forward="true" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
+            <state relative-caret-position="505">
+              <caret line="71" column="2" lean-forward="false" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -152,14 +88,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JarHillClimbingMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JarHillClimbingMain.java">
+      <file leaf-file-name="IteratedLocalSearch.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="55" column="99" lean-forward="true" selection-start-line="55" selection-start-column="99" selection-end-line="55" selection-end-column="99" />
+            <state relative-caret-position="21">
+              <caret line="45" column="18" lean-forward="true" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HC_solution_5.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/HC_solution_5.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HC_solution_8.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/HC_solution_8.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IL_solution_8.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/IL_solution_8.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -167,8 +133,8 @@
       <file leaf-file-name="JarIteratedMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="55" column="100" lean-forward="false" selection-start-line="55" selection-start-column="100" selection-end-line="55" selection-end-column="100" />
+            <state relative-caret-position="484">
+              <caret line="50" column="67" lean-forward="false" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -176,43 +142,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArgBundle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ArgBundle.java">
+      <file leaf-file-name="IL_solution_6.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/IL_solution_6.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="694">
-              <caret line="128" column="87" lean-forward="false" selection-start-line="128" selection-start-column="87" selection-end-line="128" selection-end-column="87" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2191#2192#0" expanded="true" />
-                <element signature="e#2221#2222#0" expanded="true" />
-                <element signature="e#2267#2268#0" expanded="true" />
-                <element signature="e#2305#2306#0" expanded="true" />
-                <element signature="e#2340#2341#0" expanded="true" />
-                <element signature="e#2371#2372#0" expanded="true" />
-                <element signature="e#2419#2420#0" expanded="true" />
-                <element signature="e#2459#2460#0" expanded="true" />
-                <element signature="e#2488#2489#0" expanded="true" />
-                <element signature="e#2515#2516#0" expanded="true" />
-                <element signature="e#2553#2554#0" expanded="true" />
-                <element signature="e#2585#2586#0" expanded="true" />
-                <element signature="e#2614#2615#0" expanded="true" />
-                <element signature="e#2641#2642#0" expanded="true" />
-                <element signature="e#2679#2680#0" expanded="true" />
-                <element signature="e#2711#2712#0" expanded="true" />
-                <element signature="e#2741#2742#0" expanded="true" />
-                <element signature="e#2769#2770#0" expanded="true" />
-                <element signature="e#2809#2810#0" expanded="true" />
-                <element signature="e#2843#2844#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="273">
+              <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dataclasses/Data.java">
+      <file leaf-file-name="IL_solution_4.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/IL_solution_4.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="242" column="41" lean-forward="false" selection-start-line="242" selection-start-column="41" selection-end-line="242" selection-end-column="41" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -229,9 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tos</find>
-      <find>Solution(</find>
-      <find>solution(</find>
       <find>dummy</find>
       <find>load(</find>
       <find>move()</find>
@@ -259,11 +200,16 @@
       <find>checkFeas</find>
       <find>solution</find>
       <find>system</find>
+      <find>C:\\dataFolder\\programmeren\\java\\optimalisatie\\solver\\src\\com\\kuleuven\\tvh\\data</find>
+      <find>C:\\dataFolder\\programmeren\\java\\Labo_optimalisatie</find>
+      <find>\\src</find>
     </findStrings>
     <replaceStrings>
       <replace>*</replace>
       <replace>usedTrucks</replace>
       <replace>=</replace>
+      <replace>C:\\dataFolder\\programmeren\\java\\Labo_optimalisatie\\src\\data</replace>
+      <replace>src</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -313,14 +259,14 @@
         <option value="$PROJECT_DIR$/src/dataclasses/Data.java" />
         <option value="$PROJECT_DIR$/src/JarMain.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/heuristics/Hillclimbing.java" />
         <option value="$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java" />
-        <option value="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" />
         <option value="$PROJECT_DIR$/src/ArgBundle.java" />
-        <option value="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
-        <option value="$PROJECT_DIR$/src/JarIteratedMain.java" />
         <option value="$PROJECT_DIR$/src/solution/Solution.java" />
+        <option value="$PROJECT_DIR$/src/heuristics/Hillclimbing.java" />
+        <option value="$PROJECT_DIR$/src/JarIteratedMain.java" />
+        <option value="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
         <option value="$PROJECT_DIR$/src/OvernightMain.java" />
+        <option value="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" />
       </list>
     </option>
   </component>
@@ -353,9 +299,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -379,6 +323,19 @@
               <item name="Labo_optimalisatie" type="b2602c69:ProjectViewProjectNode" />
               <item name="Labo_optimalisatie" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="solutions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Labo_optimalisatie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Labo_optimalisatie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dataclasses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Labo_optimalisatie" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Labo_optimalisatie" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="heuristics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -391,10 +348,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../optimalisatie" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="org.sonarlint.intellij.config.project.SonarLintProjectConfigurable" />
@@ -422,12 +381,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.OvernightMain">
+  <component name="RunManager" selected="Application.JarIteratedMain">
     <configuration name="JarHillClimbingMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="JarHillClimbingMain" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="--problem=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_problem_8.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_8.txt --seed=1 --time=60" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Labo_Optimalisatie" />
+      <envs />
+    </configuration>
+    <configuration name="JarIteratedMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="JarIteratedMain" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="--problem=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_problem_4.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_4.txt --seed=1 --time=600" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -599,25 +572,27 @@
     <configuration name="validate" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="JAR_PATH" value="$PROJECT_DIR$/tvh-3.0-student.jar" />
-      <option name="PROGRAM_PARAMETERS" value="--problem=src/data/tvh_problem_8.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_8.txt" />
+      <option name="PROGRAM_PARAMETERS" value="--problem=src/data/tvh_problem_3.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_3.txt" />
       <option name="WORKING_DIRECTORY" value="C:\dataFolder\programmeren\java\Labo_Optimalisatie" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <envs />
     </configuration>
-    <list size="6">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="JAR Application.validate" />
       <item index="2" class="java.lang.String" itemvalue="Application.SolverMain" />
       <item index="3" class="java.lang.String" itemvalue="Application.TVHApplication" />
       <item index="4" class="java.lang.String" itemvalue="Application.JarHillClimbingMain" />
       <item index="5" class="java.lang.String" itemvalue="Application.OvernightMain" />
+      <item index="6" class="java.lang.String" itemvalue="Application.JarIteratedMain" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.OvernightMain" />
-        <item index="1" class="java.lang.String" itemvalue="Application.JarHillClimbingMain" />
-        <item index="2" class="java.lang.String" itemvalue="Application.TVHApplication" />
-        <item index="3" class="java.lang.String" itemvalue="Application.SolverMain" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.JarIteratedMain" />
+        <item index="1" class="java.lang.String" itemvalue="Application.OvernightMain" />
+        <item index="2" class="java.lang.String" itemvalue="Application.JarHillClimbingMain" />
+        <item index="3" class="java.lang.String" itemvalue="Application.TVHApplication" />
+        <item index="4" class="java.lang.String" itemvalue="Application.SolverMain" />
       </list>
     </recent_temporary>
   </component>
@@ -648,7 +623,9 @@
       <workItem from="1543562581294" duration="2479000" />
       <workItem from="1543671864054" duration="538000" />
       <workItem from="1544380154268" duration="628000" />
-      <workItem from="1544400798523" duration="1978000" />
+      <workItem from="1544400798523" duration="4446000" />
+      <workItem from="1544405739639" duration="1687000" />
+      <workItem from="1544428055255" duration="5298000" />
     </task>
     <task id="LOCAL-00001" summary="load fixed, v2.0">
       <created>1542818085873</created>
@@ -748,11 +725,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544400263479</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="overnight main to run heuristic as chain">
+      <created>1544402804000</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1544402804000</updated>
+    </task>
+    <task id="LOCAL-00016" summary="overnight main to run heuristic as chain -&gt; fixed">
+      <created>1544403579239</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1544403579239</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101254000" />
+    <option name="totallyTimeSpent" value="110707000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -784,10 +775,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35875404" sideWeight="0.8104189" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18451025" sideWeight="0.6917293" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35875404" sideWeight="0.8104189" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57061505" sideWeight="0.48174006" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.1734694" sideWeight="0.78085643" order="0" side_tool="false" content_ui="combo" x="786" y="102" width="636" height="878" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.1734694" sideWeight="0.78085643" order="0" side_tool="false" content_ui="combo" x="786" y="102" width="636" height="878" />
       <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="UML design tool window" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -898,7 +889,9 @@
     <MESSAGE value="initial main for jar packaging" />
     <MESSAGE value="runtime fix" />
     <MESSAGE value="jar build initial structure fic" />
-    <option name="LAST_COMMIT_MESSAGE" value="jar build initial structure fic" />
+    <MESSAGE value="overnight main to run heuristic as chain" />
+    <MESSAGE value="overnight main to run heuristic as chain -&gt; fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="overnight main to run heuristic as chain -&gt; fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -977,45 +970,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/heuristics/Hillclimbing.java</url>
-          <line>38</line>
+          <line>44</line>
           <properties />
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/solution/Solution.java</url>
-          <line>284</line>
+          <url>file://$PROJECT_DIR$/src/JarIteratedMain.java</url>
+          <line>17</line>
           <properties />
-          <option name="timeStamp" value="183" />
+          <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/solution/Solution.java</url>
-          <line>276</line>
+          <line>713</line>
           <properties />
-          <option name="timeStamp" value="184" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/solution/Solution.java</url>
-          <line>271</line>
-          <properties />
-          <option name="timeStamp" value="185" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dataclasses/Data.java</url>
-          <line>218</line>
-          <properties />
-          <option name="timeStamp" value="186" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/dataclasses/Data.java</url>
-          <line>219</line>
-          <properties />
-          <option name="timeStamp" value="187" />
+          <option name="timeStamp" value="192" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="188" />
+      <option name="time" value="195" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1027,73 +1002,7 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/heuristics/Oplossing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4431">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Oplossingsmatrix.java" />
-    <entry file="file://$PROJECT_DIR$/src/data/tvh_problem_5.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39228">
-          <caret line="1951" column="0" lean-forward="false" selection-start-line="1951" selection-start-column="0" selection-end-line="1951" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7308">
-          <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/util/LinkedList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="475" column="0" lean-forward="false" selection-start-line="475" selection-start-column="0" selection-end-line="475" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/solution">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataclasses/TimeMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interfaces/src/tvh/dataClasses/Location.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/interfaces/src/tvh/dataClasses/Location.java" />
     <entry file="file://$PROJECT_DIR$/src/dataclasses/Collect.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9">
@@ -1161,7 +1070,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="541" column="0" lean-forward="false" selection-start-line="541" selection-start-column="0" selection-end-line="541" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1193,76 +1101,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interfaces/src/tvh/interfaces/ScoreUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/new_heuristic.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="140" lean-forward="false" selection-start-line="8" selection-start-column="140" selection-end-line="8" selection-end-column="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/tvh_view.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="54" lean-forward="false" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/TVHController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/running_heuristic_tab.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="53" lean-forward="false" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/TVHApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="91" lean-forward="false" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/RunningHeuristicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="114" column="58" lean-forward="false" selection-start-line="114" selection-start-column="58" selection-end-line="114" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/NewHeuristicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/interfaces/src/tvh/interfaces/ScoreUpdater.java" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/new_heuristic.fxml" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/tvh_view.fxml" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/TVHController.java" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/views/running_heuristic_tab.fxml" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/TVHApplication.java" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/RunningHeuristicController.java" />
+    <entry file="file://$PROJECT_DIR$/gui/src/tvh/gui/controllers/NewHeuristicController.java" />
     <entry file="file://$PROJECT_DIR$/src/dataclasses/Stop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1274,12 +1120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5964">
           <caret line="340" column="0" lean-forward="false" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
-          <folding>
-            <element signature="e#8628#8629#0" expanded="false" />
-            <element signature="e#8663#8664#0" expanded="false" />
-            <element signature="e#9071#9072#0" expanded="false" />
-            <element signature="e#9103#9104#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1287,7 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="609">
           <caret line="52" column="6" lean-forward="false" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1298,14 +1137,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/applicationEntrypoint/SolverMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="32" column="48" lean-forward="false" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/applicationEntrypoint/SolverMain.java" />
     <entry file="file://$PROJECT_DIR$/src/heuristics/Oplossing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5187">
@@ -1320,7 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1328,7 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4095">
           <caret line="195" column="38" lean-forward="false" selection-start-line="195" selection-start-column="38" selection-end-line="195" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1336,23 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-776">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataclasses/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="242" column="41" lean-forward="false" selection-start-line="242" selection-start-column="41" selection-end-line="242" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/heuristics/Hillclimbing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1370,86 +1183,151 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="694">
           <caret line="128" column="87" lean-forward="false" selection-start-line="128" selection-start-column="87" selection-end-line="128" selection-end-column="87" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2191#2192#0" expanded="true" />
-            <element signature="e#2221#2222#0" expanded="true" />
-            <element signature="e#2267#2268#0" expanded="true" />
-            <element signature="e#2305#2306#0" expanded="true" />
-            <element signature="e#2340#2341#0" expanded="true" />
-            <element signature="e#2371#2372#0" expanded="true" />
-            <element signature="e#2419#2420#0" expanded="true" />
-            <element signature="e#2459#2460#0" expanded="true" />
-            <element signature="e#2488#2489#0" expanded="true" />
-            <element signature="e#2515#2516#0" expanded="true" />
-            <element signature="e#2553#2554#0" expanded="true" />
-            <element signature="e#2585#2586#0" expanded="true" />
-            <element signature="e#2614#2615#0" expanded="true" />
-            <element signature="e#2641#2642#0" expanded="true" />
-            <element signature="e#2679#2680#0" expanded="true" />
-            <element signature="e#2711#2712#0" expanded="true" />
-            <element signature="e#2741#2742#0" expanded="true" />
-            <element signature="e#2769#2770#0" expanded="true" />
-            <element signature="e#2809#2810#0" expanded="true" />
-            <element signature="e#2843#2844#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="140" column="25" lean-forward="false" selection-start-line="140" selection-start-column="25" selection-end-line="140" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5006#5007#0" expanded="true" />
-            <element signature="e#5039#5040#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JarHillClimbingMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="55" column="99" lean-forward="true" selection-start-line="55" selection-start-column="99" selection-end-line="55" selection-end-column="99" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="55" column="100" lean-forward="false" selection-start-line="55" selection-start-column="100" selection-end-line="55" selection-end-column="100" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
+        <state relative-caret-position="42">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/heuristics/Hillclimbing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="37" column="26" lean-forward="false" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dataclasses/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3024">
+          <caret line="218" column="0" lean-forward="false" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/tvh_solution_8.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JarHillClimbingMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="53" column="102" lean-forward="false" selection-start-line="53" selection-start-column="102" selection-end-line="53" selection-end-column="102" />
+          <folding>
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/solution/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2566">
-          <caret line="913" column="1" lean-forward="true" selection-start-line="913" selection-start-column="1" selection-end-line="913" selection-end-column="1" />
+        <state relative-caret-position="13629">
+          <caret line="664" column="15" lean-forward="false" selection-start-line="664" selection-start-column="15" selection-end-line="664" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/HC_solution_5.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/HC_solution_8.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_8.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/tvh_solution_3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_6.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="50" column="67" lean-forward="false" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OvernightMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="42" column="63" lean-forward="true" selection-start-line="42" selection-start-column="63" selection-end-line="42" selection-end-column="63" />
+        <state relative-caret-position="505">
+          <caret line="71" column="2" lean-forward="false" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="45" column="18" lean-forward="true" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

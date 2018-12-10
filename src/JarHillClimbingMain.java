@@ -10,6 +10,8 @@ import java.util.Date;
 
 public class JarHillClimbingMain {
 
+    private static final long SAFETY = 10000;
+
     public static void main(String[] args) {
 
         // vars --------------------------------------------------------------------------------------------------------
@@ -49,7 +51,7 @@ public class JarHillClimbingMain {
         Hillclimbing hillclimbing = new Hillclimbing(initial, bundle.getSeed(), bundle.getStart());
         // calculate new runtime taking into consideration the time already passed -------------------------------------
         hillclimbing.start(
-                ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - 20000)
+                ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - SAFETY)
         );
 
         // write output ------------------------------------------------------------------------------------------------

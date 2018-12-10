@@ -10,6 +10,8 @@ import java.util.Date;
 
 public class JarIteratedMain {
 
+    private static final long SAFETY = 10000;
+
     public static void main(String[] args) {
 
         // vars --------------------------------------------------------------------------------------------------------
@@ -49,7 +51,7 @@ public class JarIteratedMain {
         IteratedLocalSearch iteratedLocalSearch = new IteratedLocalSearch(initial, bundle.getStart());
         // calculate new runtime taking into consideration the time already passed -------------------------------------
         iteratedLocalSearch.run(
-                ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - 20000)
+                ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - SAFETY)
         );
 
         // write output ------------------------------------------------------------------------------------------------

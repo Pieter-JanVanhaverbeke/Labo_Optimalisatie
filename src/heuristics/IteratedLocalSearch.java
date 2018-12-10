@@ -33,13 +33,19 @@ public class IteratedLocalSearch {
         int shakerCount = 50;
         end = System.currentTimeMillis() + time;
 
-        // run basic shake and rebuild ----------------------------------------------------------------------------------
-        System.out.println("starting local search...");
+
+        // run basic iterated local search -----------------------------------------------------------------------------
+        System.out.println("starting iterated local search...");
         System.out.println(String.format(
                 "time: %dms\t - distance: %d",
                 System.currentTimeMillis() - start,
                 currentScore
         ));
+
+        // improve once ------------------------------------------------------------------------------------------------
+        improve();
+
+        // start iterated local search ---------------------------------------------------------------------------------
         int newScore;
         int deadIterations = 0;
         while (System.currentTimeMillis() < end) {
@@ -53,7 +59,7 @@ public class IteratedLocalSearch {
                     System.out.println(String.format(
                             "time: %dms\t - distance: %d",
                             System.currentTimeMillis() - start,
-                            currentScore
+                            score
                     ));
                 } else {
                     deadIterations++;
@@ -97,6 +103,7 @@ public class IteratedLocalSearch {
 
         // local init ------------------------------------------------------------------------------------------
         int tempBest;
+        int lastBest = -1;
         int counter;
 
         // run improve algorithm -------------------------------------------------------------------------------
@@ -105,7 +112,8 @@ public class IteratedLocalSearch {
             do {
                 if (end < System.currentTimeMillis()) return;
                 tempBest = current.improveTruck(truck);
-                if (tempBest == -1) counter++;
+                if (lastBest == tempBest || tempBest == -1) counter++;
+                lastBest = tempBest;
             } while (counter < 5);
             System.out.println(String.format(
                     "time: %dms\t - distance: %d",
