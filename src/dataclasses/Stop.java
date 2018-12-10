@@ -1,9 +1,5 @@
 package dataclasses;
-
-import javax.crypto.Mac;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Stop {
     private int stoplocatieid;

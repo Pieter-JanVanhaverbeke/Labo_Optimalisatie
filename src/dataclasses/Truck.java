@@ -140,8 +140,6 @@ public class Truck {
         }
 
 
-
-        //TODO GEEN OUDE METHODE WERKT
         else{
            return heefttijd(locationid,locationid2,timematrix,servicetime);
         }
@@ -158,9 +156,6 @@ public class Truck {
 
     public void truckLegen(Stop stop){
         for(Machine machine: machinelijst.keySet()){            //alles terug afzetten.
-          //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
-
-          //  geredenminuten = geredenminuten + machine.getServicetime();
             stop.addMachine(machine, machinelijst.get(machine));
         }
         stoplijst.add(stop);
@@ -173,9 +168,7 @@ public class Truck {
 
     public void truckLegen(){
         for(Machine machine: machinelijst.keySet()){        //alles terug afzetten.
-            //  System.out.println("dataclasses.Truck " + id + " dropt " + machine.getId() + " af op locatie: " + huidigeLocatie);
 
-         //   geredenminuten = geredenminuten + machine.getServicetime();
         }
         machinelijst.clear();
         this.setVolume(0);  //alles legen, volume is 0
@@ -192,33 +185,6 @@ public class Truck {
     }
 
 
-
-    public int getDistance(Location location, DistanceMatrix distancematrix){
-        int locatieid = location.getId();
-
-        return distancematrix.getDistance()[huidigeLocatie][locatieid];
-
-    }
-
-    public boolean heeftcapacity(Machine machine1 , Machine machine2){
-        if(volume+machine1.getVolume()+machine2.getVolume()>TRUCK_CAPACITY){
-            return  false;
-        }
-        else return true;
-    }
-
-
-
-
-    public ArrayList<Machine> getAlleMachinesVanType(int type){
-        ArrayList<Machine> lijst = new ArrayList<Machine>();
-        for (Machine machine: machinelijst.keySet()){
-            if(machine.getMachineTypeId()==type){
-                lijst.add(machine);
-            }
-        }
-        return lijst;
-    }
 
     public static int getTruckCapacity() {
         return TRUCK_CAPACITY;

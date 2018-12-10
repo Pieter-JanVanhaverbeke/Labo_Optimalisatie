@@ -39,9 +39,6 @@ public class Data {
         startLocations = new ArrayList<Integer>();
         endLocations = new ArrayList<Integer>();
 
-
-       //  Distancematrix distancematrix = new Distancematrix();
-       //  Timematrix timematrix = new Timematrix();
     }
 
     public void buildLastArrays() {
@@ -425,7 +422,6 @@ public class Data {
             for(int j=0; j<trucklijst.size();j++){
                 Truck truck = trucklijst.get(j);
                 if(truck.getHuidigeLocatie()==depot.getLocation().getId()){
-                 //   System.out.println(truck.getId() + " " +  truck.getHuidigeLocatie() + " " + depot.getLocation().getId());
                     depot.addTruck(truck);
                 }
             }

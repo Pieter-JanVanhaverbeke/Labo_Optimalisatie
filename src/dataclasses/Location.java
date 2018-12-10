@@ -53,10 +53,7 @@ public class Location {
        return distance;
     }
 
-    public int getTime(int locationid, int[][] timematrix){
-        int time = timematrix[id][locationid];
-        return time;
-    }
+
 
     public Depot getDichtsteDepot(ArrayList<Depot> depotslijst,int machineTypeId,int[][] distancematrix){
         Depot depot;

@@ -76,7 +76,6 @@ public class SimulatedAnnealing {
 
                 huidigesolution = new Solution(buursolution);
                 huidigescore = huidigesolution.calculateScore();
-                huidigesolution.printStats();
                 cooling();
 
 
@@ -85,7 +84,6 @@ public class SimulatedAnnealing {
                 if (buurscore < bestescore) {
                     bestescore = buurscore;
                     bestesolution = new Solution(buursolution);
-                    // bestesolution.printStats();
                 }
             }
 
@@ -93,7 +91,6 @@ public class SimulatedAnnealing {
             else{
                 probability =  Math.exp(delta/(temperatuur*kb));
                 double kans = rng.nextDouble();
-                //  System.out.println(probability);
 
 
                 boolean neembuursolution = kans<probability;
@@ -103,7 +100,6 @@ public class SimulatedAnnealing {
 
                     huidigesolution = new Solution(buursolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = huidigesolution.calculateScore();
-                    huidigesolution.printStats();
                     cooling();
                 }
                 else{

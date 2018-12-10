@@ -43,9 +43,7 @@ public class Oplossing {
         int collectId;
 
 
-        //TODO COLLECTS NIET METEEN UITVOEREN? MAAR EERST IEDERE TRUCK LIJST GEVEN
         for (int i = 0; i < droplijst.size(); i++) {
-            //TODO TOEWIJZEN DROPS TO TRUCKS
 
             Drop drop = droplijst.get(i);
             int machinetypeId = drop.getMachineTypeId();
@@ -63,7 +61,7 @@ public class Oplossing {
             }
 
 
-            if (dichtstecollectdistance < 2 * dichtstedepotdistance) {
+            if (dichtstecollectdistance < 2 * dichtstedepotdistance) {              //2 maal dichtere depot, depot nemen, anders machine van pickup
                 machine = dichtstecollect.getMachine();  //machine van collect
                 collectlijst.remove(dichtstecollect);   //removing collect uit lijst
                 collectId = dichtstecollect.getId();
@@ -101,7 +99,7 @@ public class Oplossing {
                 bestetruck.pickUp(machine, collectId);
 
                 if (verplaats) {
-                    stop = new Stop(beginlocatie);   //solve bug
+                    stop = new Stop(beginlocatie);   //stop toekennen als truck verplaatst
                     bestetruck.addStop(stop);
                 }
 
@@ -229,32 +227,8 @@ public class Oplossing {
 
 
 
-        //PRINTEN
-  /*   for(int i=0; i<data.getTrucklijst().size();i++){
-         Truck truck = data.getTrucklijst().get(i);
-         if(truck.getStoplijst().size()!=0) {
-
-             System.out.println();
-             System.out.print(truck.getId() + " " + truck.getDistance() + " " + truck.getGeredenminuten() + " ");
-             //   System.out.print(truck.getHuidigeLocatie() + " "); //pakt in begin depot nooit iets op
-             for (int j = 0; j < truck.getStoplijst().size(); j++) {
-                 System.out.print(truck.getStoplijst().get(j).toString() + " ");
-             }
-         }
-
-     }
-
-
-*/
-
-//        System.out.println("totale distance: " + totalDistance());
-
         this.solution = new Solution(data, seed);
         solution.load();
-        /*if (solution.checkFeasibility()) {
-            System.out.println(solution.toString());
-        }*/
-
         return solution;
 
     }

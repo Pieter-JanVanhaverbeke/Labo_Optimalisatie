@@ -86,20 +86,6 @@ public class Depot {
     }
 
 
-    public Truck getGoedeTruck(int locationid,int[][] timeMatrix, int servicetime){
-
-        Truck goedetruck=null;
-        for(int i=0; i<trucklijst.size();i++){
-            Truck truck = trucklijst.get(i);
-            if(truck.heefttijd(locationid,timeMatrix,servicetime)){
-                goedetruck = truck;
-            }
-        }
-
-        return goedetruck;
-
-
-    }
 
     public void addMachine(Machine machine){
         machinelijst.add(machine);
