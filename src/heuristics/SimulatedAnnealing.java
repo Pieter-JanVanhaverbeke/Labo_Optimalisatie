@@ -11,12 +11,20 @@ public class SimulatedAnnealing {
     private int bestescore;
     private int huidigescore;
     private int buurscore;
-    private int temperatuur;
+    private double temperatuur;
+    private int eindtemperatuur;
     private double probability;
     private Random rng;
-    private long start;
 
-    public SimulatedAnnealing(Solution intitiele, long seed, long start) {
+    private long start;
+    private double kb;
+    private long starttijd;
+    private long endtime;
+    private int itterations;
+    private boolean zoeklocaalmin;
+    private int moveteller;
+
+    public SimulatedAnnealing(Solution intitiele, long seed) {
         this.bestesolution = intitiele;
         this.huidigesolution = intitiele;
         this.buursolution = intitiele;                //SOLUTION DAT JE BIJHOUDT MET VERGELEKEN
@@ -24,79 +32,86 @@ public class SimulatedAnnealing {
         this.huidigescore = intitiele.calculateScore();
         this.buurscore = intitiele.calculateScore();
         this.rng = new Random(seed);
-        this.temperatuur = 10000;
-        this.start = start;
+        this.temperatuur = 40000;
+        this.eindtemperatuur = 0;
+        this.itterations = 0;
+
+
+
+        kb = Math.pow(1.38064852,-23);
     }
 
     public void start(long time){
-        long end = System.currentTimeMillis() + (1000 * time);
-        System.out.println(String.format(
-                "time: %dms\t - distance: %d",
-                System.currentTimeMillis() - start,
-                huidigescore
-        ));
+        long tijd = System.currentTimeMillis();
 
-        while (temperatuur > 0 && System.currentTimeMillis() < end) {
+
+        long end = tijd + (1000 * time);
+
+        while (temperatuur > eindtemperatuur && System.currentTimeMillis() < end) {
             simannealing();
         }
-        System.out.println(String.format(
-                "time: %dms\t - distance: %d",
-                System.currentTimeMillis() - start,
-                bestescore
-        ));
+        bestesolution.printStats();
     }
 
     public void simannealing(){
-      //  buursolution = new solution.Solution(huidigesolution);
-        buursolution = huidigesolution.getBestNeighbour();
+        itterations++;
+        buursolution = new solution.Solution(huidigesolution);
+        buursolution.move();
+
 
 
         //eerst checken of feasible is
         if (buursolution.checkFeasibility()) {
+            moveteller++;
             buurscore = buursolution.calculateScore();      //setten score
 
-            double delta = (buurscore - huidigescore);   //TODO DELTA DECLAREREN
+            double delta = ((double)huidigescore - (double)buurscore);
+
+            if (buurscore <= huidigescore) {            //NEG IS BETERE OPL
 
 
+                if(buurscore<huidigescore){
+                    itterations=0;
+                }
 
-            if (delta < 0) {            //NEG IS BETERE OPL
                 huidigesolution = new Solution(buursolution);
                 huidigescore = huidigesolution.calculateScore();
+                huidigesolution.printStats();
+                cooling();
 
-                //SCORE IS BETER DAN BESTE UPDATEN      //TODO BUURSCORE ZETTEN
+
+
+                //SCORE IS BETER DAN BESTE UPDATEN
                 if (buurscore < bestescore) {
                     bestescore = buurscore;
                     bestesolution = new Solution(buursolution);
-                    bestesolution.printStats();
-                    cooling();
+                    // bestesolution.printStats();
                 }
             }
 
             //GEEN BETERE NEIGHBOUR
             else{
-                probability =  Math.exp(-delta/temperatuur);
-                int prob = (int) (probability*1000);            //boolean setten
-                //Random random = new Random
-                // TODO moet het ni zo? nog is delen door 1000? ********************************************************
-                int kans = rng.nextInt(1000) / 1000;
-              //  System.out.println("kans: " + kans);
-                boolean neembuursolution = kans<prob;
+                probability =  Math.exp(delta/(temperatuur*kb));
+                double kans = rng.nextDouble();
+                //  System.out.println(probability);
 
-              //  System.out.println("prob: " + prob);
 
+                boolean neembuursolution = kans<probability;
 
                 if(neembuursolution){
+
+
                     huidigesolution = new Solution(buursolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = huidigesolution.calculateScore();
-                    System.out.println(String.format(
-                            "time: %sms\t - distance: %d",
-                            System.currentTimeMillis() - start,
-                            huidigescore
-                    ));
+                    huidigesolution.printStats();
                     cooling();
                 }
                 else{
-                    //      huidigesolution = new solution.Solution(buursolution,bestesolution.getRNG());                //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
+                    if(itterations>50000){
+                        itterations = 0;
+                        reheating();
+                    }
+                    //BLIJVEN VERDERWERKEN MET HUIDIGE SOLUTION
                     cooling();
                 }
 
@@ -107,11 +122,15 @@ public class SimulatedAnnealing {
 
     }
 
-
     //TODO TEMPERATUUR OP GOEDE MANIER KOELEN
     private void cooling(){
-        temperatuur = temperatuur-1;
-//        System.out.println(temperatuur);
+
+        temperatuur = 0.9999*temperatuur;               //temperatuur lichtjes dalen
+
+    }
+
+    private void reheating(){
+        temperatuur = 15000 + temperatuur ;
     }
 
 
@@ -149,3 +168,5 @@ public class SimulatedAnnealing {
         this.huidigescore = huidigescore;
     }
 }
+
+
