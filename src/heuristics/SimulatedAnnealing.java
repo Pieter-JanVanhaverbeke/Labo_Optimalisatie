@@ -1,7 +1,6 @@
 package heuristics;
 
 import solution.Solution;
-import tvh.interfaces.ScoreUpdater;
 
 import java.util.Random;
 
@@ -15,11 +14,9 @@ public class SimulatedAnnealing {
     private int temperatuur;
     private double probability;
     private Random rng;
-
-    private ScoreUpdater updater;
     private long start;
 
-    public SimulatedAnnealing(Solution intitiele, long seed, ScoreUpdater updater) {
+    public SimulatedAnnealing(Solution intitiele, long seed, long start) {
         this.bestesolution = intitiele;
         this.huidigesolution = intitiele;
         this.buursolution = intitiele;                //SOLUTION DAT JE BIJHOUDT MET VERGELEKEN
@@ -28,18 +25,25 @@ public class SimulatedAnnealing {
         this.buurscore = intitiele.calculateScore();
         this.rng = new Random(seed);
         this.temperatuur = 10000;
-        this.updater = updater;
+        this.start = start;
     }
 
     public void start(long time){
         long end = System.currentTimeMillis() + (1000 * time);
-        start = end - (1000 * time);
-        updater.updateScore(bestescore, 0);
+        System.out.println(String.format(
+                "time: %dms\t - distance: %d",
+                System.currentTimeMillis() - start,
+                huidigescore
+        ));
 
         while (temperatuur > 0 && System.currentTimeMillis() < end) {
             simannealing();
         }
-        bestesolution.printStats();
+        System.out.println(String.format(
+                "time: %dms\t - distance: %d",
+                System.currentTimeMillis() - start,
+                bestescore
+        ));
     }
 
     public void simannealing(){
@@ -84,7 +88,11 @@ public class SimulatedAnnealing {
                 if(neembuursolution){
                     huidigesolution = new Solution(buursolution);               //VERDER GAAN MET BUURSOLUTION DIE ZWAKKER IS IN SCORE
                     huidigescore = huidigesolution.calculateScore();
-                    updater.updateScore(huidigescore, System.currentTimeMillis() - start);
+                    System.out.println(String.format(
+                            "time: %sms\t - distance: %d",
+                            System.currentTimeMillis() - start,
+                            huidigescore
+                    ));
                     cooling();
                 }
                 else{

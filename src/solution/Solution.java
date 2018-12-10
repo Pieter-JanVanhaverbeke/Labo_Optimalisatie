@@ -565,9 +565,6 @@ public class Solution {
         originalCollect = collect.clone();
         originalDrop = drop.clone();
         base.update(firstTruck, firstCollect);
-        if (collect[1] == 20) {
-            System.out.println(String.format("removing 20 from %d", firstTruck));
-        }
 
         // check all other trucks for best new solution ----------------------------------------------------------------
         for (int truck = 0; truck < data.getTruckCount(); truck++) {
@@ -618,9 +615,6 @@ public class Solution {
                     if (current.checkTruckFeasibility(truck)) {
                         if (base.truckTimes[truck].getLast() - current.truckTimes[truck].getLast() > bestTimeDelta) {
 
-                            if (collect[1] == 20) {
-                                System.out.println(String.format("adding 20 to %d", truck));
-                            }
                             // new best solution and update coupling for added collect and drop ------------------------
                             best = new Solution(base);
                             best.availableMachines = new HashMap<>();

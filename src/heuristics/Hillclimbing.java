@@ -1,9 +1,7 @@
 package heuristics;
 
 import solution.Solution;
-import tvh.interfaces.ScoreUpdater;
 
-import java.io.File;
 import java.util.Random;
 
 public class Hillclimbing {

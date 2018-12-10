@@ -136,4 +136,8 @@ public class IteratedLocalSearch {
         }
         current = new Solution(best);
     }
+
+    public Solution getGlobalBest() {
+        return globalBest;
+    }
 }
