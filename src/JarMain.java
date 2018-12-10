@@ -53,6 +53,10 @@ public class JarMain {
         simulatedAnnealing.start(
                 ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - SAFETY)
         );
+        System.out.println(String.format(
+                "finished at %s",
+                new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(new Date())
+        ));
 
         // write output ------------------------------------------------------------------------------------------------
         simulatedAnnealing.getBestesolution().writeSolution(problemFile, new File(bundle.getSolution()));
