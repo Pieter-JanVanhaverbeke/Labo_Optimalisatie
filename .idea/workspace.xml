@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="overnight main to run heuristic as chain -&gt; fixed">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/Hillclimbing.class" afterPath="$PROJECT_DIR$/out/production/Labo_Optimalisatie/heuristics/Hillclimbing.class" />
+    <list default="true" id="37368cd5-9488-4deb-a891-a4006ce8b7eb" name="Default Changelist" comment="jar mains push">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/JarMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JarHillClimbingMain.java" afterPath="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/JarIteratedMain.java" afterPath="$PROJECT_DIR$/src/JarIteratedMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OvernightMain.java" afterPath="$PROJECT_DIR$/src/OvernightMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" afterPath="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,34 +85,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IteratedLocalSearch.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IteratedLocalSearch.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="21">
-              <caret line="45" column="18" lean-forward="true" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+              <caret line="45" column="18" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HC_solution_5.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/HC_solution_5.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HC_solution_8.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/HC_solution_8.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -133,8 +110,8 @@
       <file leaf-file-name="JarIteratedMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="50" column="67" lean-forward="false" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+            <state relative-caret-position="274">
+              <caret line="40" column="9" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,7 +123,7 @@
         <entry file="file://$PROJECT_DIR$/src/data/IL_solution_6.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+              <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -157,6 +134,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tvh_solution_4.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/tvh_solution_4.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JarMain.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/JarMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-566">
+              <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -257,7 +254,6 @@
         <option value="$PROJECT_DIR$/src/heuristics/Oplossing.java" />
         <option value="$PROJECT_DIR$/src/applicationEntrypoint/SolverMain.java" />
         <option value="$PROJECT_DIR$/src/dataclasses/Data.java" />
-        <option value="$PROJECT_DIR$/src/JarMain.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java" />
         <option value="$PROJECT_DIR$/src/ArgBundle.java" />
@@ -267,6 +263,7 @@
         <option value="$PROJECT_DIR$/src/JarHillClimbingMain.java" />
         <option value="$PROJECT_DIR$/src/OvernightMain.java" />
         <option value="$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java" />
+        <option value="$PROJECT_DIR$/src/JarMain.java" />
       </list>
     </option>
   </component>
@@ -358,6 +355,9 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="org.sonarlint.intellij.config.project.SonarLintProjectConfigurable" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="false" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.38120103" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -368,6 +368,128 @@
       <recent name="C:\dataFolder\programmeren\java\Labo_Optimalisatie\interfaces\src" />
       <recent name="C:\dataFolder\programmeren\java\Labo_Optimalisatie\src\data" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/data/solutions/sol3.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/data/solutions/sol4.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Collect.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Data.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Depot.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Location.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Stop.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Truck.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/heuristics/Oplossing.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/DistanceMatrix.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/Machinematrix.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/dataclasses/TimeMatrix.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -381,7 +503,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.JarIteratedMain">
+  <component name="RunManager" selected="JAR Application.validate">
     <configuration name="JarHillClimbingMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="JarHillClimbingMain" />
@@ -400,7 +522,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="JarIteratedMain" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="--problem=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_problem_4.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_4.txt --seed=1 --time=600" />
+      <option name="PROGRAM_PARAMETERS" value="--problem=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_problem_4.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_4.txt --seed=152 --time=600" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -572,7 +694,7 @@
     <configuration name="validate" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="JAR_PATH" value="$PROJECT_DIR$/tvh-3.0-student.jar" />
-      <option name="PROGRAM_PARAMETERS" value="--problem=src/data/tvh_problem_3.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_3.txt" />
+      <option name="PROGRAM_PARAMETERS" value="--problem=src/data/tvh_problem_4.txt --solution=C:\dataFolder\programmeren\java\Labo_optimalisatie\src\data\tvh_solution_4.txt" />
       <option name="WORKING_DIRECTORY" value="C:\dataFolder\programmeren\java\Labo_Optimalisatie" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <envs />
@@ -625,7 +747,7 @@
       <workItem from="1544380154268" duration="628000" />
       <workItem from="1544400798523" duration="4446000" />
       <workItem from="1544405739639" duration="1687000" />
-      <workItem from="1544428055255" duration="5298000" />
+      <workItem from="1544428055255" duration="6847000" />
     </task>
     <task id="LOCAL-00001" summary="load fixed, v2.0">
       <created>1542818085873</created>
@@ -739,11 +861,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544403579239</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="jar mains push">
+      <created>1544469147461</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1544469147462</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110707000" />
+    <option name="totallyTimeSpent" value="112256000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -775,10 +904,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18451025" sideWeight="0.6917293" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4931663" sideWeight="0.6917293" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35875404" sideWeight="0.8104189" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57061505" sideWeight="0.48174006" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.1734694" sideWeight="0.78085643" order="0" side_tool="false" content_ui="combo" x="786" y="102" width="636" height="878" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.1734694" sideWeight="0.78085643" order="0" side_tool="false" content_ui="combo" x="459" y="97" width="636" height="878" />
       <window_info id="SonarLint" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="UML design tool window" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -891,7 +1020,8 @@
     <MESSAGE value="jar build initial structure fic" />
     <MESSAGE value="overnight main to run heuristic as chain" />
     <MESSAGE value="overnight main to run heuristic as chain -&gt; fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="overnight main to run heuristic as chain -&gt; fixed" />
+    <MESSAGE value="jar mains push" />
+    <option name="LAST_COMMIT_MESSAGE" value="jar mains push" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -934,13 +1064,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/heuristics/Oplossing.java</url>
-          <line>250</line>
+          <line>229</line>
           <properties />
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/heuristics/SimulatedAnnealing.java</url>
-          <line>49</line>
+          <line>56</line>
           <properties />
           <option name="timeStamp" value="160" />
         </line-breakpoint>
@@ -1002,14 +1132,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/interfaces/src/tvh/dataClasses/Location.java" />
-    <entry file="file://$PROJECT_DIR$/src/dataclasses/Collect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/dataclasses/Machine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9">
@@ -1120,6 +1242,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5964">
           <caret line="340" column="0" lean-forward="false" selection-start-line="340" selection-start-column="0" selection-end-line="340" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1183,6 +1306,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="694">
           <caret line="128" column="87" lean-forward="false" selection-start-line="128" selection-start-column="87" selection-end-line="128" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2191#2192#0" expanded="true" />
+            <element signature="e#2221#2222#0" expanded="true" />
+            <element signature="e#2267#2268#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2340#2341#0" expanded="true" />
+            <element signature="e#2371#2372#0" expanded="true" />
+            <element signature="e#2419#2420#0" expanded="true" />
+            <element signature="e#2459#2460#0" expanded="true" />
+            <element signature="e#2488#2489#0" expanded="true" />
+            <element signature="e#2515#2516#0" expanded="true" />
+            <element signature="e#2553#2554#0" expanded="true" />
+            <element signature="e#2585#2586#0" expanded="true" />
+            <element signature="e#2614#2615#0" expanded="true" />
+            <element signature="e#2641#2642#0" expanded="true" />
+            <element signature="e#2679#2680#0" expanded="true" />
+            <element signature="e#2711#2712#0" expanded="true" />
+            <element signature="e#2741#2742#0" expanded="true" />
+            <element signature="e#2769#2770#0" expanded="true" />
+            <element signature="e#2809#2810#0" expanded="true" />
+            <element signature="e#2843#2844#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1288,29 +1434,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_4.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/IL_solution_6.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="50" column="67" lean-forward="false" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1327,12 +1455,124 @@
     <entry file="file://$PROJECT_DIR$/src/heuristics/IteratedLocalSearch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
-          <caret line="45" column="18" lean-forward="true" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+          <caret line="45" column="18" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/IL_solution_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/tvh_solution_4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JarIteratedMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="40" column="9" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JarMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-566">
+          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>Labo_Optimalisatie:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.38120103" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.38120103" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>aspectjrt</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Labo_Optimalisatie</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>google-collections-1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
