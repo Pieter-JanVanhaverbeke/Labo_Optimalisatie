@@ -16,7 +16,7 @@ public class JarIteratedMain {
         ArgBundle bundle = new ArgBundle(args);
 
         // check args --------------------------------------------------------------------------------------------------
-        bundle.checkArgs();
+        if (!bundle.checkArgs()) return;
 
         // start processing --------------------------------------------------------------------------------------------
         System.out.println(String.format(
@@ -46,7 +46,7 @@ public class JarIteratedMain {
 
         // heuristic start ---------------------------------------------------------------------------------------------
         System.out.println("starting with heuristic...");
-        IteratedLocalSearch iteratedLocalSearch = new IteratedLocalSearch(initial, bundle.getSeed(), bundle.getStart());
+        IteratedLocalSearch iteratedLocalSearch = new IteratedLocalSearch(initial, bundle.getStart());
         // calculate new runtime taking into consideration the time already passed -------------------------------------
         iteratedLocalSearch.run(
                 ((bundle.getTime() * 1000) - (System.currentTimeMillis() - bundle.getStart()) - 20000)

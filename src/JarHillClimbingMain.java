@@ -16,7 +16,7 @@ public class JarHillClimbingMain {
         ArgBundle bundle = new ArgBundle(args);
 
         // check args --------------------------------------------------------------------------------------------------
-        bundle.checkArgs();
+        if (!bundle.checkArgs()) return;
 
         // start processing --------------------------------------------------------------------------------------------
         System.out.println(String.format(

@@ -2,6 +2,8 @@ package heuristics;
 
 import solution.Solution;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class Hillclimbing {
@@ -30,7 +32,11 @@ public class Hillclimbing {
             localSearch();
             teller++;
         }
-        bestesolution.printStats();
+        System.out.println(String.format(
+                "finished at %s\nfinal best solution is %d",
+                new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(new Date()),
+                bestescore
+        ));
     }
 
     public void localSearch(){

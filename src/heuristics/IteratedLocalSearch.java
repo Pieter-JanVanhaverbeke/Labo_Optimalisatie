@@ -17,21 +17,21 @@ public class IteratedLocalSearch {
     private long start;
     private long end;
 
-    public IteratedLocalSearch(Solution initial, long start, long end) {
+    public IteratedLocalSearch(Solution initial, long start) {
         this.current = new Solution(initial);
         this.currentScore = current.calculateScore();
         this.best = new Solution(initial);
         this.score = best.calculateScore();
+        this.globalScore = Integer.MAX_VALUE;
 
         this.start = start;
-        this.end = end;
     }
 
     public void run(long time) {
 
         int deadIterationThreshold = 500;
         int shakerCount = 50;
-        long end = System.currentTimeMillis() + time;
+        end = System.currentTimeMillis() + time;
 
         // run basic shake and rebuild ----------------------------------------------------------------------------------
         System.out.println("starting local search...");
