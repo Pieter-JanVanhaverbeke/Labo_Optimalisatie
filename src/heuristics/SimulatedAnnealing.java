@@ -43,9 +43,7 @@ public class SimulatedAnnealing {
 
     public void start(long time){
         long tijd = System.currentTimeMillis();
-
-
-        long end = tijd + (1000 * time);
+        long end = tijd + time;
 
         while (temperatuur > eindtemperatuur && System.currentTimeMillis() < end) {
             simannealing();
