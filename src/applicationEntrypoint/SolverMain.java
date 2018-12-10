@@ -30,6 +30,7 @@ public class SolverMain {
         String heuristic = "simulated-annealing";
         int deadIterationThreshold = 200;
         int ruinCount = 200;
+        long start = System.currentTimeMillis();
 
         if (args != null) {
             for (String arg : args) {
@@ -85,14 +86,14 @@ public class SolverMain {
             Data data = new Data();
             data.leesData(inputFile);
             Oplossing oplossing = new Oplossing(data);
-            Solution initial = oplossing.start();
+            Solution initial = oplossing.start(seed);
 
             switch (heuristic) {
                 case "randomsearch":
                     System.out.println(String.format("%s not implemented", heuristic));
                     break;
                 case "hillclimbing":
-                    Hillclimbing hillclimbing = new Hillclimbing(initial, seed, updater);
+                    Hillclimbing hillclimbing = new Hillclimbing(initial, seed, start);
                     hillclimbing.start(time);
                     break;
                 case "ruin-rebuild":

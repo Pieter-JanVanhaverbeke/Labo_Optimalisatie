@@ -87,36 +87,12 @@ public class JarMain {
         // Oplossing init ----------------------------------------------------------------------------------------------
         System.out.println("building initial solution...");
         Oplossing oplossing = new Oplossing(data);
-        Solution initial = oplossing.start();
+        Solution initial = oplossing.start(seed);
         System.out.println("initial solution built!");
 
         // heuristic start ---------------------------------------------------------------------------------------------
         System.out.println("starting with heuristic...");
-        Hillclimbing hillclimbing = new Hillclimbing(initial, seed, new ScoreUpdater() {
-
-            private int best = initial.calculateScore();
-            private long startTime = start;
-
-            @Override
-            public void locations(ArrayList<Location> locations) {
-
-            }
-
-            @Override
-            public void done() {
-                System.out.println(String.format(
-                        "finished at %s\nfinal best solution is %d",
-                        new SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(new Date()),
-                        best
-                ));
-            }
-
-            @Override
-            public void updateScore(int score, long iteration) {
-                if (score < best) best = score;
-                System.out.println(String.format("time: %d ms\t - distance: %d", iteration - startTime, score));
-            }
-        });
+        Hillclimbing hillclimbing = new Hillclimbing(initial, seed, start);
         // calculate new runtime taking into consideration the time already passed -------------------------------------
         hillclimbing.start(
                 ((time * 1000) - (System.currentTimeMillis() - start) - 20000)

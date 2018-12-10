@@ -14,10 +14,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class Solution {
-    private static final int MAX_WORKING_TIME = 600;
-    private static final int MAX_VOLUME = 100;
-    private static final int SEED = 100;
-    private static final int TRUCK_COUNT = 40;
 
     //TODO VOLUME KUNNEN CHECKEN
 
@@ -48,7 +44,7 @@ public class Solution {
 
     private Data data;
 
-    public Solution(Data data) {
+    public Solution(Data data, long seed) {
 
         this.solution = new LinkedList[data.getTrucklijst().size()];
         this.truckCount = this.solution.length;
@@ -70,7 +66,7 @@ public class Solution {
         }
         this.data = data;
 
-        this.rng = new Random(SEED);
+        this.rng = new Random(seed);
     }
 
     public Solution(Solution solution) {
@@ -79,9 +75,10 @@ public class Solution {
 
         this.solution = new LinkedList[solution.truckCount];
         this.truckCount = solution.truckCount;
+        this.data = solution.data;
         for (int truck = 0; truck < truckCount; truck++) {
             // remove last truck if unused -----------------------------------------------------------------------------
-            if (truckCount > TRUCK_COUNT && truck == truckCount - 1 && solution.solution[truck].size() == 2) {
+            if (truckCount > data.getTruckCount() && truck == truckCount - 1 && solution.solution[truck].size() == 2) {
                 truckCount--;
                 continue;
             }
@@ -96,7 +93,9 @@ public class Solution {
         this.truckDistances = new LinkedList[solution.truckDistances.length];
         for (int truck = 0; truck < solution.truckDistances.length; truck++) {
             this.truckDistances[truck] = new LinkedList<>();
-            for (Integer distance: solution.truckDistances[truck]) this.truckDistances[truck].addLast(new Integer(distance));
+            for (Integer distance: solution.truckDistances[truck]) {
+                this.truckDistances[truck].addLast(new Integer(distance));
+            }
         }
         this.truckCurrentMachines = new LinkedList[solution.truckCurrentMachines.length];
         for (int truck = 0; truck < solution.truckCurrentMachines.length; truck++) {
@@ -111,7 +110,6 @@ public class Solution {
                 this.availableMachines.get(type).addLast(data.clone());
             }
         }
-        this.data = solution.data;
     }
 
     /**
@@ -275,7 +273,7 @@ public class Solution {
             }
 
             // time check ----------------------------------------------------------------------------------------------
-            if(truckTimes[truck].getLast() > MAX_WORKING_TIME){
+            if(truckTimes[truck].getLast() > data.getTruckWorkingTime()){
                 return false;
             }
 
@@ -283,7 +281,7 @@ public class Solution {
             for (LinkedList<Integer> machines: truckCurrentMachines[truck]) {
                 volume = 0;
                 for (Integer machine: machines) volume += data.getMachineStats()[machine][1];
-                if (volume > MAX_VOLUME) {
+                if (volume > data.getTruckCapacity()) {
                     return false;
                 }
             }
@@ -491,7 +489,7 @@ public class Solution {
         base.update(firstTruck, firstCollect);
 
         // check all other trucks for best new solution ----------------------------------------------------------------
-        for (int truck = 0; truck < TRUCK_COUNT; truck++) {
+        for (int truck = 0; truck < data.getTruckCount(); truck++) {
             current = new Solution(base);
             for (int collectStop = 1; collectStop < current.solution[truck].size(); collectStop++) {
                 current.solution[truck].add(collectStop, collect.clone());
@@ -907,5 +905,16 @@ public class Solution {
     public void printStats() {
         System.out.println(String.format("DISTANCE: %d\n", getTotalDistance()));
         System.out.println(String.format("TRUCKS: %d\n", getTotalTrucks()));
+    }
+
+    // =================================================================================================================
+    // getters & setters ===============================================================================================
+
+    public int getTruckCount() {
+        return truckCount;
+    }
+
+    public void setTruckCount(int truckCount) {
+        this.truckCount = truckCount;
     }
 }

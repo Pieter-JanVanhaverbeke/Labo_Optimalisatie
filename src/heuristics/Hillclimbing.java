@@ -12,19 +12,17 @@ public class Hillclimbing {
     private int bestescore;
     private int huidigescore;
     private int teller;
-    private ScoreUpdater scoreUpdater;
     private Random rng;
+    private long start;
 
-    public Hillclimbing(Solution intitialsolution, long seed, ScoreUpdater updater) {
+    public Hillclimbing(Solution intitialsolution, long seed, long start) {
         bestesolution = intitialsolution;
         huidigesolution = intitialsolution;
         huidigescore = 999999999;
         bestescore = intitialsolution.calculateScore();
         teller=0;
         this.rng = new Random(seed);
-        this.scoreUpdater = updater;
-
-
+        this.start = start;
     }
 
     public void start(long runtime){
@@ -44,7 +42,11 @@ public class Hillclimbing {
             if (huidigescore < bestescore) {
                 bestescore = huidigescore;
                 bestesolution = new Solution(huidigesolution);
-                scoreUpdater.updateScore(bestescore,System.currentTimeMillis());
+                System.out.println(String.format(
+                        "time: %dms\t - distance: %d",
+                        System.currentTimeMillis() - start,
+                        bestescore
+                ));
                 bestesolution.printStats();
             }
         }

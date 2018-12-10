@@ -27,7 +27,7 @@ public class Oplossing {
         this.data = data;
     }
 
-    public Solution start() {
+    public Solution start(long seed) {
         ArrayList<Drop> droplijst = data.getDroplijst();
         ArrayList<Collect> collectlijst = data.getCollectlijst();
         ArrayList<Depot> depotlijst = data.getDepotlijst();
@@ -249,7 +249,7 @@ public class Oplossing {
 
 //        System.out.println("totale distance: " + totalDistance());
 
-        this.solution = new Solution(data);
+        this.solution = new Solution(data, seed);
         solution.load();
         /*if (solution.checkFeasibility()) {
             System.out.println(solution.toString());

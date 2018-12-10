@@ -213,14 +213,12 @@ public class Data {
         Scanner sc = null;
         sc = new Scanner(file);
 
-
-        for (int i = 0; i < 4; i++) {
-            sc.nextLine();      //info lijn verwijderen
-        }
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
 
-            if (line.contains("LOCATIONS:")) {
+            if(line.contains("TRUCK_CAPACITY:")) truckCapacity = Integer.parseInt(line.split(" ")[1]);
+            else if(line.contains("TRUCK_WORKING_TIME:")) truckWorkingTime = Integer.parseInt(line.split(" ")[1]);
+            else if (line.contains("LOCATIONS:")) {
                 int aantal = new Scanner(line).useDelimiter("\\D+").nextInt();     //eerste getal zoeken
                 for (int i = 0; i < aantal; i++) {
                     line = sc.nextLine();
